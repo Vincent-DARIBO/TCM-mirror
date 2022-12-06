@@ -25,7 +25,7 @@ export class User {
   @Field(() => String, { description: 'user last name' })
   lastName: string;
 
-  @Column()
+  @Column({ unique: true })
   @Field(() => String, { description: 'user email' })
   email: string;
 
@@ -37,10 +37,10 @@ export class User {
   @Field(() => String, { description: 'user birth date' })
   birthDate: Date;
 
-  @OneToMany(() => Event, (event) => event.creator)
+  @OneToMany(() => Event, (event) => event.creator, { onDelete: 'CASCADE' })
   events: Event[];
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, { onDelete: 'CASCADE' })
   @JoinTable({
     name: 'friends',
     joinColumn: {
@@ -54,7 +54,7 @@ export class User {
   })
   friends: User[];
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, { onDelete: 'CASCADE' })
   @JoinTable({
     name: 'pendingFriends',
     joinColumn: {
@@ -68,7 +68,7 @@ export class User {
   })
   pendingFriends: User[];
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, { onDelete: 'CASCADE' })
   @JoinTable({
     name: 'met',
     joinColumn: {
@@ -82,7 +82,7 @@ export class User {
   })
   metUsers: User[];
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, { onDelete: 'CASCADE' })
   @JoinTable({
     name: 'blocked',
     joinColumn: {
@@ -96,7 +96,7 @@ export class User {
   })
   blockedUsers: User[];
 
-  @ManyToMany(() => Hobby)
+  @ManyToMany(() => Hobby, { onDelete: 'CASCADE' })
   @JoinTable({
     name: 'userHobbies',
     joinColumn: {
