@@ -7,28 +7,36 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ScrollView,
+  Pressable,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import ElevatedView from 'react-native-elevated-view';
-import {Button as PaperButton} from 'react-native-paper';
+import {Button as PaperButton, TouchableRipple} from 'react-native-paper';
 
 import Button from '../../components/Button';
-import {orange, white} from '../../constants/colors';
+import {
+  fadedOrange,
+  orange,
+  primary,
+  secondary,
+  white,
+} from '../../constants/colors';
 import {layout} from '../../shared/styles';
 import Input from './components/Input';
 
-export default function EditProfile() {
+export default function EditProfile({navigation}) {
   const [firstname, setFirstname] = React.useState('');
   const [lastname, setLastname] = React.useState('');
   const [image, setImage] = React.useState('');
+  const surnameRef = React.createRef(null);
   async function onIconPress() {
     try {
       const {assets} = await launchImageLibrary(
         {mediaType: 'photo'},
         response => response,
       );
-      console.log({assets});
       setImage(assets[0].uri);
     } catch (error) {
       console.log(error);
@@ -54,9 +62,15 @@ export default function EditProfile() {
               <Image source={{uri: image}} style={styles.image} />
             </ElevatedView>
           ) : (
-            <PaperButton onPress={() => onIconPress()}>
-              Ajouter une photo de profile
-            </PaperButton>
+            <TouchableRipple
+              style={{...layout.center, ...styles.elevated}}
+              onPress={() => onIconPress()}
+              borderles>
+              <>
+                <Ionicons name="person-outline" size={50} color={secondary} />
+                <Text style={{color: secondary}}>Ajouter un photo</Text>
+              </>
+            </TouchableRipple>
           )}
           {image.length ? (
             <View style={{...layout.center, ...styles.circle, marginTop: 10}}>
@@ -70,10 +84,13 @@ export default function EditProfile() {
           ) : null}
         </View>
         <Input
-          label="Prénom"
           placeholder="Jessica..."
           value={firstname}
           onChangeText={setFirstname}
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            surnameRef.current.focus();
+          }}
         />
         <Input
           label="Nom"
@@ -81,15 +98,18 @@ export default function EditProfile() {
           value={lastname}
           onChangeText={setLastname}
           style={{marginTop: 10}}
+          ref={surnameRef}
         />
         <Button
-          style={{marginTop: 10}}
-          title="choisir une date"
+          style={{...styles.dateButton}}
           onPress={() => console.log('pressed calendar')}
+          icon={<EvilIcons name="calendar" size={35} color={secondary} />}
+          title="Choisir une date"
+          textStyle={{color: secondary}}
         />
         <Button
-          title="confirmer"
-          onPress={() => console.log('pressed confirmer')}
+          title="Confirmer"
+          onPress={() => navigation.navigate('Profile Details')}
           style={{marginTop: 25}}
         />
       </ScrollView>
@@ -105,6 +125,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontWeight: 'bold',
     fontSize: 30,
+    color: primary,
   },
   image: {
     resizeMode: 'contain',
@@ -124,5 +145,10 @@ const styles = StyleSheet.create({
     width: 30,
     borderRadius: 30,
     backgroundColor: orange,
+  },
+  dateButton: {
+    marginTop: 10,
+    backgroundColor: fadedOrange,
+    padding: 10,
   },
 });

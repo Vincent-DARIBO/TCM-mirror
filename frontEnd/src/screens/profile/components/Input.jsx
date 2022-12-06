@@ -1,25 +1,37 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import {StyleSheet, TextInput, View} from 'react-native';
+import ElevatedView from 'react-native-elevated-view';
 
-export default function Input({placeholder, label, value, onChangeText, style}) {
+function Input({
+  placeholder,
+  label,
+  value,
+  onChangeText,
+  style,
+  ...props
+}, ref) {
   return (
-    <TextInput
-      mode="outlined"
-      label={label}
-      placeholder={placeholder}
-      value={value}
-      onChangeText={onChangeText}
-      style={[styles.input, style]}
-      outlineColor="grey"
-      activeOutlineColor="grey"
-    />
+    <ElevatedView elevation={2} style={[styles.radius, style]}>
+      <TextInput
+        placeholder={placeholder}
+        value={value}
+        onChangeText={onChangeText}
+        style={[styles.input]}
+        ref={ref}
+        {...props}
+      />
+    </ElevatedView>
   );
 }
-
+export default React.forwardRef(Input)
 const styles = StyleSheet.create({
   input: {
     width: 295,
     height: 50,
+    paddingLeft: 20,
+  },
+  radius: {
+    borderRadius: 50,
+    borderWith: 1,
   },
 });
