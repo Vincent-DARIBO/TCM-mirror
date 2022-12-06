@@ -5,7 +5,8 @@ export default function Home({navigation}) {
   return (
     <View style={{justifyContent: 'center', alignItems: 'center'}}>
       {<Button title="INSCRIPTION" onPress={() => navigation.navigate('Number')} />}
-      {<Button title="Add" onPress={() => navigation.navigate('AddEvent')} />}
+      {<Button title="Add Event" onPress={() => navigation.navigate('AddEvent')} />}
+      {<Button title="Add List" onPress={() => navigation.navigate('EventList')} />}
     </View>
   );
 }

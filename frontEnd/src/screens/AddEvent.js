@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     tittle: {
         flex: 1,
         padding: 40,
-        backgroundColor: "white",
         alignItems: 'center'
       },
     container: {
