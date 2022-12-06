@@ -22,7 +22,7 @@ export class CreateEventInput {
   @Field(() => Date, { description: 'event date' })
   eventDate: Date;
 
-  @Field(type => String)
+  @Field((type) => String)
   type: EventType;
 
   @Field(() => String, { description: 'event creator' })
