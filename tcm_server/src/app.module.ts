@@ -32,7 +32,8 @@ dotenv.config();
     }),
     UsersModule,
     EventsModule,
-    HobbiesModule],
+    HobbiesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
