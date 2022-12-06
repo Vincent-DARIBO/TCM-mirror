@@ -1,12 +1,19 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Friend } from 'src/friends/entities/friend.entity';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Event } from 'src/events/entities/event.entity';
 import { Hobby } from 'src/hobbies/entities/hobby.entity';
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field(() => String, { description: 'uuid' })
   uuid: string;
 
@@ -27,76 +34,79 @@ export class User {
   password: string;
 
   @Column()
-  @Field(() => Int, { description: 'user age' })
-  age: number;
+  @Field(() => String, { description: 'user birth date' })
+  birthDate: Date;
+
+  @OneToMany(() => Event, (event) => event.creator)
+  events: Event[];
 
   @ManyToMany(() => User)
   @JoinTable({
-    name: "friends",
+    name: 'friends',
     joinColumn: {
-      name: "user1",
-      referencedColumnName: "uuid",
+      name: 'user1',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "user2",
-      referencedColumnName: "uuid",
-    }
+      name: 'user2',
+      referencedColumnName: 'uuid',
+    },
   })
-  friends: User[]
+  friends: User[];
 
   @ManyToMany(() => User)
   @JoinTable({
-    name: "friends",
+    name: 'pendingFriends',
     joinColumn: {
-      name: "user",
-      referencedColumnName: "uuid",
+      name: 'user',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "userAsked",
-      referencedColumnName: "uuid",
-    }
+      name: 'userAsked',
+      referencedColumnName: 'uuid',
+    },
   })
-  pendingFriends: User[]
+  pendingFriends: User[];
 
   @ManyToMany(() => User)
   @JoinTable({
-    name: "met",
+    name: 'met',
     joinColumn: {
-      name: "user1",
-      referencedColumnName: "uuid",
+      name: 'user1',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "user2",
-      referencedColumnName: "uuid",
-    }
+      name: 'user2',
+      referencedColumnName: 'uuid',
+    },
   })
-  metUsers: User[]
+  metUsers: User[];
 
   @ManyToMany(() => User)
   @JoinTable({
-    name: "blocked",
+    name: 'blocked',
     joinColumn: {
-      name: "user",
-      referencedColumnName: "uuid",
+      name: 'user',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "userBlocked",
-      referencedColumnName: "uuid",
-    }
+      name: 'userBlocked',
+      referencedColumnName: 'uuid',
+    },
   })
-  blockedUsers: User[]
+  blockedUsers: User[];
 
   @ManyToMany(() => Hobby)
   @JoinTable({
-    name: "userHobbies",
+    name: 'userHobbies',
     joinColumn: {
-      name: "user",
-      referencedColumnName: "uuid",
+      name: 'user',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "hobbie",
-      referencedColumnName: "hobbyId",
-    }
+      name: 'hobbie',
+      referencedColumnName: 'hobbyId',
+    },
   })
-  hobbies: Hobby[]
+  hobbies: Hobby[];
 }

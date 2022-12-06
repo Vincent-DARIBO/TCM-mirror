@@ -1,7 +1,11 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
 export class Hobby {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  name: string;
 }
