@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import {
   Column,
+  Entity,
   JoinTable,
   ManyToMany,
   ManyToOne,
@@ -9,10 +10,11 @@ import {
 import { EventType } from 'src/types';
 import { User } from 'src/users/entities/user.entity';
 
+@Entity()
 @ObjectType()
 export class Event {
   @PrimaryGeneratedColumn()
-  @Field(() => String, { description: 'event id' })
+  @Field(() => Int, { description: 'event id' })
   id: number;
 
   @Column()
@@ -44,14 +46,14 @@ export class Event {
     enum: EventType,
     default: EventType.ACTIVITY,
   })
-  @Field(() => EventType, { description: 'event type' })
+  @Field(() => EventType)
   type: EventType;
 
-  @ManyToOne(() => User, (user) => user.events)
-  @Field(() => User, { description: 'event creator' })
+  @ManyToOne(() => User, (user) => user.events, { onDelete: 'CASCADE' })
+  @Field(() => String)
   creator: User;
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, { onDelete: 'CASCADE' })
   @JoinTable({
     name: 'userInEvents',
     joinColumn: {

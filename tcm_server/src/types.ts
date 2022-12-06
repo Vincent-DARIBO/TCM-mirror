@@ -1,5 +1,12 @@
+import { InputType, registerEnumType } from "@nestjs/graphql";
+
 export enum EventType {
-  ACTIVITY = 'activity',
-  ONE2ONE = '1to1',
-  EVENT = 'event',
+  ACTIVITY = 'ACTIVITY',
+  ONE2ONE = 'ONE2ONE',
+  EVENT = 'EVENT',
 }
+
+registerEnumType(EventType, {
+  name: 'EventType',
+  description: 'event types'
+})

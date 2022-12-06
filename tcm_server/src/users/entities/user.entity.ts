@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { Event } from 'src/events/entities/event.entity';
 import { Hobby } from 'src/hobbies/entities/hobby.entity';
 import {
@@ -105,7 +105,7 @@ export class User {
     },
     inverseJoinColumn: {
       name: 'hobbie',
-      referencedColumnName: 'hobbyId',
+      referencedColumnName: 'id',
     },
   })
   hobbies: Hobby[];
