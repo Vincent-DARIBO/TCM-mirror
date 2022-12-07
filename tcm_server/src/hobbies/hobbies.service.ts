@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateHobbyInput } from './dto/create-hobby.input';
@@ -13,6 +17,10 @@ export class HobbiesService {
   ) {}
 
   async create(createHobbyInput: CreateHobbyInput): Promise<Hobby> {
+    if (createHobbyInput.name.length > 20) {
+      throw new ForbiddenException(`Hobby length must be under 20`);
+    }
+    createHobbyInput.name = createHobbyInput.name.toLowerCase();
     const hobby = this.hobbyRepository.create(createHobbyInput);
     return await this.hobbyRepository.save(hobby);
   }
@@ -32,6 +40,10 @@ export class HobbiesService {
   }
 
   async update(id: number, updateHobbyInput: UpdateHobbyInput): Promise<Hobby> {
+    if (updateHobbyInput.name.length > 20) {
+      throw new ForbiddenException(`Hobby length must be under 20`);
+    }
+    updateHobbyInput.name = updateHobbyInput.name.toLowerCase();
     const hobby = this.hobbyRepository.preload({
       id: id,
       ...updateHobbyInput,

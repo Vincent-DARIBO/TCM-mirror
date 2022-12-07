@@ -9,7 +9,6 @@ import {
   ParseFilePipe,
   Post,
   Put,
-  Req,
   UploadedFile,
   UseInterceptors,
   UsePipes,
@@ -24,6 +23,18 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  // only accessible to the admin user
+  @Get()
+  async getUsers() {
+    return await this.usersService.findAll();
+  }
+
+  // only accessible to the admin user
+  @Get(':uuid')
+  async getUser(@Param('uuid') uuid: string) {
+    return await this.usersService.findOne(uuid);
+  }
 
   // only accessible to the user whom id is the same as the route and admin user
   @Get(':uuid/profile')
@@ -43,6 +54,7 @@ export class UsersController {
     return await this.usersService.getBlocked(uuid);
   }
 
+  // only accessible to the user whom id is the same as the route and admin user
   @Get(':uuid/events')
   async getEvents(@Param('uuid') uuid: string) {
     return await this.usersService.getEvents(uuid);
@@ -69,7 +81,11 @@ export class UsersController {
     )
     file: Express.Multer.File,
   ) {
-    return await this.usersService.addAvatar(uuid, file.buffer, file.originalname);
+    return await this.usersService.addAvatar(
+      uuid,
+      file.buffer,
+      file.originalname,
+    );
   }
 
   // only accessible to the user whom id is the same as the route and admin user

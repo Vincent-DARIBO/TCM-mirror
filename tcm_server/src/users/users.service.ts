@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProfilesService } from 'src/profiles/profile.service';
 import { Repository } from 'typeorm';
+import { hashPassword } from './users.utils';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
@@ -14,7 +15,19 @@ export class UsersService {
     private readonly profilesService: ProfilesService,
   ) {}
 
-  async create(createUserInput: CreateUserInput): Promise<User> {
+  async create(profile: CreateUserInput): Promise<User> {
+    const createProfileInput = {
+      firstName: profile.profile.firstName,
+      lastName: profile.profile.lastName,
+      email: profile.profile.email,
+      phone: profile.profile.phone,
+      password: await hashPassword(profile.profile.password),
+      birthDate: profile.profile.birthDate,
+      location: profile.profile.location,
+    };
+    const createUserInput = {
+      profile: await this.profilesService.create(createProfileInput),
+    };
     const user = this.userRepository.create(createUserInput);
     return await this.userRepository.save(user);
   }
@@ -64,7 +77,9 @@ export class UsersService {
       firstName: user.profile.firstName,
       lastName: user.profile.lastName,
       email: user.profile.email,
+      phone: user.profile.phone,
       birthDate: user.profile.birthDate,
+      location: user.profile.location,
       hobbies: user.hobbies,
     };
     return userProfile;
@@ -205,6 +220,11 @@ export class UsersService {
   }
 
   async update(uuid: string, updateUserInput: UpdateUserInput): Promise<User> {
+    if (updateUserInput.profile.password) {
+      updateUserInput.profile.password = await hashPassword(
+        updateUserInput.profile.password,
+      );
+    }
     const user = this.userRepository.preload({
       uuid: uuid,
       ...updateUserInput,

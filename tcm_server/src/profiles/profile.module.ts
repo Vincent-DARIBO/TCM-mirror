@@ -7,7 +7,10 @@ import { File } from 'src/files/entities/file.entity';
 import { FilesService } from 'src/files/files.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Profile]), TypeOrmModule.forFeature([File])],
+  imports: [
+    TypeOrmModule.forFeature([Profile]),
+    TypeOrmModule.forFeature([File]),
+  ],
   providers: [ProfileResolver, ProfilesService, FilesService],
 })
 export class ProfileModule {}

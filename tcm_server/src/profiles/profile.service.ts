@@ -76,8 +76,10 @@ export class ProfilesService {
       firstName: null,
       lastName: null,
       email: null,
+      phone: null,
       password: null,
       birthDate: null,
+      location: null,
     };
   }
 }

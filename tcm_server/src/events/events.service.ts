@@ -40,6 +40,10 @@ export class EventsService {
     return event;
   }
 
+  async findByLocation(uuid: string) {
+    // get user location and return an array of events depending on the distance with the users location
+  }
+
   async update(id: number, updateEventInput: UpdateEventInput): Promise<Event> {
     const event = this.eventRepository.preload({
       id: id,

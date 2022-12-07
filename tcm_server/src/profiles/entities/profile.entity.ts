@@ -33,10 +33,18 @@ export class Profile {
   email: string;
 
   @Column()
+  @Field(() => String, { description: 'user phone number' })
+  phone: string;
+
+  @Column()
   @Field(() => String, { description: 'user password' })
   password: string;
 
   @Column()
   @Field(() => String, { description: 'user birth date' })
   birthDate: Date;
+
+  @Column()
+  @Field(() => String, { description: 'user location' })
+  location: string;
 }

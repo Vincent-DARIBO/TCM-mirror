@@ -10,7 +10,11 @@ import { FilesService } from 'src/files/files.service';
 import { File } from 'src/files/entities/file.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), TypeOrmModule.forFeature([Profile]), TypeOrmModule.forFeature([File])],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([Profile]),
+    TypeOrmModule.forFeature([File]),
+  ],
   providers: [UsersResolver, UsersService, ProfilesService, FilesService],
   controllers: [UsersController],
 })
