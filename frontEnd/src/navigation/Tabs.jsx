@@ -3,10 +3,11 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
 import Chat from '../screens/Chat';
 import Number from '../screens/Number'
-
+import Home from '../screens/home/Home';
+import EditProfile from '../screens/profile/EditProfile';
+import ProfileDetails from '../screens/profile/ProfileDetails';
 const Stack = createNativeStackNavigator();
 
 export default function TabNavigator() {
