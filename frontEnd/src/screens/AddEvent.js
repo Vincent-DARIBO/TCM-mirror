@@ -1,4 +1,5 @@
 import React from 'react';
+import { FAB } from 'react-native-paper';
 import {
     Keyboard,
     View,
@@ -8,10 +9,11 @@ import {
     TouchableWithoutFeedback,
     ScrollView,
 } from 'react-native';
+import { color } from 'react-native-reanimated';
 
 export default function AddEvent() {
     return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{flex:1}}>
         <View style={styles.tittle}>
             <Text style={{fontSize:25}}>Lundi 25 novembre</Text>
             {/* <Button title="pres" onPress={() => navigation.navigate('Number')} /> */}
@@ -37,35 +39,42 @@ export default function AddEvent() {
             <Text>20h</Text>
             {/* <Button title="pres" onPress={() => navigation.navigate('Number')} /> */}
         </View>
+        <View style={styles.fab}>
+          <FAB 
+          icon="plus"
+          onPress={() => console.log('Pressed')}
+          />
+        </View>
     </ScrollView>
     );
-  }
+}
 
 const styles = StyleSheet.create({
     tittle: {
-        flex: 1,
         padding: 40,
         alignItems: 'center'
       },
     container: {
-        flex: 1,
-        padding: 24,
+        padding: 15,
         backgroundColor: "red"
       },
       container2: {
-        flex: 1,
-        padding: 24,
+        padding: 15,
         backgroundColor: "#eaeaea"
       },
       container3: {
-        flex: 1,
-        padding: 24,
+        padding: 15,
         backgroundColor: "green"
       },
       container4: {
-        flex: 1,
-        padding: 24,
-        backgroundColor: "yellow"
+        padding: 15,
+        backgroundColor: "yellow",
+        color:"red"
+      },
+      fab: {
+        position: 'absolute',
+        right: 170,
+        bottom: 170,
       },
 
     /*photo: {

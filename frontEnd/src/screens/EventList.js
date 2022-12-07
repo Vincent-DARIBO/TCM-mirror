@@ -8,21 +8,26 @@ import {
     TouchableWithoutFeedback,
     ScrollView,
 } from 'react-native';
+import {Calendar} from 'react-native-calendars'; 
 
 export default function EventList() {
     return (
-    <ScrollView>
         <View style={styles.tittle}>
             <Text style={{fontSize:25}}>Evènement a venir</Text>
+            <Calendar/>
         </View>
-    </ScrollView>
     );
-  }
+}
 
   const styles = StyleSheet.create({
     tittle: {
         flex: 1,
         padding: 40,
         alignItems: 'center'
-      },
+    },
+    calendar: {
+        flex: 1,
+        padding: 40,
+        alignItems: 'right'
+    },
   });
