@@ -1,9 +1,12 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
 
 @InputType()
 export class CreateProfileInput {
-  @Field(() => String, { description: 'user first name' })
+  @Field(() => String, {
+    description: 'user first name',
+    nullable: true,
+  })
   firstname: string;
 
   @Field(() => String, { description: 'user name' })

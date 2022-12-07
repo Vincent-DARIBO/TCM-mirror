@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { Profile } from 'src/profile/entities/profile.entity';
+import { Profile } from 'src/profiles/entities/profile.entity';
 
 @InputType()
 export class CreateUserInput {

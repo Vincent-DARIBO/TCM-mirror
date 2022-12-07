@@ -1,9 +1,8 @@
-import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Event } from 'src/events/entities/event.entity';
 import { Hobby } from 'src/hobbies/entities/hobby.entity';
-import { Profile } from 'src/profile/entities/profile.entity';
+import { Profile } from 'src/profiles/entities/profile.entity';
 import {
-  Column,
   Entity,
   JoinColumn,
   JoinTable,
