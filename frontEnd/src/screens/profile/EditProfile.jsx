@@ -11,7 +11,9 @@ import {
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+Ionicons.loadFont()
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+EvilIcons.loadFont()
 import ElevatedView from 'react-native-elevated-view';
 import {Button as PaperButton, TouchableRipple} from 'react-native-paper';
 
