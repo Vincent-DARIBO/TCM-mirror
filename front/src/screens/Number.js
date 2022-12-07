@@ -42,15 +42,10 @@ export default function Number({ navigation }) {
                     isValid ? null : <Text style={{ color: "red" }}>Numéro de téléphone invalide.</Text>
                 }
             </View>
+            
             <View style={{ marginTop: "20%", borderWidth: 1, backgroundColor: "#007AFF", borderRadius: 20, height: "15%", justifyContent: "center" }}>
                 {<Button title="CONTINUE" color="#FFFFFF" onPress={() => checkValid()} />}
-            <View style={{ marginTop: "10%", height: 100, borderColor: "black", borderWidth: 1, borderRadius: 20 }}>
-
             </View>
-            <View style={{marginTop:"20%",borderWidth:1, backgroundColor:"#007AFF", borderRadius:20, height:"15%", justifyContent:"center"}}>
-                {<Button title="CONTINUE" color="#FFFFFF" onPress={() => navigation.navigate('Home')} />}
-            </View>
-        </View>
         </View>
     )
 

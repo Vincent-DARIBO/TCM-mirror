@@ -13,7 +13,6 @@ export default function Home({navigation}) {
           onPress={() => navigation.navigate('Number')}
         />
       }
-      <Text>voila</Text>
       <Button
         title="Register"
         onPress={() => navigation.navigate('Register')}
@@ -23,7 +22,6 @@ export default function Home({navigation}) {
         onPress={() => navigation.navigate('Profile details')}
       />
       <Button title="pres" onPress={() => navigation.navigate('Edit profile')} />
-      <Button title="IAM" onPress={() => navigation.navigate('Iam')} />
     </View>
   );
 }
