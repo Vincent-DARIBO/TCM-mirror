@@ -1,6 +1,6 @@
 import { View, Image, StyleSheet, Text, TextInput } from 'react-native';
 import React from 'react';
-import Message from './Message';
+import Message from '../components/Message';
 
 export default function Chat() {
   return (

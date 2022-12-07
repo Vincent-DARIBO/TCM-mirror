@@ -10,6 +10,7 @@ import Register from '../screens/profile/Register';
 import ProfileDetails from '../screens/profile/ProfileDetails';
 import Code from '../screens/Code';
 import Iam from '../screens/Iam';
+import Friends from '../screens/Friends/Friends';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ export default function TabNavigator() {
       <Stack.Screen name="Profile details" component={ProfileDetails} />
       <Stack.Screen name="Code" component={Code} />
       <Stack.Screen name="Iam" component={Iam} />
+      <Stack.Screen name="Friends" component={Friends} />
     </Stack.Navigator>
   );
 }
