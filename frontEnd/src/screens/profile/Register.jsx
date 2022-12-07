@@ -11,11 +11,12 @@ import {
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-Ionicons.loadFont()
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-EvilIcons.loadFont()
 import ElevatedView from 'react-native-elevated-view';
-import {Button as PaperButton, TouchableRipple} from 'react-native-paper';
+import {TouchableRipple} from 'react-native-paper';
+
+EvilIcons.loadFont()
+Ionicons.loadFont()
 
 import Button from '../../components/Button';
 import {
@@ -28,11 +29,13 @@ import {
 import {layout} from '../../shared/styles';
 import Input from './components/Input';
 
-export default function EditProfile({navigation}) {
+export default function Register({navigation}) {
   const [firstname, setFirstname] = React.useState('');
   const [lastname, setLastname] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
+  const passwordRef = React.createRef(null);
   async function onIconPress() {
     try {
       const {assets} = await launchImageLibrary(
@@ -86,7 +89,7 @@ export default function EditProfile({navigation}) {
           ) : null}
         </View>
         <Input
-          placeholder="Jessica..."
+          placeholder="Prénom"
           value={firstname}
           onChangeText={setFirstname}
           returnKeyType="next"
@@ -95,12 +98,22 @@ export default function EditProfile({navigation}) {
           }}
         />
         <Input
-          label="Nom"
-          placeholder="Mc Miller..."
+          placeholder="Nom"
           value={lastname}
           onChangeText={setLastname}
           style={{marginTop: 10}}
           ref={surnameRef}
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            passwordRef.current.focus();
+          }}
+        />
+        <Input
+          placeholder="Mot de passe"
+          value={password}
+          onChangeText={setPassword}
+          style={{marginTop: 10}}
+          ref={passwordRef}
         />
         <Button
           style={{...styles.dateButton}}

@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Chat from '../screens/Chat';
 import Number from '../screens/Number'
 import Home from '../screens/home/Home';
-import EditProfile from '../screens/profile/EditProfile';
+import Register from '../screens/profile/Register';
 import ProfileDetails from '../screens/profile/ProfileDetails';
 import Code from '../screens/Code';
 import Iam from '../screens/Iam';
@@ -19,7 +19,7 @@ export default function TabNavigator() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Number" component={Number} />
       <Stack.Screen name="Chat" component={Chat} />
-      <Stack.Screen name="Edit profile" component={EditProfile} />
+      <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Profile details" component={ProfileDetails} />
       <Stack.Screen name="Code" component={Code} />
       <Stack.Screen name="Iam" component={Iam} />
