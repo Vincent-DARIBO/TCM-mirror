@@ -74,7 +74,7 @@ export default function Register({navigation}) {
           ) : (
             <TouchableRipple
               style={{...layout.center, ...styles.elevated}}
-              onPress={() => onIconPress()}
+              onPress={() => pickImage()}
               borderles>
               <>
                 <Ionicons name="person-outline" size={50} color={secondary} />
