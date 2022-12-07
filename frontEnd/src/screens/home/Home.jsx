@@ -7,6 +7,7 @@ export default function Home({navigation}) {
       {<Button title="INSCRIPTION" onPress={() => navigation.navigate('Number')} />}
       <Text>voila</Text>
       <Button title="pres" onPress={() => navigation.navigate('Edit profile')} />
+      <Button title="IAM" onPress={() => navigation.navigate('Iam')} />
     </View>
   );
 }
