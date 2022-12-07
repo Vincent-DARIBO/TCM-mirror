@@ -17,7 +17,7 @@ export default function TabNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Number" component={Number} />
+      {/* <Stack.Screen name="Number" component={Number} /> */}
       <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="Edit profile" component={EditProfile} />
       <Stack.Screen name="Profile details" component={ProfileDetails} />
