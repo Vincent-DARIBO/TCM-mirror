@@ -10,6 +10,8 @@ import EditProfile from '../screens/profile/EditProfile';
 import ProfileDetails from '../screens/profile/ProfileDetails';
 import Code from '../screens/Code';
 import Iam from '../screens/Iam';
+import Message from '../screens/Message';
+import Matches from '../screens/Matches';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,12 +19,14 @@ export default function TabNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
-      {/* <Stack.Screen name="Number" component={Number} /> */}
+      <Stack.Screen name="Number" component={Number} />
       <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="Edit profile" component={EditProfile} />
       <Stack.Screen name="Profile details" component={ProfileDetails} />
       <Stack.Screen name="Code" component={Code} />
       <Stack.Screen name="Iam" component={Iam} />
+      <Stack.Screen name="Message" component={Message} />
+      <Stack.Screen name="Matches" component={Matches} />
     </Stack.Navigator>
   );
 }
