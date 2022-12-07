@@ -1,12 +1,15 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { Event } from 'src/events/entities/event.entity';
 import { Hobby } from 'src/hobbies/entities/hobby.entity';
+import { Profile } from 'src/profile/entities/profile.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -17,25 +20,10 @@ export class User {
   @Field(() => String, { description: 'uuid' })
   uuid: string;
 
-  @Column()
-  @Field(() => String, { description: 'user first name' })
-  firstName: string;
-
-  @Column()
-  @Field(() => String, { description: 'user last name' })
-  lastName: string;
-
-  @Column({ unique: true })
-  @Field(() => String, { description: 'user email' })
-  email: string;
-
-  @Column()
-  @Field(() => String, { description: 'user password' })
-  password: string;
-
-  @Column()
-  @Field(() => String, { description: 'user birth date' })
-  birthDate: Date;
+  @OneToOne(() => Profile, { onDelete: 'CASCADE' })
+  @JoinColumn({ referencedColumnName: 'id' })
+  @Field(() => Int)
+  profile: Profile;
 
   @OneToMany(() => Event, (event) => event.creator, { onDelete: 'CASCADE' })
   events: Event[];

@@ -7,6 +7,7 @@ import { EventsModule } from './events/events.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProfileModule } from './profile/profile.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -33,6 +34,7 @@ dotenv.config();
     UsersModule,
     EventsModule,
     HobbiesModule,
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService],

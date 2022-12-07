@@ -1,21 +1,8 @@
-import { IsEmail } from 'class-validator';
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import { Profile } from 'src/profile/entities/profile.entity';
 
 @InputType()
 export class CreateUserInput {
-  @Field(() => String, { description: 'user first name' })
-  firstname: string;
-
-  @Field(() => String, { description: 'user name' })
-  lastName: string;
-
-  @Field(() => String, { description: 'user email' })
-  @IsEmail()
-  email: string;
-
-  @Field(() => String, { description: 'user password' })
-  password: string;
-
-  @Field(() => String, { description: 'user birth date' })
-  birthDate: Date;
+  @Field(() => Int)
+  profile: Profile;
 }

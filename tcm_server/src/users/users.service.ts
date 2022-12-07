@@ -20,6 +20,8 @@ export class UsersService {
   async findAll(): Promise<Array<User>> {
     return await this.userRepository.find({
       relations: {
+        profile: true,
+        events: true,
         friends: true,
         pendingFriends: true,
         metUsers: true,
@@ -32,6 +34,8 @@ export class UsersService {
   async findOne(uuid: string): Promise<User> {
     const user = await this.userRepository.findOne({
       relations: {
+        profile: true,
+        events: true,
         friends: true,
         pendingFriends: true,
         metUsers: true,
@@ -62,11 +66,7 @@ export class UsersService {
     await this.userRepository.remove(user);
     return {
       uuid: uuid,
-      firstName: null,
-      lastName: null,
-      email: null,
-      password: null,
-      birthDate: null,
+      profile: null,
       events: null,
       friends: null,
       pendingFriends: null,

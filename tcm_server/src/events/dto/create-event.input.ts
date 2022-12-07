@@ -1,4 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
+import { IsEnum } from 'class-validator';
 import { EventType } from 'src/types';
 import { User } from 'src/users/entities/user.entity';
 
@@ -22,7 +23,7 @@ export class CreateEventInput {
   @Field(() => Date, { description: 'event date' })
   eventDate: Date;
 
-  @Field((type) => String)
+  @Field(() => String)
   type: EventType;
 
   @Field(() => String, { description: 'event creator' })
