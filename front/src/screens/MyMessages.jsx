@@ -72,12 +72,7 @@ const DATA = [
         id: '12',
         title: 'Tania',
         img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '13',
-        title: 'Camille',
-        img: require('../assets/Femme1.png'),
-    },
+    }
 ];
 
 const MyMessages = () => {
@@ -100,14 +95,14 @@ const MyMessages = () => {
         )
     }
 
-    return(
+    return (
         <View>
             <FlatList data={DATA}
-                    renderItem={render}
-                    keyExtractor={item => item.id}
-                    ListEmptyComponent={emptyList}
-                    showsHorizontalScrollIndicator={false}
-                    showsVerticalScrollIndicator={false}
+                renderItem={render}
+                keyExtractor={item => item.id}
+                ListEmptyComponent={emptyList}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
             />
         </View>
     )
