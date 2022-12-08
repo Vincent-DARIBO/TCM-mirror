@@ -8,6 +8,9 @@ import {
     secondary,
     white,
 } from '../constants/colors';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+FontAwesome.loadFont()
 
 const DATA = [
     {
@@ -77,7 +80,7 @@ const DATA = [
     },
 ];
 
-const Matches = ({ navigation }) => {
+const Friends = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [matchesList, setMatchesList] = useState(DATA);
     const [loading, setLoading] = useState(false);
@@ -89,21 +92,32 @@ const Matches = ({ navigation }) => {
 
     const render = ({ item, index }) => {
         return (
-            <TouchableOpacity style={styles.itemCard} onPress={() => navigation.navigate('Profile Details')} >
-                <Image style={{ width: '85%', height: '80%', borderRadius: 5 }} source={item.img} />
+                <TouchableOpacity style={styles.itemCard} onPress={() => navigation.navigate('Profile Details')} >
+                    <Image style={{ width: '85%', height: '80%', marginTop: '2%' }} source={item.img} />
+                    <Text style={{
+                        fontSize: 15,
+                        color: primary,
+                    }}>{item.title}</Text>
+                    <View style={styles.bottomCardBar} />
+                </TouchableOpacity>
+        )
+    }
+
+    const emptyList = () => {
+        return (
+            <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row', justifyContent: 'center' }} >
                 <Text style={{
-                    paddingTop: 5,
+                    paddingTop: '10%',
+                    fontWeight: '500',
                     fontSize: 15,
-                    color: primary,
-                }}>{item.title}</Text>
-                <View style={styles.bottomCardBar} />
-            </TouchableOpacity>
+                }}>Ajoutez vos amis pour les voir ici! <FontAwesome name='smile-o' /></Text>
+            </View>
         )
     }
 
     return (
         <View style={{ alignItems: 'center' }}>
-            <View style={{ width: '100%'}} >
+            <View style={{ width: '100%' }} >
                 <Text style={{
                     paddingTop: 10,
                     fontWeight: 'bold',
@@ -118,23 +132,29 @@ const Matches = ({ navigation }) => {
                     elevation={4}
                     style={{ borderRadius: 20, marginLeft: '10%', marginRight: '10%', marginTop: '5%', marginBottom: '5%' }}
                 />
-                <Text style={{
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    color: secondary,
-                    textAlign: 'right',
-                    paddingRight: 20,
-                    paddingBottom: 10
-                }} >Demandes (2)</Text>
+                <TouchableOpacity style={{ flexDirection: 'row-reverse' }}>
+                    <Text style={{
+                        fontWeight: 'bold',
+                        fontSize: 18,
+                        color: secondary,
+                        textAlign: 'right',
+                        paddingRight: 20,
+                        paddingBottom: 10
+                    }} >Demandes (2)</Text>
+                </TouchableOpacity>
             </View>
-            <View style={{ height: '87%', width: '80%' }}>
+            <View style={{ height: '65%', width: '80%', alignItems: 'center' }}>
                 <FlatList data={DATA.filter(item => item.title.includes(searchQuery))}
                     renderItem={render}
                     keyExtractor={item => item.id}
                     numColumns={2}
+                    ListEmptyComponent={emptyList}
+                    style={{
+                        flex: 1, width: '100%', height: '100%',
+                    }}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    ItemSeparatorComponent={() => <View style={{ height: '1%' }} />} />
+                    ItemSeparatorComponent={() => <View style={{ marginVertical: '2%' }} />} />
             </View>
         </View>
     );
@@ -143,11 +163,11 @@ const Matches = ({ navigation }) => {
 const styles = StyleSheet.create({
     itemCard: {
         alignItems: 'center',
-        width: '50%',
-        padding: 3,
+        flex: 0.5,
         aspectRatio: 1,
-        paddingLeft: '2%',
-        paddingRight: '2%',
+        marginHorizontal: '2%',
+        backgroundColor: '#ddd',
+        borderRadius: 5
     },
     bottomCardBar: {
         width: '100%',
@@ -157,4 +177,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Matches;
+export default Friends;

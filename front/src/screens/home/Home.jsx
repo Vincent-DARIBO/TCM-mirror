@@ -24,7 +24,7 @@ export default function Home({navigation}) {
       />
       <Button title="pres" onPress={() => navigation.navigate('Edit profile')} />
       <Button title="IAM" onPress={() => navigation.navigate('Iam')} />
-      <Button title="Matches" onPress={() => navigation.navigate('Matches')} />
+      <Button title="Matches" onPress={() => navigation.navigate('Friends')} />
     </View>
   );
 }
