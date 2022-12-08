@@ -9,7 +9,7 @@ const Code = ({ route, navigation }) => {
 
     console.log("code " + code)
     if (code === "0000")
-      navigation.navigate("Iam")
+      navigation.navigate("Gender")
     else {
       setInvalidCode(true)
       setCode('')
