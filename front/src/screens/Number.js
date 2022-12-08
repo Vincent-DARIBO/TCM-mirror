@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, Text, TouchableOpacity, View } from 'react-native';
 import PhoneInput, { isValidNumber } from "react-native-phone-number-input";
 import { useState, useRef } from 'react'
 
@@ -9,7 +9,7 @@ export default function Number({ navigation }) {
     const checkValid = () => {
 
         if (isValidNumber(value)) {
-            navigation.navigate("Code", { phoneNumber : value})
+            navigation.navigate("Code", { phoneNumber: value })
             //send OAuth code function
         }
         else
@@ -42,10 +42,12 @@ export default function Number({ navigation }) {
                     isValid ? null : <Text style={{ color: "red" }}>Numéro de téléphone invalide.</Text>
                 }
             </View>
-            
-            <View style={{ marginTop: "20%", borderWidth: 1, backgroundColor: "#007AFF", borderRadius: 20, height: "15%", justifyContent: "center" }}>
-                {<Button title="CONTINUE" color="#FFFFFF" onPress={() => checkValid()} />}
-            </View>
+
+            <TouchableOpacity onPress={() => checkValid()}>
+                <View style={{ marginTop: "20%", borderWidth: 1, backgroundColor: "#007AFF", borderRadius: 20, height: "35%", justifyContent: "center", alignItems:"center" }}>
+                    <Text style={{fontSize:20, color:"white"}}>CONTINUE</Text>
+                </View>
+            </TouchableOpacity>
         </View>
     )
 

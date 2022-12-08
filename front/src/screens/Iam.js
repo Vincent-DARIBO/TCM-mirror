@@ -11,10 +11,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Iam() {
+export default function Iam({ route, navigation }) {
   const [btn, setButton] = useState(undefined);
   
   const checkValid = () => {
+    if (btn !== undefined)
+      navigation.navigate("Interest")
     return
   }
 
