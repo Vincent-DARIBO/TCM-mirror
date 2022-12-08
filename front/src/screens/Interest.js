@@ -60,48 +60,79 @@ const DATA = [
 ];
 
 export default function Interest() {
+  const [interests, setInterests] = useState([]);
   const checkIsSelected = name => {
     const found = interests.find(element => element === name);
 
     if (found === undefined) setInterests(interests => [...interests, name]);
     else {
-      for (let i = 0; i != interests.length; i++) {
-        if (interests[i] === name)
-          setInterests(interests.filter(item => item !== name));
-      }
+      setInterests(interests.filter(item => item !== name));
     }
   };
-  const [interests, setInterests] = useState([]);
 
-
-
-    const renderItem = ({ item }) => {
-
-        return (
-            <View style={{ marginTop: "5%", width: "47.5%", alignItems: "center", justifyContent: "center", alignContent: "center", marginRight: "5%" }}>
-                {<CustomButton onPress={() => checkIsSelected(item.text)} title={item.text} style={{ width: "100%", backgroundColor: interests.find(element => element === item.text) ? "#FF9900" : "#FFFFFF", borderWidth: 0.5, borderColor: "grey" }} icon={item.icon} textStyle={{ color: "black", marginLeft: "5%", fontSize: "14%" }}></CustomButton>}
-            </View>
-        )
-    }
+  const renderItem = ({item}) => {
     return (
-        <View style={{ marginLeft: '10%', marginRight: '10%' }}>
-            <Text style={{ fontSize: 30, fontWeight: 'bold', marginTop: '20%' }}>Centre d'intérêts</Text>
-            <Text style={{ marginTop: "3%" }}>Sélectionnez plusieurs centre d'intérêts</Text>
+      <View
+        style={{
+          marginTop: '5%',
+          width: '47.5%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          alignContent: 'center',
+          marginRight: '5%',
+        }}>
+        <CustomButton
+          onPress={() => checkIsSelected(item.text)}
+          title={item.text}
+          style={{
+            width: '100%',
+            backgroundColor: interests.find(element => element === item.text)
+              ? '#FF9900'
+              : '#FFFFFF',
+            borderWidth: 0.5,
+            borderColor: 'grey',
+          }}
+          icon={item.icon}
+          textStyle={{
+            color: 'black',
+            marginLeft: '5%',
+            fontSize: 14,
+          }}
+        />
+      </View>
+    );
+  };
+  return (
+    <View style={{marginLeft: '10%', marginRight: '10%'}}>
+      <Text style={{fontSize: 30, fontWeight: 'bold', marginTop: '20%'}}>
+        Centre d'intérêts
+      </Text>
+      <Text style={{marginTop: '3%'}}>
+        Sélectionnez plusieurs centre d'intérêts
+      </Text>
 
-            <View>
-                <FlatList
-                    data={DATA}
-                    renderItem={renderItem}
-                    numColumns={2}
-                    keyExtractor={item => item.id}
-                />
-            <View>
-                <TouchableOpacity>
-                    <View style={{ borderWidth: 1, backgroundColor: '#007AFF', borderRadius: 20, height: '30%', justifyContent: "center", alignItems: "center", marginTop: '20%' }}>
-                        <Text style={{ fontSize: 20, color: "white" }}>CONTINUER</Text>
-                    </View>
-                </TouchableOpacity>
-
+      <View>
+        <FlatList
+          data={DATA}
+          renderItem={renderItem}
+            numColumns={2}
+          keyExtractor={(item, index) => index.toString()}
+        />
+        <View>
+          <TouchableOpacity>
+            <View
+              style={{
+                borderWidth: 1,
+                backgroundColor: '#007AFF',
+                borderRadius: 20,
+                height: '30%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: '20%',
+              }}>
+              <Text style={{fontSize: 20, color: 'white'}}>CONTINUER</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
