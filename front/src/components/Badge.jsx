@@ -3,20 +3,21 @@ import {StyleSheet, Pressable, Text} from 'react-native';
 import ElevatedView from 'react-native-elevated-view';
 import {secondary, white} from '../constants/colors';
 
-export default function Badge({icon, title, textStyle, onPress, props}) {
+export default function Badge({icon, title, textStyle, onPress, style = {}}) {
   return (
     <ElevatedView
       elevation={2}
       style={{
         ...styles.center,
-      }}
-      {...props}>
+        ...style,
+      }}>
       <Pressable
         onPress={onPress}
         style={{
           ...styles.center,
           justifyContent: icon ? null : 'center',
-          paddingHorizontal: 10
+          paddingHorizontal: 10,
+          ...style,
         }}>
         <>{icon}</>
         <Text style={[styles.text, {marginLeft: icon ? 15 : null}, textStyle]}>
@@ -26,6 +27,7 @@ export default function Badge({icon, title, textStyle, onPress, props}) {
     </ElevatedView>
   );
 }
+
 const styles = StyleSheet.create({
   center: {
     alignItems: 'center',

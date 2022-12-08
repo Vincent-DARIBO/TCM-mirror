@@ -7,15 +7,11 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ScrollView,
-  Pressable,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import ElevatedView from 'react-native-elevated-view';
 import {TouchableRipple} from 'react-native-paper';
-
-EvilIcons.loadFont()
-Ionicons.loadFont()
+import {Ionicons, EvilIcons} from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 
 import Button from '../../components/Button';
 import {
@@ -31,12 +27,9 @@ import Input from './components/Input';
 export default function Register({navigation}) {
   const [firstname, setFirstname] = React.useState('');
   const [lastname, setLastname] = React.useState('');
-  const [password, setPassword] = React.useState('');
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
-  const passwordRef = React.createRef(null);
- 
-  
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -108,17 +101,6 @@ export default function Register({navigation}) {
           onChangeText={setLastname}
           style={{marginTop: 10}}
           ref={surnameRef}
-          returnKeyType="next"
-          onSubmitEditing={() => {
-            passwordRef.current.focus();
-          }}
-        />
-        <Input
-          placeholder="Mot de passe"
-          value={password}
-          onChangeText={setPassword}
-          style={{marginTop: 10}}
-          ref={passwordRef}
         />
         <Button
           style={{...styles.dateButton}}
@@ -164,7 +146,7 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     borderRadius: 30,
-    backgroundColor: orange,
+    backgroundColor: secondary,
   },
   dateButton: {
     marginTop: 10,
