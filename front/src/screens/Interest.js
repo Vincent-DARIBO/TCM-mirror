@@ -77,15 +77,14 @@ export default function Interest() {
 
     const renderItem = ({ item }) => {
 
-        console.log(interests)
         return (
-            <View style={{ marginTop: "5%", width: "47.5%", alignItems: "center", justifyContent: "center", alignContent: "center", marginRight:"5%"}}>
-                {<CustomButton onPress={() => checkIsSelected(item.text)} title={item.text} style={{ width: "100%", backgroundColor: interests.find(element => element === item.text) ? "#FF9900" : "#FFFFFF", borderWidth: 0.5, borderColor: "grey"}} icon={item.icon} textStyle={{ color: "black", marginLeft: "5%", fontSize: "14%" }}></CustomButton>}
+            <View style={{ marginTop: "5%", width: "47.5%", alignItems: "center", justifyContent: "center", alignContent: "center", marginRight: "5%" }}>
+                {<CustomButton onPress={() => checkIsSelected(item.text)} title={item.text} style={{ width: "100%", backgroundColor: interests.find(element => element === item.text) ? "#FF9900" : "#FFFFFF", borderWidth: 0.5, borderColor: "grey" }} icon={item.icon} textStyle={{ color: "black", marginLeft: "5%", fontSize: "14%" }}></CustomButton>}
             </View>
         )
     }
     return (
-        <View style={{ marginLeft: '10%', marginRight: '10%'}}>
+        <View style={{ marginLeft: '10%', marginRight: '10%' }}>
             <Text style={{ fontSize: 30, fontWeight: 'bold', marginTop: '20%' }}>Centre d'intérêts</Text>
             <Text style={{ marginTop: "3%" }}>Sélectionnez plusieurs centre d'intérêts</Text>
 
@@ -96,12 +95,13 @@ export default function Interest() {
                     numColumns={2}
                     keyExtractor={item => item.id}
                 />
-                <View style={{borderWidth: 1,backgroundColor: '#007AFF', borderRadius: 20, height: '15%', justifyContent:"center", alignItems:"center", marginTop: '20%'}}>
-                    <TouchableOpacity>
-                        <Text style={{fontSize:20, color:"white"}}>TEXT</Text>
-                    </TouchableOpacity>
-                </View>
             </View>
+                <TouchableOpacity>
+                    <View style={{ borderWidth: 1, backgroundColor: '#007AFF', borderRadius: 20, height: '30%', justifyContent: "center", alignItems: "center", marginTop: '20%' }}>
+                        <Text style={{ fontSize: 20, color: "white" }}>CONTINUER</Text>
+                    </View>
+                </TouchableOpacity>
+
         </View>
     )
 }

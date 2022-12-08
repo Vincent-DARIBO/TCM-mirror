@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 
 export default function Iam({ route, navigation }) {
   const [btn, setButton] = useState(undefined);
-  
+
   const checkValid = () => {
     if (btn !== undefined)
       navigation.navigate("Interest")
@@ -95,23 +95,20 @@ export default function Iam({ route, navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View
-        style={{
-          marginTop: '20%',
-          borderWidth: 1,
-          backgroundColor: '#007AFF',
-          borderRadius: 20,
-          height: '15%',
-          justifyContent: 'center',
-        }}>
-        {
-          <Button
-            title="CONTINUE"
-            color="#FFFFFF"
-            onPress={() => checkValid()}
-          />
-        }
-      </View>
+      <TouchableOpacity onPress={() => checkValid()}>
+        <View
+          style={{
+            marginTop: '20%',
+            borderWidth: 1,
+            backgroundColor: '#007AFF',
+            borderRadius: 20,
+            height: '30%',
+            justifyContent: 'center',
+            alignItems:"center"
+          }}>
+            <Text style={{fontSize:20, color:"white"}}>CONTINUER</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
