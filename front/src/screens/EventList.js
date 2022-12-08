@@ -7,27 +7,61 @@ import {
     StyleSheet,
     TouchableWithoutFeedback,
     ScrollView,
+    SafeAreaView,
+    StatusBar
 } from 'react-native';
-import {Calendar} from 'react-native-calendars'; 
+import {Calendar} from 'react-native-calendars';
+import { FAB } from 'react-native-paper';
+import {AntDesign} from '@expo/vector-icons'
 
 export default function EventList() {
     return (
-        <View style={styles.tittle}>
-            <Text style={{fontSize:25}}>Evènement a venir</Text>
-            <Calendar/>
-        </View>
+        <SafeAreaView style={styles.safeareaview}>
+            <ScrollView>
+                <View style={styles.tittle}>
+                    <Text style={{fontSize:40, color:'darkblue'}}>Evénements</Text>
+                    <View style={styles.fab}>
+                    <Text style={styles.text}>Créer un évènement</Text>
+                        <View style={{paddingHorizontal:10}}>    
+                            <AntDesign 
+                            name="pluscircleo"
+                            size={25}
+                            onPress={() => console.log('Pressed')}
+                            color="orange"
+                            />
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.calendar}>
+                    <Calendar/>
+                </View>
+                <View style={styles.calendar}>
+                    <Calendar/>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
   const styles = StyleSheet.create({
-    tittle: {
+    safeareaview: {
         flex: 1,
-        padding: 40,
-        alignItems: 'center'
+    },
+    tittle: {
+        marginBottom: 20,
+        alignItems: 'center',
+        padding: 10,
     },
     calendar: {
-        flex: 1,
-        padding: 40,
-        alignItems: 'right'
+        padding: 10,
+        alignItems: 'center'
     },
+    text: {
+        alignItems: 'center',
+        fontSize: 15,
+        color: 'orange',
+    },
+    fab: {
+        flexDirection:'row',
+      },
   });

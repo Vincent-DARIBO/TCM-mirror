@@ -1,5 +1,6 @@
 import React from 'react';
 import { FAB } from 'react-native-paper';
+import { Searchbar } from 'react-native-paper';
 import {
     Keyboard,
     View,
@@ -8,99 +9,131 @@ import {
     StyleSheet,
     TouchableWithoutFeedback,
     ScrollView,
+    SafeAreaView,
 } from 'react-native';
 
 export default function AddEvent() {
-    return (
-    <ScrollView contentContainerStyle={{flex:1}}>
-        <View style={styles.tittle}>
-            <Text style={{fontSize:25}}>Lundi 25 novembre</Text>
-            {/* <Button title="pres" onPress={() => navigation.navigate('Number')} /> */}
-        </View>
-        <View style={styles.container}>
-            <Text style={{fontSize:20}}>Cours de poterie avec ginette</Text>
-            <Text>9-11h</Text>
-            <Text>places restantes: 3</Text>
-            {/* <Button title="pres" onPress={() => navigation.navigate('Number')} /> */}
-        </View>
-        <View style={styles.container2}>
-            <Text style={{fontSize:20}}>Partie d'échec avec léa</Text>
-            <Text>15h</Text>
-            {/* <Button title="pres" onPress={() => navigation.navigate('Number')} /> */}
-        </View>
-        <View style={styles.container3}>
-            <Text style={{fontSize:20}}>Balade sur les quais avec Thibault</Text>
-            <Text>17h</Text>
-            {/* <Button title="pres" onPress={() => navigation.navigate('Number')} /> */}
-        </View>
-        <View style={styles.container4}>
-            <Text style={{fontSize:20}}>Balade sur les quais avec Thibault</Text>
-            <Text>20h</Text>
-            {/* <Button title="pres" onPress={() => navigation.navigate('Number')} /> */}
-        </View>
-        <View style={styles.fab}>
-          <FAB 
-          icon="plus"
-          onPress={() => console.log('Pressed')}
-          />
-        </View>
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const onChangeSearch = query => setSearchQuery(query);
+  return (
+  //contentContainerStyle={{flex:1}}
+  <SafeAreaView style={styles.safeareaview} >
+    <ScrollView >
+      <View style={styles.tittle}>
+          <Text style={styles.text}>Lundi 25 novembre</Text>
+      </View>
+      <View style={styles.search}>
+        <Searchbar style={{borderRadius: 30}}
+        placeholder="Search"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+        />
+      </View>
+      <View style={styles.container}>
+          <Text style={styles.textWhite}>Cours d'espagnol</Text>
+          <Text>9:00 AM - 10:00 AM</Text>
+          <Text style={{textAlign:'right'}}>Lyon 1er</Text>
+          <View style={styles.sameLigne}>
+            <Image style={styles.image} source={require("../assets/Femme1.png")} />
+            <Image style={styles.image} source={require("../assets/marcel.png")} />
+          </View>
+      </View>
+      <View style={styles.container2}>
+          <Text style={styles.textWhite}>Partie d'échec avec léa</Text>
+          <Text>10:00 AM - 11:00 AM</Text>
+          <Text style={{textAlign:'right'}}>Lyon 7eme</Text>
+          <Image style={styles.image} source={require("../assets/Femme1.png")} />
+      </View>
+      <View style={styles.container3}>
+          <Text style={styles.textWhite}>Yoga avec karine</Text>
+          <Text>9:00 AM - 11:00 AM</Text>
+          <Text style={{textAlign:'right'}}>Lyon 1er</Text>
+          <Image style={styles.image} source={require("../assets/Femme1.png")} />
+      </View>
+      <View style={styles.container4}>
+          <Text style={styles.textWhite}>Pique-nique avec marie</Text>
+          <Text>10:00 AM - 11:00 AM</Text>
+          <Text style={{textAlign:'right'}}>Lyon 8eme</Text>
+          <View style={styles.sameLigne}>
+            <Image style={styles.image} source={require("../assets/Femme1.png")} />
+            <Image style={styles.image} source={require("../assets/marcel.png")} />
+          </View>
+      </View>
+      {/*<View style={styles.fab}>
+        <FAB 
+        icon="plus"
+        onPress={() => console.log('Pressed')}
+        />
+  </View>*/}
     </ScrollView>
-    );
+  </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    tittle: {
-        padding: 40,
-        alignItems: 'center'
-      },
-    container: {
-        padding: 15,
-        backgroundColor: "red"
-      },
-      container2: {
-        padding: 15,
-        backgroundColor: "#eaeaea"
-      },
-      container3: {
-        padding: 15,
-        backgroundColor: "green"
-      },
-      container4: {
-        padding: 15,
-        backgroundColor: "yellow",
-        color:"red"
-      },
-      fab: {
-        position: 'absolute',
-        right: 170,
-        bottom: 170,
-      },
-
-    /*photo: {
-      height: 350,
+  tittle: {
+      padding: 10,
+      alignItems: 'center',
     },
-    title: {
-      paddingTop: 10,
-      fontWeight: 'bold',
+  text: {
       fontSize: 30,
+      color:'#00008b'
     },
-    image: {
-      resizeMode: 'contain',
-      height: 200,
-      width: 130,
-      borderRadius: 10,
-    },
-    elevated: {
-      height: 198,
-      width: 130,
-      borderRadius: 10,
-      marginTop: 20,
-      backgroundColor: 'transparent',
-    },
-    circle: {
-      height: 30,
-      width: 30,
+  textWhite: {
+    fontSize: 20,
+    color:'white'
+  },
+  search: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  image:{
+    width:25,
+    height:25,
+    borderRadius:100,
+  },
+  sameLigne:{
+    flexDirection:'row',
+  },
+  container: {
+      padding: 10,
+      backgroundColor: "red",
+      marginRight: 20,
+      marginLeft: 20,
+      marginBottom: 10,
       borderRadius: 30,
-      backgroundColor: orange,
-    },*/
-  });
+    },
+  container2: {
+    padding: 10,
+    backgroundColor: "lightskyblue",
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 10,
+    borderRadius: 30
+  },
+  container3: {
+    padding: 10,
+    backgroundColor: "navajowhite",
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 10,
+    borderRadius: 30
+  },
+  container4: {
+    padding: 10,
+    backgroundColor: "lightgreen",
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 10,
+    borderRadius: 30
+  },
+  fab: {
+    position: 'absolute',
+    right: 50,
+    bottom: 10,
+  },
+  safeareaview: {
+    flex:1,
+  },
+});
