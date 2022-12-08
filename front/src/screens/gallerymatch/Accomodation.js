@@ -21,7 +21,7 @@ const Accomodation = () => {
                 />
             </TouchableOpacity>
             <Input placeholder="Search"/>
-            <TouchableOpacity style={styles.resto}>
+            <TouchableOpacity style={styles.student}>
                 <Ionicons
                     name="people-outline"
                     size={30}
@@ -31,7 +31,7 @@ const Accomodation = () => {
                     Etudiants
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.shopping}>
+            <TouchableOpacity style={styles.part}>
                 <Ionicons
                     name="home-outline"
                     size={30}
@@ -41,7 +41,7 @@ const Accomodation = () => {
                     Particuliers
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.sport}>
+            <TouchableOpacity style={styles.court}>
                 <Ionicons
                     name="alarm-outline"
                     size={30}
@@ -51,7 +51,7 @@ const Accomodation = () => {
                     Court-terme
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.outside}>
+            <TouchableOpacity style={styles.long}>
                 <Ionicons
                     name="time-outline"
                     size={30}
@@ -60,6 +60,16 @@ const Accomodation = () => {
                 <Text>
                     Long-terme
                 </Text>
+            </TouchableOpacity>
+            <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: '15%', color: "orange", marginLeft: '10%'}}>
+                Créer une activité
+            </Text>
+            <TouchableOpacity style={styles.add}>
+                <Ionicons
+                    name="add-circle-outline"
+                    size={40}
+                    color="orange"
+                />
             </TouchableOpacity>
             <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: '15%', color: "darkblue", marginLeft: '10%'}}>
                 Vos amis
@@ -83,34 +93,44 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10
     },
-    resto: {
+    student: {
         height: 60,
-        width: 250,
+        width: 80,
+        marginLeft: 85,
         alignItems: "center",
         padding: 10
     },
-    shopping: {
+    part: {
         height: 60,
-        width: 250,
+        width: 100,
         marginTop: -60,
-        marginLeft: 150,
+        marginLeft: 225,
         alignItems: "center",
         padding: 10
     },
-    sport: {
+    court: {
         height: 60,
-        width: 250,
+        width: 100,
+        marginLeft: 75,
         alignItems: "center",
         padding: 10
     },
-    outside: {
+    long: {
         height: 60,
-        width: 250,
+        width: 100,
         marginTop: -60,
-        marginLeft: 150,
+        marginLeft: 228,
         alignItems: "center",
         padding: 10
-    }
+    },
+    add: {
+        height: 60,
+        width: 60,
+        marginTop: -45,
+        marginLeft: 200,
+        alignItems: "center",
+        padding: 10
+    },
 });
 
 export default Accomodation;

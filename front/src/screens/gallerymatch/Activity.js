@@ -61,6 +61,16 @@ const Activity = () => {
                     Activité en plein air...
                 </Text>
             </TouchableOpacity>
+            <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: '15%', color: "orange", marginLeft: '10%'}}>
+                Créer une activité
+            </Text>
+            <TouchableOpacity style={styles.add}>
+                <Ionicons
+                    name="add-circle-outline"
+                    size={40}
+                    color="orange"
+                />
+            </TouchableOpacity>
             <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: '15%', color: "darkblue", marginLeft: '10%'}}>
                 Vos amis
             </Text>
@@ -85,32 +95,42 @@ const styles = StyleSheet.create({
     },
     resto: {
         height: 60,
-        width: 250,
+        width: 150,
+        marginLeft: 55,
         alignItems: "center",
         padding: 10
     },
     shopping: {
         height: 60,
-        width: 250,
+        width: 150,
         marginTop: -60,
-        marginLeft: 150,
+        marginLeft: 200,
         alignItems: "center",
         padding: 10
     },
     sport: {
         height: 60,
-        width: 250,
+        width: 130,
+        marginLeft: 65,
         alignItems: "center",
         padding: 10
     },
     outside: {
         height: 60,
-        width: 250,
+        width: 150,
         marginTop: -60,
-        marginLeft: 150,
+        marginLeft: 200,
         alignItems: "center",
         padding: 10
-    }
+    },
+    add: {
+        height: 60,
+        width: 60,
+        marginTop: -45,
+        marginLeft: 200,
+        alignItems: "center",
+        padding: 10
+    },
 });
 
 export default Activity;

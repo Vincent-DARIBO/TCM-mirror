@@ -21,7 +21,7 @@ const Class = () => {
                 />
             </TouchableOpacity>
             <Input placeholder="Search"/>
-            <TouchableOpacity style={styles.resto}>
+            <TouchableOpacity style={styles.music}>
                 <Ionicons
                     name="musical-notes-outline"
                     size={30}
@@ -31,7 +31,7 @@ const Class = () => {
                     Musique
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.shopping}>
+            <TouchableOpacity style={styles.cook}>
                 <Ionicons
                     name="pizza-outline"
                     size={30}
@@ -41,7 +41,7 @@ const Class = () => {
                     Cuisine
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.sport}>
+            <TouchableOpacity style={styles.school}>
                 <Ionicons
                     name="book-outline"
                     size={30}
@@ -51,7 +51,7 @@ const Class = () => {
                     Scolaire
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.outside}>
+            <TouchableOpacity style={styles.langage}>
                 <Ionicons
                     name="language-outline"
                     size={30}
@@ -60,6 +60,16 @@ const Class = () => {
                 <Text>
                     Langues
                 </Text>
+            </TouchableOpacity>
+            <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: '15%', color: "orange", marginLeft: '10%'}}>
+                Créer une activité
+            </Text>
+            <TouchableOpacity style={styles.add}>
+                <Ionicons
+                    name="add-circle-outline"
+                    size={40}
+                    color="orange"
+                />
             </TouchableOpacity>
             <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: '15%', color: "darkblue", marginLeft: '10%'}}>
                 Vos amis
@@ -83,31 +93,41 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10
     },
-    resto: {
+    music: {
         height: 60,
-        width: 250,
+        width: 80,
+        marginLeft: 85,
         alignItems: "center",
         padding: 10
     },
-    shopping: {
+    cook: {
         height: 60,
-        width: 250,
+        width: 70,
         marginTop: -60,
-        marginLeft: 150,
+        marginLeft: 240,
         alignItems: "center",
         padding: 10
     },
-    sport: {
+    school: {
         height: 60,
-        width: 250,
+        width: 80,
+        marginLeft: 87,
         alignItems: "center",
         padding: 10
     },
-    outside: {
+    langage: {
         height: 60,
-        width: 250,
+        width: 80,
         marginTop: -60,
-        marginLeft: 150,
+        marginLeft: 237,
+        alignItems: "center",
+        padding: 10
+    },
+    add: {
+        height: 60,
+        width: 60,
+        marginTop: -45,
+        marginLeft: 200,
         alignItems: "center",
         padding: 10
     },
