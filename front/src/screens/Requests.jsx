@@ -9,78 +9,25 @@ import {
     white,
 } from '../constants/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 FontAwesome.loadFont()
+EvilIcons.loadFont()
 
 const DATA = [
     {
         id: '1',
-        title: 'Lola',
+        title: 'Michelle',
         img: require('../assets/Femme1.png'),
     },
     {
         id: '2',
-        title: 'Emma',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '3',
-        title: 'Gisele',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '4',
-        title: 'Caroline',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '5',
-        title: 'Nadege',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '6',
-        title: 'Adrea',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '7',
-        title: 'Natalie',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '8',
-        title: 'Felice',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '9',
-        title: 'Lea',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '10',
-        title: 'Emilie',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '11',
-        title: 'Juliette',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '12',
-        title: 'Tania',
-        img: require('../assets/Femme1.png'),
-    },
-    {
-        id: '13',
-        title: 'Camille',
+        title: 'Géraldine',
         img: require('../assets/Femme1.png'),
     },
 ];
 
-const Friends = ({ navigation }) => {
+const Requests = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [matchesList, setMatchesList] = useState(DATA);
     const [loading, setLoading] = useState(false);
@@ -93,11 +40,10 @@ const Friends = ({ navigation }) => {
     const render = ({ item, index }) => {
         return (
             <TouchableOpacity style={styles.itemCard} onPress={() => navigation.navigate('Profile Details')} >
-                <Image style={{ width: 120, height: 110, marginTop: '2%' }} source={item.img} />
+                <Image style={{ width: '85%', height: '80%', marginTop: '2%' }} source={item.img} />
                 <Text style={{
                     fontSize: 15,
                     color: primary,
-                    textAlign: 'center',
                 }}>{item.title}</Text>
                 <View style={styles.bottomCardBar} />
             </TouchableOpacity>
@@ -111,7 +57,7 @@ const Friends = ({ navigation }) => {
                     paddingTop: '10%',
                     fontWeight: '500',
                     fontSize: 15,
-                }}>Ajoutez vos amis pour les voir ici! <FontAwesome name='smile-o' /></Text>
+                }}>Vous n'avez pas de demande! <FontAwesome name='smile-o' /></Text>
             </View>
         )
     }
@@ -125,7 +71,7 @@ const Friends = ({ navigation }) => {
                     fontSize: 30,
                     color: primary,
                     textAlign: 'center'
-                }}>Mes amis</Text>
+                }}>Mes Demandes</Text>
                 <Searchbar
                     placeholder='Search'
                     loading={loading}
@@ -133,18 +79,8 @@ const Friends = ({ navigation }) => {
                     elevation={4}
                     style={{ borderRadius: 20, marginLeft: '10%', marginRight: '10%', marginTop: '5%', marginBottom: '5%' }}
                 />
-                <TouchableOpacity style={{ flexDirection: 'row-reverse' }} onPress={() => navigation.navigate('Requests')}>
-                    <Text style={{
-                        fontWeight: 'bold',
-                        fontSize: 18,
-                        color: secondary,
-                        textAlign: 'right',
-                        paddingRight: 20,
-                        paddingBottom: 10
-                    }} >Demandes (2)</Text>
-                </TouchableOpacity>
             </View>
-            <View style={{ height: '73%', width: '80%', alignItems: 'center' }}>
+            <View style={{ height: '65%', width: '80%', alignItems: 'center' }}>
                 <FlatList data={DATA.filter(item => item.title.includes(searchQuery))}
                     renderItem={render}
                     keyExtractor={item => item.id}
@@ -164,12 +100,12 @@ const Friends = ({ navigation }) => {
 const styles = StyleSheet.create({
     itemCard: {
         alignItems: 'center',
-        justifyContent: 'space-between',
         flex: 0.5,
         aspectRatio: 1,
         marginHorizontal: '2%',
         backgroundColor: '#ddd',
         borderRadius: 5,
+        justifyContent: 'space-between'
     },
     bottomCardBar: {
         width: '100%',
@@ -179,4 +115,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Friends;
+export default Requests;
