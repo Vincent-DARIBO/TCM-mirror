@@ -16,6 +16,10 @@ export default function Home({navigation}) {
 
   return (
     <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+      <Button
+        title="HomeScreen"
+        onPress={() => navigation.navigate('HomeScreen')}
+      />
       {
         <Button
           title="INSCRIPTION"
@@ -30,7 +34,10 @@ export default function Home({navigation}) {
         title="Details"
         onPress={() => navigation.navigate('Profile details')}
       />
-      <Button title="pres" onPress={() => navigation.navigate('Edit profile')} />
+      <Button
+        title="pres"
+        onPress={() => navigation.navigate('Edit profile')}
+      />
       <Button
         title="pres"
         onPress={() => navigation.navigate('Edit profile')}
