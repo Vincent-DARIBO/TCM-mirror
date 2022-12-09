@@ -10,7 +10,7 @@ export default function IconBar({onPress1, onPress2, onPress3}) {
     <View style={styles.container}>
       <ElevatedIcon
         icon={
-          <Entypo name="cross" size={30} onPress={onPress1} color={secondary} />
+          <Entypo name="cross" size={35} onPress={onPress1} color={secondary} />
         }
         style={[styles.circle]}
       />
@@ -18,7 +18,7 @@ export default function IconBar({onPress1, onPress2, onPress3}) {
         icon={
           <MaterialCommunityIcons
             name="clipboard-text-outline"
-            size={30}
+            size={40}
             color={primary}
           />
         }
@@ -26,7 +26,7 @@ export default function IconBar({onPress1, onPress2, onPress3}) {
         style={[styles.circle]}
       />
       <ElevatedIcon
-        icon={<Entypo name="star" size={30} color="purple" />}
+        icon={<Entypo name="star" size={35} color="purple" />}
         style={[styles.circle]}
         onPress={onPress3}
       />
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
   container: {
     ...layout.row,
     justifyContent: 'space-between',
-    width: 200,
-    marginTop: -30
+    width: 300,
+    marginTop: -35
   },
   circle: {
-    height: 60,
-    width: 60,
+    height: 70,
+    width: 70,
     borderRadius: 40,
     ...layout.center,
   },

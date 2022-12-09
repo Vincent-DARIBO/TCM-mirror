@@ -41,7 +41,7 @@ export default function ProfileDetails() {
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <ScrollView contentContainerStyle={[layout.center]}>
         <ElevatedView
           elevation={5}
@@ -135,20 +135,22 @@ const styles = StyleSheet.create({
     width: 60,
     backgroundColor: fadedOrange,
     right: 0,
+    bottom: 0,
     ...layout.center,
     position: 'absolute',
     height: 35,
   },
   image: {
-    width: 200,
-    height: 300,
-    resizeMode: 'contain',
+    width: 300,
+    height: 400,
+    borderRadius: 20,
+    resizeMode: 'cover',
   },
   imageContainer: {
-    width: 200,
-    height: 300,
-    borderRadius: 15,
-    marginTop: 10,
+    width: 300,
+    height: 400,
+    borderRadius: 20,
+    marginTop: 20,
   },
   paragraph: {
     maxWidth: 300,
