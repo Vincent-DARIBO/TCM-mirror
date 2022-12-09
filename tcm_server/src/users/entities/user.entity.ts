@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Channel } from 'src/channels/entities/channel.entity';
 import { Event } from 'src/events/entities/event.entity';
 import { Hobby } from 'src/hobbies/entities/hobby.entity';
 import { Profile } from 'src/profiles/entities/profile.entity';
