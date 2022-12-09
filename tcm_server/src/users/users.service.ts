@@ -1,11 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import {
-  InjectConnection,
-  InjectDataSource,
-  InjectRepository,
-} from '@nestjs/typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { ProfilesService } from 'src/profiles/profile.service';
-import { QueryRunner, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { hashPassword } from './users.utils';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
@@ -18,7 +14,6 @@ export class UsersService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly profilesService: ProfilesService,
-    @InjectDataSource() private readonly queryRunner: QueryRunner,
   ) {}
 
   async create(profile: CreateUserInput): Promise<User> {
@@ -61,8 +56,30 @@ export class UsersService {
         profile: {
           picture: true,
         },
-        createdEvents: true,
-        subscribedEvents: true,
+        createdEvents: {
+          participants: {
+            profile: {
+              picture: true,
+            },
+          },
+          creator: {
+            profile: {
+              picture: true,
+            },
+          },
+        },
+        subscribedEvents: {
+          participants: {
+            profile: {
+              picture: true,
+            },
+          },
+          creator: {
+            profile: {
+              picture: true,
+            },
+          },
+        },
         friends: true,
         pendingFriends: true,
         metUsers: true,
@@ -89,14 +106,13 @@ export class UsersService {
       birthDate: user.profile.birthDate,
       location: user.profile.location,
       hobbies: user.hobbies,
-      avatar:
-        user.profile.picture === null
-          ? null
-          : {
-              id: user.profile.picture.id,
-              name: user.profile.picture.name,
-              data: Buffer.from(user.profile.picture.data, 'base64'),
-            },
+      avatar: !user.profile.picture
+        ? null
+        : {
+            id: user.profile.picture.id,
+            name: user.profile.picture.name,
+            data: Buffer.from(user.profile.picture.data, 'base64'),
+          },
     };
     return userProfile;
   }
@@ -110,11 +126,13 @@ export class UsersService {
           firstName: friend.profile.firstName,
           lastName: friend.profile.lastName,
           hobbies: friend.hobbies,
-          avatar: {
-            id: friend.profile.picture.id,
-            name: friend.profile.picture.name,
-            data: Buffer.from(friend.profile.picture.data, 'base64'),
-          },
+          avatar: !friend.profile.picture
+            ? null
+            : {
+                id: friend.profile.picture.id,
+                name: friend.profile.picture.name,
+                data: Buffer.from(friend.profile.picture.data, 'base64'),
+              },
         };
       }),
       pendingFriends: user.pendingFriends.map((friend) => {
@@ -123,11 +141,13 @@ export class UsersService {
           firstName: friend.profile.firstName,
           lastName: friend.profile.lastName,
           hobbies: friend.hobbies,
-          avatar: {
-            id: friend.profile.picture.id,
-            name: friend.profile.picture.name,
-            data: Buffer.from(friend.profile.picture.data, 'base64'),
-          },
+          avatar: !friend.profile.picture
+            ? null
+            : {
+                id: friend.profile.picture.id,
+                name: friend.profile.picture.name,
+                data: Buffer.from(friend.profile.picture.data, 'base64'),
+              },
         };
       }),
       metUsers: user.metUsers.map((met) => {
@@ -136,11 +156,13 @@ export class UsersService {
           firstName: met.profile.firstName,
           lastName: met.profile.lastName,
           hobbies: met.hobbies,
-          avatar: {
-            id: met.profile.picture.id,
-            name: met.profile.picture.name,
-            data: Buffer.from(met.profile.picture.data, 'base64'),
-          },
+          avatar: !met.profile.picture
+            ? null
+            : {
+                id: met.profile.picture.id,
+                name: met.profile.picture.name,
+                data: Buffer.from(met.profile.picture.data, 'base64'),
+              },
         };
       }),
     };
@@ -154,11 +176,13 @@ export class UsersService {
         uuid: blocked.uuid,
         firstName: blocked.profile.firstName,
         lastName: blocked.profile.lastName,
-        avatar: {
-          id: blocked.profile.picture.id,
-          name: blocked.profile.picture.name,
-          data: Buffer.from(blocked.profile.picture.data, 'base64'),
-        },
+        avatar: !blocked.profile.picture
+          ? null
+          : {
+              id: blocked.profile.picture.id,
+              name: blocked.profile.picture.name,
+              data: Buffer.from(blocked.profile.picture.data, 'base64'),
+            },
       };
     });
     return blocked;
@@ -177,20 +201,23 @@ export class UsersService {
           creationDate: event.creationDate,
           eventDate: event.eventDate,
           type: event.type,
-          creator: event.creator,
-          participants: event.participants.map((user) => {
-            return {
-              uuid: user.uuid,
-              firstName: user.profile.firstName,
-              lastName: user.profile.lastName,
-              hobbies: user.hobbies,
-              avatar: {
-                id: user.profile.picture.id,
-                name: user.profile.picture.name,
-                data: Buffer.from(user.profile.picture.data, 'base64'),
-              },
-            };
-          }),
+          creator: {
+            uuid: event.creator.uuid,
+            firstName: event.creator.profile.firstName,
+            lastName: event.creator.profile.lastName,
+            hobbies: event.creator.hobbies,
+            avatar: !event.creator.profile.picture
+              ? null
+              : {
+                  id: event.creator.profile.picture.id,
+                  name: event.creator.profile.picture.name,
+                  data: Buffer.from(
+                    event.creator.profile.picture.data,
+                    'base64',
+                  ),
+                },
+          },
+          participants: event.participants.length,
         };
       }),
       created: user.createdEvents.map((event) => {
@@ -203,18 +230,19 @@ export class UsersService {
           creationDate: event.creationDate,
           eventDate: event.eventDate,
           type: event.type,
-          creator: event.creator,
           participants: event.participants.map((user) => {
             return {
               uuid: user.uuid,
               firstName: user.profile.firstName,
               lastName: user.profile.lastName,
               hobbies: user.hobbies,
-              avatar: {
-                id: user.profile.picture.id,
-                name: user.profile.picture.name,
-                data: Buffer.from(user.profile.picture.data, 'base64'),
-              },
+              avatar: !user.profile.picture
+                ? null
+                : {
+                    id: user.profile.picture.id,
+                    name: user.profile.picture.name,
+                    data: Buffer.from(user.profile.picture.data, 'base64'),
+                  },
             };
           }),
         };

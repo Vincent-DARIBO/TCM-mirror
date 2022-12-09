@@ -9,6 +9,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProfileModule } from './profiles/profile.module';
 import { FilesModule } from './files/files.module';
+import { ChannelsModule } from './channels/channels.module';
+import { MessagesModule } from './messages/messages.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -37,6 +39,8 @@ dotenv.config();
     HobbiesModule,
     ProfileModule,
     FilesModule,
+    ChannelsModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

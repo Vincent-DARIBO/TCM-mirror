@@ -1,5 +1,4 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsEnum } from 'class-validator';
 import { EventType } from 'src/types';
 import { User } from 'src/users/entities/user.entity';
 

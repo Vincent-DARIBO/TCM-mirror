@@ -58,6 +58,14 @@ export class EventsController {
     return await this.eventsService.update(id, updateEventInput);
   }
 
+  @Delete(':id/:uuid')
+  async removeParticipant(
+    @Param('id') id: number,
+    @Param('uuid') uuid: string,
+  ) {
+    return await this.eventsService.removeParticipant(id, uuid);
+  }
+
   // accessible only by creator and admin
   @Delete(':id')
   async removeEvent(@Param('id') id: number) {

@@ -10,9 +10,6 @@ import { FilesService } from 'src/files/files.service';
 import { File } from 'src/files/entities/file.entity';
 import { Event } from 'src/events/entities/event.entity';
 import { EventsService } from 'src/events/events.service';
-import { ProfileModule } from 'src/profiles/profile.module';
-import { FilesModule } from 'src/files/files.module';
-import { EventsModule } from 'src/events/events.module';
 
 @Module({
   imports: [
