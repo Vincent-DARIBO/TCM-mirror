@@ -44,10 +44,7 @@ export class EventsController {
 
   // accessible to admin and uuid
   @Put(':id/:uuid')
-  async addParticipant(
-    @Param('id') id: number,
-    @Param('uuid') uuid: string,
-  ) {
+  async addParticipant(@Param('id') id: number, @Param('uuid') uuid: string) {
     return await this.eventsService.addParticipant(id, uuid);
   }
 

@@ -1,5 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectConnection, InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import {
+  InjectConnection,
+  InjectDataSource,
+  InjectRepository,
+} from '@nestjs/typeorm';
 import { ProfilesService } from 'src/profiles/profile.service';
 import { QueryRunner, Repository } from 'typeorm';
 import { hashPassword } from './users.utils';
@@ -187,7 +191,7 @@ export class UsersService {
               },
             };
           }),
-        }
+        };
       }),
       created: user.createdEvents.map((event) => {
         return {
@@ -213,7 +217,7 @@ export class UsersService {
               },
             };
           }),
-        }
+        };
       }),
     };
     return events;
@@ -227,26 +231,28 @@ export class UsersService {
     });
   }
 
-  async update(uuid: string, updateUserInput: UpdateUserInput): Promise<User | Profile> {
+  async update(
+    uuid: string,
+    updateUserInput: UpdateUserInput,
+  ): Promise<User | Profile> {
     if (updateUserInput.profile.password) {
       updateUserInput.profile.password = await hashPassword(
         updateUserInput.profile.password,
       );
     }
     if (updateUserInput.profile) {
-      return (await this.profilesService.update(
+      return await this.profilesService.update(
         (
           await this.findOne(uuid)
         ).profile.id,
         updateUserInput.profile,
-      ));
+      );
     } else {
       const user = this.userRepository.preload({
         uuid: uuid,
         ...updateUserInput,
       });
-      if (!user)
-        throw new NotFoundException(`User #${uuid} not found`);
+      if (!user) throw new NotFoundException(`User #${uuid} not found`);
       return await this.userRepository.save(await user);
     }
   }
