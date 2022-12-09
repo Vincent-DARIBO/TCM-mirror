@@ -44,14 +44,13 @@ export class HobbiesService {
       throw new ForbiddenException(`Hobby length must be under 20`);
     }
     updateHobbyInput.name = updateHobbyInput.name.toLowerCase();
-    const hobby = this.hobbyRepository.preload({
+    const hobby = await this.hobbyRepository.preload({
       id: id,
       ...updateHobbyInput,
     });
-    if (!hobby) {
+    if (!hobby)
       throw new NotFoundException(`Hobby #${id} not found`);
-    }
-    return await this.hobbyRepository.save(await hobby);
+    return await this.hobbyRepository.save(hobby);
   }
 
   async remove(id: number): Promise<Hobby> {

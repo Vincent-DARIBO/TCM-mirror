@@ -42,14 +42,18 @@ export class ProfilesService {
     createFileInput: CreateFileInput,
   ): Promise<Profile> {
     const profile = await this.findOne(id);
-    const oldPic = profile.picture;
     const profileUpdate = this.profileRepository.preload({
       id: id,
       ...{
-        picture: await this.filesService.create(createFileInput),
+        picture: profile.picture
+          ? await this.filesService.update(profile.picture.id, {
+              id: profile.picture.id,
+              name: createFileInput.name,
+              data: createFileInput.data,
+            })
+          : await this.filesService.create(createFileInput),
       },
     });
-    await this.filesService.remove(oldPic.id);
     return await this.profileRepository.save(await profileUpdate);
   }
 
@@ -69,6 +73,9 @@ export class ProfilesService {
 
   async remove(id: number): Promise<Profile> {
     const profile = await this.findOne(id);
+
+    if (profile.picture)
+      await this.filesService.remove(profile.picture.id);
     await this.profileRepository.remove(profile);
     return {
       id: id,

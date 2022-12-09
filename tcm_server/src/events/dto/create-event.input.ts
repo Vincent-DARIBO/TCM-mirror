@@ -17,13 +17,13 @@ export class CreateEventInput {
   @Field(() => Int, { description: 'event maximum amount of participants' })
   maxParticipants: number;
 
-  @Field(() => Date, { description: 'creation date' })
+  @Field(() => String, { description: 'creation date' })
   creationDate: Date;
 
-  @Field(() => Date, { description: 'event date' })
+  @Field(() => String, { description: 'event date' })
   eventDate: Date;
 
-  @Field(() => String)
+  @Field(() => EventType)
   type: EventType;
 
   @Field(() => String, { description: 'event creator' })

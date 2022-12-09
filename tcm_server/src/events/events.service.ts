@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { CreateEventInput } from './dto/create-event.input';
 import { UpdateEventInput } from './dto/update-event.input';
@@ -13,8 +14,12 @@ export class EventsService {
   ) {}
 
   async create(createEventInput: CreateEventInput): Promise<Event> {
+    createEventInput.creationDate = new Date(createEventInput.creationDate);
+    createEventInput.eventDate = new Date(createEventInput.eventDate);
     const event = this.eventRepository.create(createEventInput);
-    return await this.eventRepository.save(event);
+    const savedEvent = await this.eventRepository.save(event);
+    savedEvent.participants.push(event.creator);
+    return await this.eventRepository.save(savedEvent);
   }
 
   async findAll(): Promise<Array<Event>> {
@@ -42,6 +47,7 @@ export class EventsService {
 
   async findByLocation(uuid: string) {
     // get user location and return an array of events depending on the distance with the users location
+    return await this.findAll();
   }
 
   async update(id: number, updateEventInput: UpdateEventInput): Promise<Event> {

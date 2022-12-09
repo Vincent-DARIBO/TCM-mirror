@@ -15,9 +15,12 @@ export class Profile {
   @Field(() => Int, { description: 'profile id' })
   id: number;
 
-  @OneToOne(() => File, { onDelete: 'CASCADE' })
+  @OneToOne(() => File, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => File)
   @JoinColumn({ referencedColumnName: 'id' })
-  @Field(() => Int)
   picture: File;
 
   @Column()

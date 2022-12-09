@@ -6,6 +6,8 @@ import { hashPassword } from './users.utils';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
+import { Profile } from 'src/profiles/entities/profile.entity';
+import { EventsService } from 'src/events/events.service';
 
 @Injectable()
 export class UsersService {
@@ -13,6 +15,7 @@ export class UsersService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly profilesService: ProfilesService,
+    private readonly eventsService: EventsService,
   ) {}
 
   async create(profile: CreateUserInput): Promise<User> {
@@ -22,7 +25,7 @@ export class UsersService {
       email: profile.profile.email,
       phone: profile.profile.phone,
       password: await hashPassword(profile.profile.password),
-      birthDate: profile.profile.birthDate,
+      birthDate: new Date(profile.profile.birthDate),
       location: profile.profile.location,
     };
     const createUserInput = {
@@ -49,7 +52,9 @@ export class UsersService {
   async findOne(uuid: string): Promise<User> {
     const user = await this.userRepository.findOne({
       relations: {
-        profile: true,
+        profile: {
+          picture: true,
+        },
         events: true,
         friends: true,
         pendingFriends: true,
@@ -69,11 +74,7 @@ export class UsersService {
     const user = await this.findOne(uuid);
     const userProfile = {
       uuid: user.uuid,
-      avatar: {
-        id: user.profile.picture.id,
-        name: user.profile.picture.name,
-        data: Buffer.from(user.profile.picture.data, 'base64'),
-      },
+      profileId: user.profile.id,
       firstName: user.profile.firstName,
       lastName: user.profile.lastName,
       email: user.profile.email,
@@ -81,6 +82,14 @@ export class UsersService {
       birthDate: user.profile.birthDate,
       location: user.profile.location,
       hobbies: user.hobbies,
+      avatar:
+        user.profile.picture === null
+          ? null
+          : {
+              id: user.profile.picture.id,
+              name: user.profile.picture.name,
+              data: Buffer.from(user.profile.picture.data, 'base64'),
+            },
     };
     return userProfile;
   }
@@ -91,40 +100,40 @@ export class UsersService {
       friends: user.friends.map((friend) => {
         return {
           uuid: friend.uuid,
+          firstName: friend.profile.firstName,
+          lastName: friend.profile.lastName,
+          hobbies: friend.hobbies,
           avatar: {
             id: friend.profile.picture.id,
             name: friend.profile.picture.name,
             data: Buffer.from(friend.profile.picture.data, 'base64'),
           },
-          firstName: friend.profile.firstName,
-          lastName: friend.profile.lastName,
-          hobbies: friend.hobbies,
         };
       }),
       pendingFriends: user.pendingFriends.map((friend) => {
         return {
           uuid: friend.uuid,
+          firstName: friend.profile.firstName,
+          lastName: friend.profile.lastName,
+          hobbies: friend.hobbies,
           avatar: {
             id: friend.profile.picture.id,
             name: friend.profile.picture.name,
             data: Buffer.from(friend.profile.picture.data, 'base64'),
           },
-          firstName: friend.profile.firstName,
-          lastName: friend.profile.lastName,
-          hobbies: friend.hobbies,
         };
       }),
       metUsers: user.metUsers.map((met) => {
         return {
           uuid: met.uuid,
+          firstName: met.profile.firstName,
+          lastName: met.profile.lastName,
+          hobbies: met.hobbies,
           avatar: {
             id: met.profile.picture.id,
             name: met.profile.picture.name,
             data: Buffer.from(met.profile.picture.data, 'base64'),
           },
-          firstName: met.profile.firstName,
-          lastName: met.profile.lastName,
-          hobbies: met.hobbies,
         };
       }),
     };
@@ -136,13 +145,13 @@ export class UsersService {
     const blocked = user.blockedUsers.map((blocked) => {
       return {
         uuid: blocked.uuid,
+        firstName: blocked.profile.firstName,
+        lastName: blocked.profile.lastName,
         avatar: {
           id: blocked.profile.picture.id,
           name: blocked.profile.picture.name,
           data: Buffer.from(blocked.profile.picture.data, 'base64'),
         },
-        firstName: blocked.profile.firstName,
-        lastName: blocked.profile.lastName,
       };
     });
     return blocked;
@@ -163,19 +172,19 @@ export class UsersService {
             eventDate: event.eventDate,
             type: event.type,
             creator: event.creator,
-            participants: event.participants.map((user) => {
+            participants: (!event.participants ? null : event.participants.map((user) => {
               return {
                 uuid: user.uuid,
+                firstName: user.profile.firstName,
+                lastName: user.profile.lastName,
+                hobbies: user.hobbies,
                 avatar: {
                   id: user.profile.picture.id,
                   name: user.profile.picture.name,
                   data: Buffer.from(user.profile.picture.data, 'base64'),
                 },
-                firstName: user.profile.firstName,
-                lastName: user.profile.lastName,
-                hobbies: user.hobbies,
               };
-            }),
+            })),
           };
         }
       }),
@@ -194,14 +203,14 @@ export class UsersService {
             participants: event.participants.map((user) => {
               return {
                 uuid: user.uuid,
+                firstName: user.profile.firstName,
+                lastName: user.profile.lastName,
+                hobbies: user.hobbies,
                 avatar: {
                   id: user.profile.picture.id,
                   name: user.profile.picture.name,
                   data: Buffer.from(user.profile.picture.data, 'base64'),
                 },
-                firstName: user.profile.firstName,
-                lastName: user.profile.lastName,
-                hobbies: user.hobbies,
               };
             }),
           };
@@ -219,24 +228,38 @@ export class UsersService {
     });
   }
 
-  async update(uuid: string, updateUserInput: UpdateUserInput): Promise<User> {
+  async update(uuid: string, updateUserInput: UpdateUserInput): Promise<User | Profile> {
     if (updateUserInput.profile.password) {
       updateUserInput.profile.password = await hashPassword(
         updateUserInput.profile.password,
       );
     }
-    const user = this.userRepository.preload({
-      uuid: uuid,
-      ...updateUserInput,
-    });
-    if (!user) {
-      throw new NotFoundException(`User #${uuid} not found`);
+    if (updateUserInput.profile) {
+      return (await this.profilesService.update(
+        (
+          await this.findOne(uuid)
+        ).profile.id,
+        updateUserInput.profile,
+      ));
+    } else {
+      const user = this.userRepository.preload({
+        uuid: uuid,
+        ...updateUserInput,
+      });
+      if (!user)
+        throw new NotFoundException(`User #${uuid} not found`);
+      return await this.userRepository.save(await user);
     }
-    return await this.userRepository.save(await user);
   }
 
   async remove(uuid: string): Promise<User> {
     const user = await this.findOne(uuid);
+    const events = (await this.getEvents(uuid)).created;
+
+    events.map(async (event) => {
+      await this.eventsService.remove(event.id);
+    });
+    await this.profilesService.remove(user.profile.id);
     await this.userRepository.remove(user);
     return {
       uuid: uuid,

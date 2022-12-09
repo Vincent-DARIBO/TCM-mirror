@@ -19,15 +19,26 @@ export class User {
   @Field(() => String, { description: 'uuid' })
   uuid: string;
 
-  @OneToOne(() => Profile, { onDelete: 'CASCADE' })
+  @OneToOne(() => Profile, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => Profile)
   @JoinColumn({ referencedColumnName: 'id' })
-  @Field(() => Int)
   profile: Profile;
 
-  @OneToMany(() => Event, (event) => event.creator, { onDelete: 'CASCADE' })
+  @OneToMany(() => Event, (event) => event.creator, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [Event], { nullable: true })
   events: Event[];
 
-  @ManyToMany(() => User, { onDelete: 'CASCADE' })
+  @ManyToMany(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [User])
   @JoinTable({
     name: 'friends',
     joinColumn: {
@@ -41,7 +52,11 @@ export class User {
   })
   friends: User[];
 
-  @ManyToMany(() => User, { onDelete: 'CASCADE' })
+  @ManyToMany(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [User])
   @JoinTable({
     name: 'pendingFriends',
     joinColumn: {
@@ -55,7 +70,11 @@ export class User {
   })
   pendingFriends: User[];
 
-  @ManyToMany(() => User, { onDelete: 'CASCADE' })
+  @ManyToMany(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [User])
   @JoinTable({
     name: 'met',
     joinColumn: {
@@ -69,7 +88,11 @@ export class User {
   })
   metUsers: User[];
 
-  @ManyToMany(() => User, { onDelete: 'CASCADE' })
+  @ManyToMany(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [User])
   @JoinTable({
     name: 'blocked',
     joinColumn: {
@@ -83,7 +106,11 @@ export class User {
   })
   blockedUsers: User[];
 
-  @ManyToMany(() => Hobby, { onDelete: 'CASCADE' })
+  @ManyToMany(() => Hobby, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [Hobby])
   @JoinTable({
     name: 'userHobbies',
     joinColumn: {

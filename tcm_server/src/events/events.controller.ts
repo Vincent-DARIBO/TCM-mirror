@@ -24,7 +24,7 @@ export class EventsController {
   }
 
   // accessible only to the connected user which uuid equals uuid parameter
-  @Get(':uuid')
+  @Get('/location/:uuid')
   async getEventsByLocation(@Param('uuid') uuid: string) {
     return await this.eventsService.findByLocation(uuid);
   }

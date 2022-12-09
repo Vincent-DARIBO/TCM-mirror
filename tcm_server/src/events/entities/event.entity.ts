@@ -34,11 +34,11 @@ export class Event {
   maxParticipants: number;
 
   @Column()
-  @Field(() => Date, { description: 'creation date' })
+  @Field(() => String, { description: 'creation date' })
   creationDate: Date;
 
   @Column()
-  @Field(() => Date, { description: 'event date' })
+  @Field(() => String, { description: 'event date' })
   eventDate: Date;
 
   @Column({
@@ -49,11 +49,12 @@ export class Event {
   @Field(() => EventType)
   type: EventType;
 
-  @ManyToOne(() => User, (user) => user.events, { onDelete: 'CASCADE' })
-  @Field(() => String)
+  @ManyToOne(() => User, (user) => user.events)
+  @Field(() => User)
   creator: User;
 
-  @ManyToMany(() => User, { onDelete: 'CASCADE' })
+  @ManyToMany(() => User, { cascade: true })
+  @Field(() => [User], { nullable: true })
   @JoinTable({
     name: 'userInEvents',
     joinColumn: {
