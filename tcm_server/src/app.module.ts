@@ -14,7 +14,6 @@ import { ChannelsModule } from './channels/channels.module';
 import { MessagesModule } from './messages/messages.module';
 import * as dotenv from 'dotenv';
 import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
 
 dotenv.config();
 

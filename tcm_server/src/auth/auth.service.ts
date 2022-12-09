@@ -13,7 +13,6 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findByMail(email);
-    console.log({ user });
     if (await compare(pass, user.profile.password)) {
       const {
         profile: { password, ...rest },
@@ -25,7 +24,6 @@ export class AuthService {
   }
 
   async login(user: any) {
-    console.log({ user });
     const payload = { username: user.firstName, sub: user.uuid };
     return {
       access_token: this.jwtService.sign(payload),
