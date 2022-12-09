@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Button, Text, TouchableOpacity } from "react-native";
-
+import { SafeAreaView, StyleSheet, Button, Text, Clipboard, TouchableOpacity } from "react-native";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 
 const Code = ({ route, navigation }) => {
