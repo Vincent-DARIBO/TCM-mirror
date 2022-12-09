@@ -9,7 +9,10 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProfileModule } from './profiles/profile.module';
 import { FilesModule } from './files/files.module';
+import { AuthModule } from './auth/auth.module';
 import * as dotenv from 'dotenv';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
 
 dotenv.config();
 
@@ -37,8 +40,9 @@ dotenv.config();
     HobbiesModule,
     ProfileModule,
     FilesModule,
+    AuthModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, AuthController],
   providers: [AppService],
 })
 export class AppModule {}

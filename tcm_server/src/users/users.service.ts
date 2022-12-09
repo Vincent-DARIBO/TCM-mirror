@@ -70,6 +70,22 @@ export class UsersService {
     return user;
   }
 
+  async findByMail(email: string): Promise<User> {
+    const user = await this.userRepository.findOne({
+      relations: {
+        profile: true,
+      },
+      where: {
+        profile: {
+          email,
+        },
+      },
+    });
+    if (!user) {
+      throw new NotFoundException(`User ${email} not found`);
+    }
+    return user;
+  }
   async getProfile(uuid: string) {
     const user = await this.findOne(uuid);
     const userProfile = {
@@ -172,19 +188,21 @@ export class UsersService {
             eventDate: event.eventDate,
             type: event.type,
             creator: event.creator,
-            participants: (!event.participants ? null : event.participants.map((user) => {
-              return {
-                uuid: user.uuid,
-                firstName: user.profile.firstName,
-                lastName: user.profile.lastName,
-                hobbies: user.hobbies,
-                avatar: {
-                  id: user.profile.picture.id,
-                  name: user.profile.picture.name,
-                  data: Buffer.from(user.profile.picture.data, 'base64'),
-                },
-              };
-            })),
+            participants: !event.participants
+              ? null
+              : event.participants.map((user) => {
+                  return {
+                    uuid: user.uuid,
+                    firstName: user.profile.firstName,
+                    lastName: user.profile.lastName,
+                    hobbies: user.hobbies,
+                    avatar: {
+                      id: user.profile.picture.id,
+                      name: user.profile.picture.name,
+                      data: Buffer.from(user.profile.picture.data, 'base64'),
+                    },
+                  };
+                }),
           };
         }
       }),
@@ -228,26 +246,28 @@ export class UsersService {
     });
   }
 
-  async update(uuid: string, updateUserInput: UpdateUserInput): Promise<User | Profile> {
+  async update(
+    uuid: string,
+    updateUserInput: UpdateUserInput,
+  ): Promise<User | Profile> {
     if (updateUserInput.profile.password) {
       updateUserInput.profile.password = await hashPassword(
         updateUserInput.profile.password,
       );
     }
     if (updateUserInput.profile) {
-      return (await this.profilesService.update(
+      return await this.profilesService.update(
         (
           await this.findOne(uuid)
         ).profile.id,
         updateUserInput.profile,
-      ));
+      );
     } else {
       const user = this.userRepository.preload({
         uuid: uuid,
         ...updateUserInput,
       });
-      if (!user)
-        throw new NotFoundException(`User #${uuid} not found`);
+      if (!user) throw new NotFoundException(`User #${uuid} not found`);
       return await this.userRepository.save(await user);
     }
   }

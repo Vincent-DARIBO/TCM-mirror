@@ -16,6 +16,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
+import { Public } from 'src/auth/auth.utils';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UsersService } from './users.service';
@@ -25,6 +26,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   // only accessible to the admin user
+  @Public()
   @Get()
   async getUsers() {
     return await this.usersService.findAll();
