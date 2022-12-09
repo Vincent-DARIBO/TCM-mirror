@@ -1,13 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectConnection, InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { ProfilesService } from 'src/profiles/profile.service';
-import { Repository } from 'typeorm';
+import { QueryRunner, Repository } from 'typeorm';
 import { hashPassword } from './users.utils';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 import { Profile } from 'src/profiles/entities/profile.entity';
-import { EventsService } from 'src/events/events.service';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +14,7 @@ export class UsersService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly profilesService: ProfilesService,
-    private readonly eventsService: EventsService,
+    @InjectDataSource() private readonly queryRunner: QueryRunner,
   ) {}
 
   async create(profile: CreateUserInput): Promise<User> {
@@ -38,8 +37,11 @@ export class UsersService {
   async findAll(): Promise<Array<User>> {
     return await this.userRepository.find({
       relations: {
-        profile: true,
-        events: true,
+        profile: {
+          picture: true,
+        },
+        createdEvents: true,
+        subscribedEvents: true,
         friends: true,
         pendingFriends: true,
         metUsers: true,
@@ -55,7 +57,8 @@ export class UsersService {
         profile: {
           picture: true,
         },
-        events: true,
+        createdEvents: true,
+        subscribedEvents: true,
         friends: true,
         pendingFriends: true,
         metUsers: true,
@@ -160,60 +163,56 @@ export class UsersService {
   async getEvents(uuid: string) {
     const user = await this.findOne(uuid);
     const events = {
-      subscribed: user.events.map((event) => {
-        if (event.creator !== user) {
-          return {
-            id: event.id,
-            name: event.name,
-            description: event.description,
-            location: event.location,
-            maxParticipants: event.maxParticipants,
-            creationDate: event.creationDate,
-            eventDate: event.eventDate,
-            type: event.type,
-            creator: event.creator,
-            participants: (!event.participants ? null : event.participants.map((user) => {
-              return {
-                uuid: user.uuid,
-                firstName: user.profile.firstName,
-                lastName: user.profile.lastName,
-                hobbies: user.hobbies,
-                avatar: {
-                  id: user.profile.picture.id,
-                  name: user.profile.picture.name,
-                  data: Buffer.from(user.profile.picture.data, 'base64'),
-                },
-              };
-            })),
-          };
+      subscribed: user.subscribedEvents.map((event) => {
+        return {
+          id: event.id,
+          name: event.name,
+          description: event.description,
+          location: event.location,
+          maxParticipants: event.maxParticipants,
+          creationDate: event.creationDate,
+          eventDate: event.eventDate,
+          type: event.type,
+          creator: event.creator,
+          participants: event.participants.map((user) => {
+            return {
+              uuid: user.uuid,
+              firstName: user.profile.firstName,
+              lastName: user.profile.lastName,
+              hobbies: user.hobbies,
+              avatar: {
+                id: user.profile.picture.id,
+                name: user.profile.picture.name,
+                data: Buffer.from(user.profile.picture.data, 'base64'),
+              },
+            };
+          }),
         }
       }),
-      created: user.events.map((event) => {
-        if (event.creator === user) {
-          return {
-            id: event.id,
-            name: event.name,
-            description: event.description,
-            location: event.location,
-            maxParticipants: event.maxParticipants,
-            creationDate: event.creationDate,
-            eventDate: event.eventDate,
-            type: event.type,
-            creator: event.creator,
-            participants: event.participants.map((user) => {
-              return {
-                uuid: user.uuid,
-                firstName: user.profile.firstName,
-                lastName: user.profile.lastName,
-                hobbies: user.hobbies,
-                avatar: {
-                  id: user.profile.picture.id,
-                  name: user.profile.picture.name,
-                  data: Buffer.from(user.profile.picture.data, 'base64'),
-                },
-              };
-            }),
-          };
+      created: user.createdEvents.map((event) => {
+        return {
+          id: event.id,
+          name: event.name,
+          description: event.description,
+          location: event.location,
+          maxParticipants: event.maxParticipants,
+          creationDate: event.creationDate,
+          eventDate: event.eventDate,
+          type: event.type,
+          creator: event.creator,
+          participants: event.participants.map((user) => {
+            return {
+              uuid: user.uuid,
+              firstName: user.profile.firstName,
+              lastName: user.profile.lastName,
+              hobbies: user.hobbies,
+              avatar: {
+                id: user.profile.picture.id,
+                name: user.profile.picture.name,
+                data: Buffer.from(user.profile.picture.data, 'base64'),
+              },
+            };
+          }),
         }
       }),
     };
@@ -254,17 +253,14 @@ export class UsersService {
 
   async remove(uuid: string): Promise<User> {
     const user = await this.findOne(uuid);
-    const events = (await this.getEvents(uuid)).created;
 
-    events.map(async (event) => {
-      await this.eventsService.remove(event.id);
-    });
     await this.profilesService.remove(user.profile.id);
     await this.userRepository.remove(user);
     return {
       uuid: uuid,
       profile: null,
-      events: null,
+      createdEvents: null,
+      subscribedEvents: null,
       friends: null,
       pendingFriends: null,
       metUsers: null,

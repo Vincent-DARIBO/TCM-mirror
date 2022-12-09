@@ -49,7 +49,7 @@ export class Event {
   @Field(() => EventType)
   type: EventType;
 
-  @ManyToOne(() => User, (user) => user.events)
+  @ManyToOne(() => User, (user) => user.createdEvents)
   @Field(() => User)
   creator: User;
 

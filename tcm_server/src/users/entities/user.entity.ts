@@ -32,7 +32,22 @@ export class User {
     onDelete: 'CASCADE',
   })
   @Field(() => [Event], { nullable: true })
-  events: Event[];
+  createdEvents: Event[];
+
+  @ManyToMany(() => Event)
+  @Field(() => [Event], { nullable: true })
+  @JoinTable({
+    name: 'userInEvents',
+    joinColumn: {
+      name: 'user',
+      referencedColumnName: 'uuid',
+    },
+    inverseJoinColumn: {
+      name: 'event',
+      referencedColumnName: 'id',
+    },
+  })
+  subscribedEvents: Event[];
 
   @ManyToMany(() => User, {
     cascade: true,
@@ -118,7 +133,7 @@ export class User {
       referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: 'hobbie',
+      name: 'hobby',
       referencedColumnName: 'id',
     },
   })

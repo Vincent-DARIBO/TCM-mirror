@@ -11,6 +11,7 @@ export class EventsService {
   constructor(
     @InjectRepository(Event)
     private readonly eventRepository: Repository<Event>,
+    private readonly usersService: UsersService,
   ) {}
 
   async create(createEventInput: CreateEventInput): Promise<Event> {
@@ -50,15 +51,22 @@ export class EventsService {
     return await this.findAll();
   }
 
+  async addParticipant(id: number, uuid: string) {
+    const user = await this.usersService.findOne(uuid);
+    const event = await this.findOne(id);
+    event.participants.push(user);
+    return await this.eventRepository.save(event);
+  }
+
   async update(id: number, updateEventInput: UpdateEventInput): Promise<Event> {
-    const event = this.eventRepository.preload({
+    const event = await this.eventRepository.preload({
       id: id,
       ...updateEventInput,
     });
     if (!event) {
       throw new NotFoundException(`Event #${id} not found`);
     }
-    return await this.eventRepository.save(await event);
+    return await this.eventRepository.save(event);
   }
 
   async remove(id: number): Promise<Event> {
