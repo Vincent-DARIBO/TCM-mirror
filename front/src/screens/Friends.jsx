@@ -82,7 +82,6 @@ const DATA = [
 
 const Friends = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [matchesList, setMatchesList] = useState(DATA);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
