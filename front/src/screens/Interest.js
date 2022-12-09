@@ -55,23 +55,15 @@ const DATA = [
 ]
 
 export default function Interest() {
-
-    const checkIsSelected = (name) => {
-
+    const [interests, setInterests] = useState([]);
+    const checkIsSelected = name => {
         const found = interests.find(element => element === name);
 
-        if (found === undefined)
-            setInterests(interests => ([...interests, name]))
+        if (found === undefined) setInterests(interests => [...interests, name]);
         else {
-            for (let i = 0; i != interests.length; i++) {
-                if (interests[i] === name)
-                    setInterests(interests.filter(item => item !== name))
-            }
+            setInterests(interests.filter(item => item !== name));
         }
-    }
-
-    const [interests, setInterests] = useState([])
-
+    };
 
     const renderItem = ({ item }) => {
 
@@ -112,5 +104,5 @@ export default function Interest() {
 
             </View>
         </View>
-    )
+    );
 }
