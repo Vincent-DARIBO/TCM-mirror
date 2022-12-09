@@ -1,57 +1,55 @@
 import { View, Text, Button, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import CustomButton from '../components/Button'
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { useState, useEffect } from 'react'
-
-EvilIcons.loadFont()
-Ionicons.loadFont()
-MaterialIcons.loadFont()
-MaterialCommunityIcons.loadFont()
+import { useState } from 'react'
+import Icon from '../components/Icon'
 
 const DATA = [
     {
         id: 1,
-        icon: <MaterialIcons name="add-a-photo" size={35} />,
         text: "Photographie",
+        family: "MaterialIcons",
+        name: "add-a-photo"
     },
     {
         id: 2,
-        icon: <FontAwesome5 name="shopping-bag" size={35} />,
         text: "Shopping",
+        family: "FontAwesome5",
+        name: "shopping-bag"
     },
     {
         id: 3,
-        icon: <MaterialCommunityIcons name="microphone-variant" size={35} />,
         text: "Karaoke",
+        family: "MaterialCommunityIcons",
+        name: "microphone-variant"
     },
     {
         id: 4,
-        icon: <MaterialCommunityIcons name="yoga" size={35} />,
         text: "Yoga",
+        family: "MaterialCommunityIcons",
+        name: "yoga"
     },
     {
         id: 5,
-        icon: <MaterialIcons name="food-bank" size={35} />,
         text: "Cuisine",
+        family: "MaterialIcons",
+        name: "food-bank"
     },
     {
         id: 6,
-        icon: <MaterialIcons name="sports-tennis" size={35} />,
         text: "Tennis",
+        family: "MaterialIcons",
+        name: "sports-tennis"
     },
     {
         id: 7,
-        icon: <FontAwesome5 name="running" size={35} />,
         text: "Courrir",
+        family: "FontAwesome5",
+        name: "running"
     },
     {
         id: 8,
-        icon: <FontAwesome5 name="swimmer" size={35} />,
         text: "Nager",
+        family: "FontAwesome5",
+        name: "swimmer"
     },
 
 ]
@@ -78,30 +76,41 @@ export default function Interest() {
     const renderItem = ({ item }) => {
 
         return (
-            <View style={{ marginTop: "5%", width: "47.5%", alignItems: "center", justifyContent: "center", alignContent: "center", marginRight: "5%" }}>
-                {<CustomButton onPress={() => checkIsSelected(item.text)} title={item.text} style={{ width: "100%", backgroundColor: interests.find(element => element === item.text) ? "#FF9900" : "#FFFFFF", borderWidth: 0.5, borderColor: "grey" }} icon={item.icon} textStyle={{ color: "black", marginLeft: "5%", fontSize: "14%" }}></CustomButton>}
+            <View style={{ marginTop: "5%", width: "47.5%", height: 50, marginRight: "5%" }}>
+                <TouchableOpacity onPress={() => checkIsSelected(item.text)} style={{ flexDirection: "row", flex: 1, alignContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 10, borderColor: "lightgrey", backgroundColor: interests.find(element => element === item.text) ? "#FF9900" : "#FFFFFF" }}>
+                    <Icon
+                        family={item.family}
+                        name={item.name}
+                        size={30}
+                        style={{ marginLeft: "10%", color: interests.find(element => element === item.text) ? "#FFFFFF" : "#FF9900" }}
+                    />
+                    <Text style={{ marginLeft: "5%", color: interests.find(element => element === item.text) ? "#FFFFFF" : "black" }}>{item.text}</Text>
+                </TouchableOpacity>
             </View>
+
         )
     }
     return (
-        <View style={{ marginLeft: '10%', marginRight: '10%' }}>
-            <Text style={{ fontSize: 30, fontWeight: 'bold', marginTop: '20%' }}>Centre d'intérêts</Text>
-            <Text style={{ marginTop: "3%" }}>Sélectionnez plusieurs centre d'intérêts</Text>
+        <View style={{ backgroundColor: "white" }}>
+            <View style={{ marginLeft: '10%', marginRight: '10%' }}>
+                <Text style={{ fontSize: 35, fontWeight: 'bold', marginTop: '20%', color: "#084887", fontWeight: "bold" }}>Centre d'intérêts</Text>
+                <Text style={{ marginTop: "3%", color: "#0754A0", fontWeight: "800" }}>Sélectionne plusieurs centre d'intérêts</Text>
 
-            <View>
-                <FlatList
-                    data={DATA}
-                    renderItem={renderItem}
-                    numColumns={2}
-                    keyExtractor={item => item.id}
-                />
-            </View>
+                <View>
+                    <FlatList
+                        data={DATA}
+                        renderItem={renderItem}
+                        numColumns={2}
+                        keyExtractor={item => item.id}
+                    />
+                </View>
                 <TouchableOpacity>
-                    <View style={{ borderWidth: 1, backgroundColor: '#007AFF', borderRadius: 20, height: '30%', justifyContent: "center", alignItems: "center", marginTop: '20%' }}>
-                        <Text style={{ fontSize: 20, color: "white" }}>CONTINUER</Text>
+                    <View style={{ borderWidth: 1, backgroundColor: '#084887', borderRadius: 20, height: '25%', justifyContent: "center", alignItems: "center", marginTop: '40%' }}>
+                        <Text style={{ fontSize: 18, color: "white", fontWeight: "bold" }}>CONTINUER</Text>
                     </View>
                 </TouchableOpacity>
 
+            </View>
         </View>
     )
 }
