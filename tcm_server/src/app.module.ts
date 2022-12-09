@@ -9,17 +9,12 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProfileModule } from './profiles/profile.module';
 import { FilesModule } from './files/files.module';
-<<<<<<< HEAD
 import { AuthModule } from './auth/auth.module';
-=======
 import { ChannelsModule } from './channels/channels.module';
 import { MessagesModule } from './messages/messages.module';
->>>>>>> 59e71662380218148831b0df7448d2015934ba20
 import * as dotenv from 'dotenv';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
-import { MessagesModule } from './messages/messages.module';
-import { ChannelsModule } from './channels/channels.module';
 
 dotenv.config();
 
