@@ -18,7 +18,13 @@ import { EventsService } from 'src/events/events.service';
     TypeOrmModule.forFeature([File]),
     TypeOrmModule.forFeature([Event]),
   ],
-  providers: [UsersResolver, UsersService, ProfilesService, FilesService, EventsService],
+  providers: [
+    UsersResolver,
+    UsersService,
+    ProfilesService,
+    FilesService,
+    EventsService,
+  ],
   controllers: [UsersController],
 })
 export class UsersModule {}

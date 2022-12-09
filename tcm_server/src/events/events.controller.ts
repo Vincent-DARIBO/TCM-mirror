@@ -42,6 +42,12 @@ export class EventsController {
     return this.eventsService.create(createEventInput);
   }
 
+  // accessible to admin and uuid
+  @Put(':id/:uuid')
+  async addParticipant(@Param('id') id: number, @Param('uuid') uuid: string) {
+    return await this.eventsService.addParticipant(id, uuid);
+  }
+
   // accessible only by creator and admin (may need to give access to other connected users to  update users list)
   @Put(':id')
   @UsePipes(ValidationPipe)
@@ -50,6 +56,14 @@ export class EventsController {
     @Body() updateEventInput: UpdateEventInput,
   ) {
     return await this.eventsService.update(id, updateEventInput);
+  }
+
+  @Delete(':id/:uuid')
+  async removeParticipant(
+    @Param('id') id: number,
+    @Param('uuid') uuid: string,
+  ) {
+    return await this.eventsService.removeParticipant(id, uuid);
   }
 
   // accessible only by creator and admin

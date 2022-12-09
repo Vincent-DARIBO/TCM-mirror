@@ -48,8 +48,7 @@ export class HobbiesService {
       id: id,
       ...updateHobbyInput,
     });
-    if (!hobby)
-      throw new NotFoundException(`Hobby #${id} not found`);
+    if (!hobby) throw new NotFoundException(`Hobby #${id} not found`);
     return await this.hobbyRepository.save(hobby);
   }
 

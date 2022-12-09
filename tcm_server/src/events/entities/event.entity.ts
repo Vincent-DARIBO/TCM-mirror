@@ -29,6 +29,7 @@ export class Event {
   @Field(() => String, { description: 'event location' })
   location: string;
 
+  // creator isn't registerd into participants list, so let's not forget about it when adding participants and playing with events
   @Column()
   @Field(() => Int, { description: 'event maximum amount of participants' })
   maxParticipants: number;
@@ -49,7 +50,7 @@ export class Event {
   @Field(() => EventType)
   type: EventType;
 
-  @ManyToOne(() => User, (user) => user.events)
+  @ManyToOne(() => User, (user) => user.createdEvents)
   @Field(() => User)
   creator: User;
 

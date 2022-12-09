@@ -1,7 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersService } from 'src/users/users.service';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { CreateEventInput } from './dto/create-event.input';
 import { UpdateEventInput } from './dto/update-event.input';
 import { Event } from './entities/event.entity';
@@ -11,15 +15,15 @@ export class EventsService {
   constructor(
     @InjectRepository(Event)
     private readonly eventRepository: Repository<Event>,
+    private readonly usersService: UsersService,
   ) {}
 
   async create(createEventInput: CreateEventInput): Promise<Event> {
     createEventInput.creationDate = new Date(createEventInput.creationDate);
     createEventInput.eventDate = new Date(createEventInput.eventDate);
     const event = this.eventRepository.create(createEventInput);
-    const savedEvent = await this.eventRepository.save(event);
-    savedEvent.participants.push(event.creator);
-    return await this.eventRepository.save(savedEvent);
+    event.participants = [];
+    return await this.eventRepository.save(event);
   }
 
   async findAll(): Promise<Array<Event>> {
@@ -34,8 +38,16 @@ export class EventsService {
   async findOne(id: number): Promise<Event> {
     const event = await this.eventRepository.findOne({
       relations: {
-        creator: true,
-        participants: true,
+        creator: {
+          profile: {
+            picture: true,
+          },
+        },
+        participants: {
+          profile: {
+            picture: true,
+          },
+        },
       },
       where: { id: id },
     });
@@ -50,15 +62,47 @@ export class EventsService {
     return await this.findAll();
   }
 
+  async addParticipant(id: number, uuid: string) {
+    const event = await this.findOne(id);
+    if (
+      event.participants.find((user) => user.uuid === uuid) ||
+      event.creator.uuid === uuid
+    )
+      throw new NotAcceptableException(`User ${uuid} already registered.`);
+    if (event.participants.length + 1 >= event.maxParticipants)
+      throw new NotAcceptableException(
+        `Cannot register for this event: too many participants`,
+      );
+    const user = await this.usersService.findOne(uuid);
+    event.participants.push(user);
+    return await this.eventRepository.save(event);
+  }
+
   async update(id: number, updateEventInput: UpdateEventInput): Promise<Event> {
-    const event = this.eventRepository.preload({
+    const event = await this.eventRepository.preload({
       id: id,
       ...updateEventInput,
     });
     if (!event) {
       throw new NotFoundException(`Event #${id} not found`);
     }
-    return await this.eventRepository.save(await event);
+    return await this.eventRepository.save(event);
+  }
+
+  async removeParticipant(id: number, uuid: string) {
+    const event = await this.findOne(id);
+    if (event.creator.uuid === uuid)
+      throw new NotAcceptableException(
+        `User ${uuid} is the creator of event ${id}.`,
+      );
+    if (!event.participants.find((user) => user.uuid === uuid))
+      throw new NotFoundException(
+        `User ${uuid} not registered in event ${id}.`,
+      );
+    event.participants = event.participants.filter(
+      (user) => user.uuid !== uuid,
+    );
+    return await this.eventRepository.save(event);
   }
 
   async remove(id: number): Promise<Event> {

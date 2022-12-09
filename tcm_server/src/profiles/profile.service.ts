@@ -74,8 +74,7 @@ export class ProfilesService {
   async remove(id: number): Promise<Profile> {
     const profile = await this.findOne(id);
 
-    if (profile.picture)
-      await this.filesService.remove(profile.picture.id);
+    if (profile.picture) await this.filesService.remove(profile.picture.id);
     await this.profileRepository.remove(profile);
     return {
       id: id,

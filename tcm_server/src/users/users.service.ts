@@ -7,7 +7,6 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 import { Profile } from 'src/profiles/entities/profile.entity';
-import { EventsService } from 'src/events/events.service';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +14,6 @@ export class UsersService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly profilesService: ProfilesService,
-    private readonly eventsService: EventsService,
   ) {}
 
   async create(profile: CreateUserInput): Promise<User> {
@@ -38,8 +36,11 @@ export class UsersService {
   async findAll(): Promise<Array<User>> {
     return await this.userRepository.find({
       relations: {
-        profile: true,
-        events: true,
+        profile: {
+          picture: true,
+        },
+        createdEvents: true,
+        subscribedEvents: true,
         friends: true,
         pendingFriends: true,
         metUsers: true,
@@ -55,7 +56,30 @@ export class UsersService {
         profile: {
           picture: true,
         },
-        events: true,
+        createdEvents: {
+          participants: {
+            profile: {
+              picture: true,
+            },
+          },
+          creator: {
+            profile: {
+              picture: true,
+            },
+          },
+        },
+        subscribedEvents: {
+          participants: {
+            profile: {
+              picture: true,
+            },
+          },
+          creator: {
+            profile: {
+              picture: true,
+            },
+          },
+        },
         friends: true,
         pendingFriends: true,
         metUsers: true,
@@ -98,14 +122,13 @@ export class UsersService {
       birthDate: user.profile.birthDate,
       location: user.profile.location,
       hobbies: user.hobbies,
-      avatar:
-        user.profile.picture === null
-          ? null
-          : {
-              id: user.profile.picture.id,
-              name: user.profile.picture.name,
-              data: Buffer.from(user.profile.picture.data, 'base64'),
-            },
+      avatar: !user.profile.picture
+        ? null
+        : {
+            id: user.profile.picture.id,
+            name: user.profile.picture.name,
+            data: Buffer.from(user.profile.picture.data, 'base64'),
+          },
     };
     return userProfile;
   }
@@ -119,11 +142,13 @@ export class UsersService {
           firstName: friend.profile.firstName,
           lastName: friend.profile.lastName,
           hobbies: friend.hobbies,
-          avatar: {
-            id: friend.profile.picture.id,
-            name: friend.profile.picture.name,
-            data: Buffer.from(friend.profile.picture.data, 'base64'),
-          },
+          avatar: !friend.profile.picture
+            ? null
+            : {
+                id: friend.profile.picture.id,
+                name: friend.profile.picture.name,
+                data: Buffer.from(friend.profile.picture.data, 'base64'),
+              },
         };
       }),
       pendingFriends: user.pendingFriends.map((friend) => {
@@ -132,11 +157,13 @@ export class UsersService {
           firstName: friend.profile.firstName,
           lastName: friend.profile.lastName,
           hobbies: friend.hobbies,
-          avatar: {
-            id: friend.profile.picture.id,
-            name: friend.profile.picture.name,
-            data: Buffer.from(friend.profile.picture.data, 'base64'),
-          },
+          avatar: !friend.profile.picture
+            ? null
+            : {
+                id: friend.profile.picture.id,
+                name: friend.profile.picture.name,
+                data: Buffer.from(friend.profile.picture.data, 'base64'),
+              },
         };
       }),
       metUsers: user.metUsers.map((met) => {
@@ -145,11 +172,13 @@ export class UsersService {
           firstName: met.profile.firstName,
           lastName: met.profile.lastName,
           hobbies: met.hobbies,
-          avatar: {
-            id: met.profile.picture.id,
-            name: met.profile.picture.name,
-            data: Buffer.from(met.profile.picture.data, 'base64'),
-          },
+          avatar: !met.profile.picture
+            ? null
+            : {
+                id: met.profile.picture.id,
+                name: met.profile.picture.name,
+                data: Buffer.from(met.profile.picture.data, 'base64'),
+              },
         };
       }),
     };
@@ -163,11 +192,13 @@ export class UsersService {
         uuid: blocked.uuid,
         firstName: blocked.profile.firstName,
         lastName: blocked.profile.lastName,
-        avatar: {
-          id: blocked.profile.picture.id,
-          name: blocked.profile.picture.name,
-          data: Buffer.from(blocked.profile.picture.data, 'base64'),
-        },
+        avatar: !blocked.profile.picture
+          ? null
+          : {
+              id: blocked.profile.picture.id,
+              name: blocked.profile.picture.name,
+              data: Buffer.from(blocked.profile.picture.data, 'base64'),
+            },
       };
     });
     return blocked;
@@ -176,63 +207,61 @@ export class UsersService {
   async getEvents(uuid: string) {
     const user = await this.findOne(uuid);
     const events = {
-      subscribed: user.events.map((event) => {
-        if (event.creator !== user) {
-          return {
-            id: event.id,
-            name: event.name,
-            description: event.description,
-            location: event.location,
-            maxParticipants: event.maxParticipants,
-            creationDate: event.creationDate,
-            eventDate: event.eventDate,
-            type: event.type,
-            creator: event.creator,
-            participants: !event.participants
+      subscribed: user.subscribedEvents.map((event) => {
+        return {
+          id: event.id,
+          name: event.name,
+          description: event.description,
+          location: event.location,
+          maxParticipants: event.maxParticipants,
+          creationDate: event.creationDate,
+          eventDate: event.eventDate,
+          type: event.type,
+          creator: {
+            uuid: event.creator.uuid,
+            firstName: event.creator.profile.firstName,
+            lastName: event.creator.profile.lastName,
+            hobbies: event.creator.hobbies,
+            avatar: !event.creator.profile.picture
               ? null
-              : event.participants.map((user) => {
-                  return {
-                    uuid: user.uuid,
-                    firstName: user.profile.firstName,
-                    lastName: user.profile.lastName,
-                    hobbies: user.hobbies,
-                    avatar: {
-                      id: user.profile.picture.id,
-                      name: user.profile.picture.name,
-                      data: Buffer.from(user.profile.picture.data, 'base64'),
-                    },
-                  };
-                }),
-          };
-        }
-      }),
-      created: user.events.map((event) => {
-        if (event.creator === user) {
-          return {
-            id: event.id,
-            name: event.name,
-            description: event.description,
-            location: event.location,
-            maxParticipants: event.maxParticipants,
-            creationDate: event.creationDate,
-            eventDate: event.eventDate,
-            type: event.type,
-            creator: event.creator,
-            participants: event.participants.map((user) => {
-              return {
-                uuid: user.uuid,
-                firstName: user.profile.firstName,
-                lastName: user.profile.lastName,
-                hobbies: user.hobbies,
-                avatar: {
-                  id: user.profile.picture.id,
-                  name: user.profile.picture.name,
-                  data: Buffer.from(user.profile.picture.data, 'base64'),
+              : {
+                  id: event.creator.profile.picture.id,
+                  name: event.creator.profile.picture.name,
+                  data: Buffer.from(
+                    event.creator.profile.picture.data,
+                    'base64',
+                  ),
                 },
-              };
-            }),
-          };
-        }
+          },
+          participants: event.participants.length,
+        };
+      }),
+      created: user.createdEvents.map((event) => {
+        return {
+          id: event.id,
+          name: event.name,
+          description: event.description,
+          location: event.location,
+          maxParticipants: event.maxParticipants,
+          creationDate: event.creationDate,
+          eventDate: event.eventDate,
+          type: event.type,
+          participants: event.participants.map((user) => {
+            return {
+              uuid: user.uuid,
+              firstName: user.profile.firstName,
+              lastName: user.profile.lastName,
+              hobbies: user.hobbies,
+              avatar: !user.profile.picture
+                ? null
+                : {
+                    id: user.profile.picture.id,
+                    name: user.profile.picture.name,
+                    data: Buffer.from(user.profile.picture.data, 'base64'),
+                  },
+            };
+          }),
+        };
       }),
     };
     return events;
@@ -274,17 +303,14 @@ export class UsersService {
 
   async remove(uuid: string): Promise<User> {
     const user = await this.findOne(uuid);
-    const events = (await this.getEvents(uuid)).created;
 
-    events.map(async (event) => {
-      await this.eventsService.remove(event.id);
-    });
     await this.profilesService.remove(user.profile.id);
     await this.userRepository.remove(user);
     return {
       uuid: uuid,
       profile: null,
-      events: null,
+      createdEvents: null,
+      subscribedEvents: null,
       friends: null,
       pendingFriends: null,
       metUsers: null,
