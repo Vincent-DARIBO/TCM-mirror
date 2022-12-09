@@ -22,26 +22,27 @@ export default function Iam({ route, navigation }) {
 
   return (
     <View style={{ marginLeft: '10%', marginRight: '10%' }}>
-      <Text style={{ fontSize: 30, fontWeight: 'bold', marginTop: '20%' }}>
+      <Text style={{ fontSize: 30, fontWeight: 'bold', marginTop: '20%', color:"#084887" }}>
         Je suis...
       </Text>
 
-      <View style={{ marginTop: '10%' }}>
+      <View style={{ marginTop: '20%' }}>
         <TouchableOpacity onPress={() => setButton('Homme')}>
           <View
             style={{
               height: 75,
               borderWidth: 1,
               borderRadius: 20,
+              borderColor:"lightgrey",
               justifyContent: 'center',
-              backgroundColor: btn === 'Homme' ? '#007AFF' : 'white',
+              backgroundColor: btn === 'Homme' ? '#FF9900' : 'white',
             }}>
             <Text
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
                 marginLeft: '5%',
-                color: btn === 'Homme' ? 'white' : 'black',
+                color: btn === 'Homme' ? 'white' : '#084887',
               }}>
               Homme
             </Text>
@@ -49,22 +50,23 @@ export default function Iam({ route, navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View style={{ marginTop: '10%' }}>
+      <View style={{ marginTop: '5%' }}>
         <TouchableOpacity onPress={() => setButton('Femme')}>
           <View
             style={{
               borderWidth: 1,
               height: 75,
               borderRadius: 20,
+              borderColor:"lightgrey",
               justifyContent: 'center',
-              backgroundColor: btn === 'Femme' ? '#007AFF' : 'white',
+              backgroundColor: btn === 'Femme' ? '#FF9900' : 'white',
             }}>
             <Text
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
                 marginLeft: '5%',
-                color: btn === 'Femme' ? 'white' : 'black',
+                color: btn === 'Femme' ? 'white' : '#084887',
               }}>
               Femme
             </Text>
@@ -72,22 +74,23 @@ export default function Iam({ route, navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View style={{ marginTop: '10%' }}>
+      <View style={{ marginTop: '5%' }}>
         <TouchableOpacity onPress={() => setButton('Autre')}>
           <View
             style={{
               borderWidth: 1,
               height: 75,
               borderRadius: 20,
+              borderColor:"lightgrey",
               justifyContent: 'center',
-              backgroundColor: btn === 'Autre' ? '#007AFF' : 'white',
+              backgroundColor: btn === 'Autre' ? '#FF9900' : 'white',
             }}>
             <Text
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
                 marginLeft: '5%',
-                color: btn === 'Autre' ? 'white' : 'black',
+                color: btn === 'Autre' ? 'white' : '#084887',
               }}>
               Autre
             </Text>
@@ -98,9 +101,9 @@ export default function Iam({ route, navigation }) {
       <TouchableOpacity onPress={() => checkValid()}>
         <View
           style={{
-            marginTop: '20%',
+            marginTop: '30%',
             borderWidth: 1,
-            backgroundColor: '#007AFF',
+            backgroundColor: '#084887',
             borderRadius: 20,
             height: '30%',
             justifyContent: 'center',

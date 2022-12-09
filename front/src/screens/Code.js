@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Button, Text } from "react-native";
+import { SafeAreaView, StyleSheet, Button, Text, TouchableOpacity } from "react-native";
 
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 
@@ -22,14 +22,12 @@ const Code = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Text style={styles.prompt}>Enter the code we sent you</Text>
-      <Text style={styles.message}>
-        {`Your phone (${phoneNumber}) will be used to protect your account each time you log in.`}
-      </Text>
-      <Button
-        title="Edit Phone Number"
-        onPress={() => navigation.replace("Number")}
-      />
+      <Text style={styles.prompt}>Entrez le code de vérification que vous avez reçu.</Text>
+      <Text style={styles.message}>{phoneNumber}</Text>
+
+      <TouchableOpacity onPress={() => navigation.replace("Number")} style={{marginTop:"5%"}}>
+        <Text style={{fontStyle:"italic", color:"#084887"}}>Modifier le numéro de téléphone</Text>
+      </TouchableOpacity>
       <OTPInputView
         style={{ width: "80%", height: 200 }}
         pinCount={4}
@@ -40,6 +38,7 @@ const Code = ({ route, navigation }) => {
         onCodeFilled={(code) => {checkVerification(code)}}
       />
       {invalidCode && <Text style={styles.error}>Incorrect code.</Text>}
+      <Text style={{color:"#FF9900", fontSize:20, fontWeight:"bold", marginTop:"40%"}}>Renvoyer le code</Text>
     </SafeAreaView>
   );
 };
@@ -47,8 +46,8 @@ const Code = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
+    marginTop:"30%"
   },
 
   borderStyleBase: {
@@ -57,35 +56,43 @@ const styles = StyleSheet.create({
   },
 
   borderStyleHighLighted: {
-    borderColor: "#03DAC6",
+    borderColor: "#4B7FB2",
   },
 
   underlineStyleBase: {
-    width: 30,
-    height: 45,
-    borderWidth: 0,
-    borderBottomWidth: 1,
-    color: "black",
+    width: 70,
+    height: 70,
+    borderWidth: 5,
+    borderBottomWidth: 5,
+    borderRadius:20,
+    fontWeight:"bold",
+    color: "#084887",
     fontSize: 20,
   },
 
   underlineStyleHighLighted: {
-    borderColor: "#03DAC6",
+    borderColor: "#084887",
   },
 
   prompt: {
     fontSize: 24,
     paddingHorizontal: 30,
     paddingBottom: 20,
+    fontWeight:"bold",
+    textAlign:"center",
+    color :"#084887"
   },
 
   message: {
-    fontSize: 16,
+    fontSize: 20,
+    fontWeight:"bold",
     paddingHorizontal: 30,
+    color:"#4B7FB2"
   },
 
   error: {
     color: "red",
+    marginTop:"-10%"
   },
 });
 
