@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Button,
+  FlatList,
   Image,
   SafeAreaView,
   ScrollView,
@@ -17,10 +18,30 @@ import {layout} from '../../shared/styles';
 import {fadedOrange, primary, secondary, white} from '../../constants/colors';
 import Title from './components/Title';
 import Description from './components/Description';
+import IconBar from './components/IconBar';
 
 export default function ProfileDetails() {
+  const data = [
+    {text: 'Jardiange', isShared: true},
+    {text: 'Voyage', isShared: true},
+    {text: 'Peinture', isShared: true},
+    {text: 'Lecture', isShared: true},
+    {text: 'Sport', isShared: true},
+    {text: 'Modeling', isShared: true},
+    {text: 'Musique', isShared: true},
+    {text: 'Danse', isShared: false},
+    {text: 'Musique', isShared: false},
+    {text: 'Voila', isShared: false},
+    {text: 'la flemme', isShared: false},
+    {text: 'Bruh', isShared: false},
+    {text: 'Musique', isShared: false},
+  ];
+  function renderItem({item}) {
+    return <Badge title={item.title} textStyle={{color: white}} />;
+  }
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <ScrollView contentContainerStyle={[layout.center]}>
         <ElevatedView
           elevation={5}
@@ -30,8 +51,15 @@ export default function ProfileDetails() {
             style={styles.image}
           />
         </ElevatedView>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={{...styles.paragraph, marginTop: 20}}>
+        <IconBar />
+
+        <View
+          style={{
+            ...styles.row,
+            alignItems: 'center',
+            marginTop: 20,
+          }}>
+          <View style={{...styles.paragraph, width: 250}}>
             <Title text="Gilbert, 75" />
             <Description text="Ceci est une description" />
           </View>
@@ -40,30 +68,60 @@ export default function ProfileDetails() {
           </TouchableOpacity>
         </View>
 
-        <View style={[styles.paragraph, {marginTop: 20}]}>
-          <View style={{...styles.row, justifyContent: 'space-between'}}>
+        <View style={[styles.paragraph, styles.row]}>
+          <View>
             <Title text="Position" />
-            <View style={{...styles.row, ...styles.badge}}>
-              <EvilIcons size={20} color={secondary} name="location" />
-              <Text style={{color: secondary}}>1Km</Text>
-            </View>
+            <Description text="Ceci est une adresse" />
           </View>
-          <Description text="Ceci est une adresse"/>
-        </View>
-        <View style={[styles.paragraph, {marginTop: 20}]}>
-          <Title text="À propos" />
-          <Description style={{fontSize: 20, marginTop: 5}} text="Je suis Marcel, le fondateur de cette appli je vais écrire ce long text pour faire des test su tous chez marcel"
-         />
+          <Badge
+            title="1km"
+            icon={<EvilIcons size={20} color={secondary} name="location" />}
+            style={styles.badge}
+            textStyle={{color: secondary, fontSize: 10, marginLeft: null}}
+          />
         </View>
 
-        <Badge
-          title="Shopping"
-          icon={<FontAwesome5 name="shopping-bag" size={20} color={white} />}
-        />
-        <Badge
-          title="Shopping"
-          icon={<FontAwesome5 name="shopping-bag" size={20} color={white} />}
-        />
+        <View style={[styles.paragraph]}>
+          <Title text="À propos" />
+          <Description text="Je suis Marcel, le fondateur de cette appli je vais écrire ce long text pour faire des test su tous chez marcel" />
+        </View>
+        <View style={[styles.paragraph]}>
+          <Title text="Intérêts" />
+          <View
+            style={{
+              ...layout.row,
+              height: 200,
+              width: 300,
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+            }}>
+            {data.map((item, index) => (
+              <Badge
+                title={item.text}
+                icon={
+                  item.isShared ? (
+                    <Ionicons
+                      name="checkmark-done"
+                      size={16}
+                      color={secondary}
+                    />
+                  ) : null
+                }
+                key={index}
+                textStyle={{
+                  color: item.isShared ? secondary : primary,
+                  fontSize: 13,
+                  marginLeft: 5,
+                }}
+                style={{
+                  ...styles.interests,
+                  borderColor: item.isShared ? secondary : primary,
+                }}
+              />
+            ))}
+          </View>
+        </View>
+        <View style={{height: 30}} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -73,37 +131,48 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   badge: {
-    paddingHorizontal: 10,
-    alignItems: 'center',
+    borderRadius: 5,
+    width: 60,
     backgroundColor: fadedOrange,
-    width: 75,
-    height: 40,
-    borderRadius: 15,
-    justifyContent: 'space-between',
+    right: 0,
+    bottom: 0,
+    ...layout.center,
+    position: 'absolute',
+    height: 35,
   },
   image: {
-    width: 200,
-    height: 300,
-    resizeMode: 'contain',
+    width: 300,
+    height: 400,
+    borderRadius: 20,
+    resizeMode: 'cover',
   },
   imageContainer: {
-    width: 200,
-    height: 300,
-    borderRadius: 15,
-    marginTop: 10,
+    width: 300,
+    height: 400,
+    borderRadius: 20,
+    marginTop: 20,
   },
   paragraph: {
     maxWidth: 300,
     width: '80%',
     marginTop: 10,
-    borderRadius: 15,
   },
   sendIcon: {
     ...layout.center,
     borderWidth: 1,
-    borderRadius: 5,
-    width: 40,
-    height: 40,
+    borderRadius: 10,
+    width: 50,
+    height: 50,
     borderColor: 'gainsboro',
+    marginTop: 20,
+  },
+  interests: {
+    ...layout.center,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderRadius: 5,
+    width: 90,
+    height: 35,
+    margin: 5,
   },
 });
