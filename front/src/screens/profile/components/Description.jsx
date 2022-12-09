@@ -8,6 +8,6 @@ export default function Description({text, style = {}}) {
 
 const styles = StyleSheet.create({
   description: {
-    fontSize: 20,
+    fontSize: 14,
   },
 });
