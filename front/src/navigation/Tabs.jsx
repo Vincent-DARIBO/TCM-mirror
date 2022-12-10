@@ -10,6 +10,7 @@ import Register from '../screens/profile/Register';
 import ProfileDetails from '../screens/profile/ProfileDetails';
 import Code from '../screens/Code';
 import Iam from '../screens/Iam';
+import Profile from '../screens/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function TabNavigator() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Number" component={Number} />
       <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Profile details" component={ProfileDetails} />
       <Stack.Screen name="Code" component={Code} />

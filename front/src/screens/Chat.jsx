@@ -1,13 +1,12 @@
-import { View, Image, StyleSheet, Text } from 'react-native';
 import { React, useState, useEffect, useCallback } from 'react';
+import { View, Image, StyleSheet, Text, Touchable, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { GiftedChat, Bubble } from 'react-native-gifted-chat';
-import { primary } from '../constants/colors';
-import text from '../constants/Global';
+import { GiftedChat } from 'react-native-gifted-chat';
+import constant, { primary } from '../constants/colors';
 
 Ionicons.loadFont()
 
-export default function Chat() {
+export default function Chat({navigation}) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -19,7 +18,6 @@ export default function Chat() {
         user: {
           _id: 1,
           name: 'Juliette Dubois',
-          avatar: require('../assets/Femme1.png'),
         },
         sent: true,
         received: true,
@@ -40,11 +38,9 @@ export default function Chat() {
         createdAt: new Date(),
         user: {
           _id: 1,
-          avatar: require('../assets/Femme1.png'),
         },
         sent: true,
         received: true,
-
       },
       {
         _id: 1,
@@ -63,39 +59,32 @@ export default function Chat() {
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
   }, [])
 
-
-
-  {/* <Ionicons
-onPress={() => pickImage()}
-name="checkmark-done-outline"
-size={20}
-color="#F2994A"
-/> */}
-
   return (
     <View style={{ flex: 1 }}>
 
       <View style={{ flexDirection: "row", justifyContent: 'space-around', marginLeft: 10 + '%', marginRight: 10 + '%', marginTop: 5 + '%' }}>
-        <Image source={require('../assets/Femme1.png')} style={styles.image} />
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Image source={require('../assets/Femme1.png')} style={styles.image}/>
+        </TouchableOpacity>
         <View>
-          <Text style={{ fontSize: 20, color: primary, fontWeight:'700' }}>Juliette Dubois</Text>
+          <Text style={styles.text}>Juliette Dubois</Text>
           <View style={{ width: 40 + '%', flexDirection: "row", alignItems: 'center', flex: 1, justifyContent: "space-around" }}>
             <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: "green" }}></View>
             <Text style={{}}>Online</Text>
           </View>
         </View>
-        <View style={{ width: 50, height: 50, borderColor: 'black', borderWidth: 1, borderRadius: 20, justifyContent:'center', alignItems:'center'}}>
-          <Image source={require('../assets/3points.png')} style={{ width: 25, height: 25}} />
+        <View style={{ width: 50, height: 50, borderColor: 'black', borderWidth: 1, borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+          <Image source={require('../assets/3points.png')} style={{ width: 25, height: 25 }} />
         </View>
       </View>
 
-      {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 25, marginRight: 25, marginTop: 15}}> */}
-        <View style={{marginLeft:20 , marginRight:20, marginTop:5, height: 1, backgroundColor: '#BFC0C0' }}></View>
-      {/* </View> */}
+      <View style={{ marginLeft: 20, marginRight: 20, marginTop: 5, height: 1, backgroundColor: '#BFC0C0' }}></View>
 
       <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
+        placeholder = "Entrez votre message"
+        onPressAvatar = {() => (navigation.navigate('Profile'))}
         user={{
           _id: 1,
         }}
@@ -112,5 +101,10 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 50,
+  },
+  text: {
+    fontSize: 20,
+    color: primary,
+    fontWeight: '400',
   },
 });
