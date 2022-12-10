@@ -9,7 +9,6 @@ import {
     TouchableWithoutFeedback,
     ScrollView,
 } from 'react-native';
-import { color } from 'react-native-reanimated';
 
 export default function AddEvent() {
     return (

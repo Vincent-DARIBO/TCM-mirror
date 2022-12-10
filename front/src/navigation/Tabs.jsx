@@ -11,6 +11,8 @@ import ProfileDetails from '../screens/profile/ProfileDetails';
 import Code from '../screens/Code';
 import Iam from '../screens/Iam';
 import Profile from '../screens/Profile';
+import AddEvent from '../screens/AddEvent';
+import EventList from '../screens/EventList';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +27,8 @@ export default function TabNavigator() {
       <Stack.Screen name="Profile details" component={ProfileDetails} />
       <Stack.Screen name="Code" component={Code} />
       <Stack.Screen name="Iam" component={Iam} />
+      <Stack.Screen name="AddEvent" component={AddEvent} />
+      <Stack.Screen name="EventList" component={EventList} />
     </Stack.Navigator>
   );
 }
