@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import {Calendar} from 'react-native-calendars';
 import { FAB } from 'react-native-paper';
-import {AntDesign} from '@expo/vector-icons'
+import {AntDesign} from '@expo/vector-icons';
+import ElevatedView from 'react-native-elevated-view'
 
 export default function EventList() {
     return (
@@ -33,9 +34,10 @@ export default function EventList() {
                     </View>
                 </View>
                 <View style={styles.calendar}>
-                    <Calendar theme={theme.theme} 
-                    style={{margin: 20, elevation: 4, width: 330, height: 350}}
-                    />
+                    <ElevatedView elevation={4}  style={{margin: 20, width: 330, height: 350}}>
+                        <Calendar theme={theme.theme} 
+                        />
+                    </ElevatedView>
                 </View>
             </ScrollView>
         </SafeAreaView>

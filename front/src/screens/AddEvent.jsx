@@ -20,18 +20,18 @@ export default function AddEvent() {
   return (
   //contentContainerStyle={{flex:1}}
   <SafeAreaView style={styles.safeareaview} >
-    <ScrollView style={{backgroundColor:'white'}}>
+    <ScrollView style={{backgroundColor:'white', paddingHorizontal: 10}}>
       <View style={styles.tittle}>
           <Text style={styles.text}>Lundi 25 novembre</Text>
       </View>
       <View style={styles.search}>
-        <Searchbar style={{borderRadius: 30, width:270}}
+        <Searchbar placeholderTextColor={'gainsbord'} style={{marginLeft:10, borderRadius: 10, width:240, height:40, backgroundColor:'white'}}
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
         />
-        <View style={{borderRadius:10, borderColor:"whitesmoke", borderWidth:2, alignItems: 'center', justifyContent: 'center'}}>
-          <Ionicons size={30} style={{color:'orange'}} name='options'/>
+        <View style={{marginRight:10, borderRadius:10, borderColor:"whitesmoke", borderWidth:2, alignItems: 'center', justifyContent: 'center'}}>
+          <Ionicons size={40} style={{color:'orange'}} name='options'/>
         </View>
       </View>
       <View >

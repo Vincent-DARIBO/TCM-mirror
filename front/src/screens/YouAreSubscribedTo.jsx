@@ -28,9 +28,9 @@ export default function YouAreSubscribedTo() {
                         <Text style={styles.subtext}>Pique-nique avec Marie</Text>
                     </View>
                 </View>
-                <View style={{marginLeft:5, padding:10}}>
-                    <View style={{flexDirection:'row'}}>
-                        <View style={{paddingHorizontal:5}}>    
+                <View style={{marginLeft:20, padding:10, marginBottom:10}}>
+                    <View style={{flexDirection:'row', marginBottom:10}}>
+                        <View >    
                                 <Ionicons 
                                 name="time-outline"
                                 size={25}
@@ -48,7 +48,7 @@ export default function YouAreSubscribedTo() {
                         <Image style={styles.image} source={require("../assets/marcel.png")} />
                     </View>
                 </View>
-                <View style={{marginLeft:5, padding:10}}>
+                <View style={{marginLeft:23,justifyContent:'center'}}>
                     <View style={{flexDirection:'row'}}>
                         <View>
                             <EvilIcons
@@ -58,12 +58,12 @@ export default function YouAreSubscribedTo() {
                                 color="orange"
                                 />
                         </View>
-                        <View style={{padding:5}}>
+                        <View style={{paddingBottom:8}}>
                             <Text style={styles.place}>TETE D'OR</Text>
                         </View>
                     </View>
                 </View>
-                <View style={{marginLeft:5, padding:10}}>
+                <View style={{marginLeft:20, padding:10}}>
                     <View style={{flexDirection:'row'}}>
                         <View>
                             <Feather
@@ -73,14 +73,16 @@ export default function YouAreSubscribedTo() {
                                 color="lightblue"
                                 />
                         </View>
-                        <View style={{flexShrink: 1}}>
+                        <View style={{flexShrink: 1, marginHorizontal:10, marginBottom:40}}>
                             <Text style={styles.description}> Bonjour, je m’apelle Marie j’ai 35 ans, traiteuse depuis quelques années maintenant j’aime partager ma cuisine avec du monde. 
                             C’est pour cela que je vous invite à partager avec moi un jolie pique nique préparer par mes soins. 
                             Vous pouvez si le souhaiter vous aussi rapporter quelques chose. </Text>
                         </View>
                     </View>
                 </View>
-                <View style={{flexDirection:'row', justifyContent:'space-between', padding:10}}>
+                
+            </ScrollView>
+            <View style={{flexDirection:'row', justifyContent:'space-between', padding:10}}>
                     <TouchableOpacity>
                         <View>
                             <View style={styles.buttonRappel}>
@@ -94,7 +96,6 @@ export default function YouAreSubscribedTo() {
                         </View>
                     </TouchableOpacity>
                 </View>
-            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -102,23 +103,25 @@ export default function YouAreSubscribedTo() {
 const styles = StyleSheet.create({
     safeareaview: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        paddingBottom:20,
+        paddingHorizontal:20,
     },
     buttonRappel: {
         backgroundColor: 'wheat',
         borderRadius: 8,
-        marginLeft:15,
+        marginLeft:20,
         padding: 5,
         alignItems:'center',
-        width:140
+        width:130,
     },
     button: {
         backgroundColor: 'red',
         borderRadius: 8,
-        marginRight:15,
+        marginRight:10,
         padding: 5,
         alignItems:'center',
-        width:140
+        width:130
     },
     alignelemView: {
         marginLeft: 10,
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
     },
     description: {
         color:'darkblue',
-        fontSize:20,
+        fontSize:16,
         textAlign:'justify'
     },
     text: {
