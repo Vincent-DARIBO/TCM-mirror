@@ -8,8 +8,8 @@ import {
     secondary,
     white,
 } from '../constants/colors';
-import { layout } from '../shared/styles';
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import ScreenHeader from '../shared/components/ScreenHeader';
 
 
 
@@ -179,19 +179,16 @@ const MyMessages = ({ navigation }) => {
 
     return (
         <View style={{ alignItems: 'center' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-end', width: '100%' }} >
-                <Text style={styles.name}>Messages</Text>
-                <Ionicons name='options' size={30} color={secondary} onPress={() => { }} />
-            </View>
+            <ScreenHeader title='Messages' />
             <Searchbar
                 placeholder='Rechercher'
                 loading={loading}
                 onChangeText={query => { setSearchQuery(query); setLoading(true) }}
-                elevation={3}
-                style={{ borderRadius: 10, marginLeft: '10%', marginRight: '10%', marginTop: '5%', marginBottom: '5%' }}
+                elevation={0}
+                style={{ borderRadius: 10, marginLeft: '10%', marginRight: '10%', marginTop: '5%', marginBottom: '5%', height: 40, borderWidth: 1, borderColor: '#ADAFBB' }}
             />
             <View style={{ paddingTop: 30, paddingHorizontal: 40, width: '100%', height: '80%' }}>
-                <FlatList data={DATA}
+                <FlatList data={matchesList}
                     renderItem={render}
                     keyExtractor={item => item.id}
                     ListEmptyComponent={emptyList}
@@ -203,14 +200,5 @@ const MyMessages = ({ navigation }) => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    name: {
-        paddingTop: 10,
-        fontWeight: 'bold',
-        fontSize: 30,
-        color: primary,
-    },
-})
 
 export default MyMessages;
