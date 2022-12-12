@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "expo": "^47.0.8",
-    "expo-cli": "^6.0.8",
-    "react-native-svg": "^13.6.0"
-  }
-}

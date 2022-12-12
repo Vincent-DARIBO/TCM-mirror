@@ -1,102 +1,142 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Friend } from 'src/friends/entities/friend.entity';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Channel } from 'src/channels/entities/channel.entity';
+import { Event } from 'src/events/entities/event.entity';
 import { Hobby } from 'src/hobbies/entities/hobby.entity';
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Profile } from 'src/profiles/entities/profile.entity';
+import {
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field(() => String, { description: 'uuid' })
   uuid: string;
 
-  @Column()
-  @Field(() => String, { description: 'user first name' })
-  firstName: string;
+  @OneToOne(() => Profile, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => Profile)
+  @JoinColumn({ referencedColumnName: 'id' })
+  profile: Profile;
 
-  @Column()
-  @Field(() => String, { description: 'user last name' })
-  lastName: string;
+  @OneToMany(() => Event, (event) => event.creator, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [Event], { nullable: true })
+  createdEvents: Event[];
 
-  @Column()
-  @Field(() => String, { description: 'user email' })
-  email: string;
-
-  @Column()
-  @Field(() => String, { description: 'user password' })
-  password: string;
-
-  @Column()
-  @Field(() => Int, { description: 'user age' })
-  age: number;
-
-  @ManyToMany(() => User)
+  @ManyToMany(() => Event)
+  @Field(() => [Event], { nullable: true })
   @JoinTable({
-    name: "friends",
+    name: 'userInEvents',
     joinColumn: {
-      name: "user1",
-      referencedColumnName: "uuid",
+      name: 'user',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "user2",
-      referencedColumnName: "uuid",
-    }
+      name: 'event',
+      referencedColumnName: 'id',
+    },
   })
-  friends: User[]
+  subscribedEvents: Event[];
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [User])
   @JoinTable({
-    name: "friends",
+    name: 'friends',
     joinColumn: {
-      name: "user",
-      referencedColumnName: "uuid",
+      name: 'user1',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "userAsked",
-      referencedColumnName: "uuid",
-    }
+      name: 'user2',
+      referencedColumnName: 'uuid',
+    },
   })
-  pendingFriends: User[]
+  friends: User[];
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [User])
   @JoinTable({
-    name: "met",
+    name: 'pendingFriends',
     joinColumn: {
-      name: "user1",
-      referencedColumnName: "uuid",
+      name: 'user',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "user2",
-      referencedColumnName: "uuid",
-    }
+      name: 'userAsked',
+      referencedColumnName: 'uuid',
+    },
   })
-  metUsers: User[]
+  pendingFriends: User[];
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [User])
   @JoinTable({
-    name: "blocked",
+    name: 'met',
     joinColumn: {
-      name: "user",
-      referencedColumnName: "uuid",
+      name: 'user1',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "userBlocked",
-      referencedColumnName: "uuid",
-    }
+      name: 'user2',
+      referencedColumnName: 'uuid',
+    },
   })
-  blockedUsers: User[]
+  metUsers: User[];
 
-  @ManyToMany(() => Hobby)
+  @ManyToMany(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [User])
   @JoinTable({
-    name: "userHobbies",
+    name: 'blocked',
     joinColumn: {
-      name: "user",
-      referencedColumnName: "uuid",
+      name: 'user',
+      referencedColumnName: 'uuid',
     },
     inverseJoinColumn: {
-      name: "hobbie",
-      referencedColumnName: "hobbyId",
-    }
+      name: 'userBlocked',
+      referencedColumnName: 'uuid',
+    },
   })
-  hobbies: Hobby[]
+  blockedUsers: User[];
+
+  @ManyToMany(() => Hobby, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @Field(() => [Hobby])
+  @JoinTable({
+    name: 'userHobbies',
+    joinColumn: {
+      name: 'user',
+      referencedColumnName: 'uuid',
+    },
+    inverseJoinColumn: {
+      name: 'hobby',
+      referencedColumnName: 'id',
+    },
+  })
+  hobbies: Hobby[];
 }

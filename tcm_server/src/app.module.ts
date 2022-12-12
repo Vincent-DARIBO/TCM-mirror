@@ -2,23 +2,50 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { UserHobbiesModule } from './user-hobbies/user-hobbies.module';
-import { MeetingsModule } from './meetings/meetings.module';
-import { FriendsModule } from './friends/friends.module';
-import { BlockedModule } from './blocked/blocked.module';
 import { HobbiesModule } from './hobbies/hobbies.module';
 import { EventsModule } from './events/events.module';
-import { EventsModule } from './events/events.module';
-import { HobbiesModule } from './hobbies/hobbies.module';
-import { BlockedModule } from './blocked/blocked.module';
-import { FriendsModule } from './friends/friends.module';
-import { MeetingsModule } from './meetings/meetings.module';
-import { UserHobbiesModule } from './user-hobbies/user-hobbies.module';
-import { UsersModule } from './users/users.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProfileModule } from './profiles/profile.module';
+import { FilesModule } from './files/files.module';
+import { AuthModule } from './auth/auth.module';
+import { ChannelsModule } from './channels/channels.module';
+import { MessagesModule } from './messages/messages.module';
+import * as dotenv from 'dotenv';
+import { AuthController } from './auth/auth.controller';
+
+dotenv.config();
 
 @Module({
-  imports: [UsersModule, EventsModule, HobbiesModule, BlockedModule, FriendsModule, MeetingsModule, UserHobbiesModule],
-  controllers: [AppController],
+  imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+      debug: true,
+      playground: true,
+    }),
+    TypeOrmModule.forRoot({
+      keepConnectionAlive: true,
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+    UsersModule,
+    EventsModule,
+    HobbiesModule,
+    ProfileModule,
+    FilesModule,
+    AuthModule,
+    ChannelsModule,
+    MessagesModule,
+  ],
+  controllers: [AppController, AuthController],
   providers: [AppService],
 })
 export class AppModule {}
