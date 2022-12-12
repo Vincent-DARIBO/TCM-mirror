@@ -1,4 +1,4 @@
-import {StyleSheet, View, Pressable, Text, TextInput} from 'react-native';
+import {StyleSheet, View, Pressable, Text, TextInput, Icon} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -8,20 +8,19 @@ import {Ionicons} from '@expo/vector-icons';
 export default function CreateAnEventScreen({navigation}) {
   return (
     <ScrollView>
-      <View style={{marginTop: 40, marginLeft: 40, position: 'absolute'}}>
+      <View style={{marginTop: 75, marginLeft: 40, position: 'absolute'}}>
         <Ionicons
           onPress={() => navigation.navigate('Home')}
-          name="camera"
+          name="arrow-back-circle-outline"
           size={35}
           color="orange"
-          style={{borderWidth: 0.5, width: 45, borderColor: 'lightgray'}}
         />
       </View>
       <View>
         <Text
           style={{
             fontWeight: '600',
-            marginTop: 45,
+            marginTop: 80,
             color: '#084887',
             padding: 45,
             fontSize: 23,
@@ -34,7 +33,7 @@ export default function CreateAnEventScreen({navigation}) {
           style={{
             fontWeight: '500',
             color: '#084887',
-            marginTop: 80,
+            marginTop: 110,
             padding: 45,
             fontSize: 19,
             position: 'absolute',
@@ -44,7 +43,7 @@ export default function CreateAnEventScreen({navigation}) {
         </Text>
         <Calendar
           style={{
-            marginTop: 170,
+            marginTop: 200,
             height: 400,
             width: 360,
             marginLeft: 34,
@@ -53,6 +52,13 @@ export default function CreateAnEventScreen({navigation}) {
         />
       </View>
       <ElevatedView elevation={2} style={styles.radius}>
+        <Ionicons
+          name="search"
+          size={20}
+          color={'orange'}
+          style={{position: 'absolute', marginTop: 45, marginLeft: 350}}
+        />
+        <TextInput placeholder="Adresse" style={[styles.inputAdresse]} />
         <TextInput
           placeholder="Titre de l'évènement"
           style={[styles.inputTitre]}
@@ -73,10 +79,20 @@ const styles = StyleSheet.create({
   inputTitre: {
     width: 350,
     height: 50,
-    marginTop: 60,
+    marginTop: 20,
     marginLeft: 40,
     paddingLeft: 20,
     borderColor: 'lightgray',
+    borderWidth: 0.5,
+    borderRadius: 10,
+  },
+  inputAdresse: {
+    width: 350,
+    height: 50,
+    marginTop: 30,
+    marginLeft: 40,
+    paddingLeft: 20,
+    borderColor: 'orange',
     borderWidth: 0.5,
     borderRadius: 10,
   },
