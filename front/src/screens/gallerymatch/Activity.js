@@ -5,8 +5,6 @@ import Button from "../../components/Button";
 import {Ionicons} from '@expo/vector-icons'
 import Input from "../profile/components/Input";
 
-
-
 const Activity = () => {
     return (
         <View>
