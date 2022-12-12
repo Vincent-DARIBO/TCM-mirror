@@ -45,6 +45,10 @@ export default function Home({navigation}) {
         title="AddEvent"
         onPress={() => navigation.navigate('AddEvent')}
       />
+      <Button
+        title="Login"
+        onPress={() => navigation.navigate('Login')}
+      />
     </View>
   );
 }

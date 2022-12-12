@@ -12,6 +12,7 @@ import Code from '../screens/Code';
 import Iam from '../screens/Iam';
 import AddEvent from '../screens/AddEvent';
 import EventList from '../screens/EventList';
+import Login from '../screens/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ export default function TabNavigator() {
       <Stack.Screen name="Iam" component={Iam} />
       <Stack.Screen name="AddEvent" component={AddEvent} />
       <Stack.Screen name="EventList" component={EventList} />
+      <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );
 }

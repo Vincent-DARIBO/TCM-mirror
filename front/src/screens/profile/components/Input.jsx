@@ -8,6 +8,8 @@ function Input({
   value,
   onChangeText,
   style,
+  icon,
+  styleInput,
   ...props
 }, ref) {
   return (
@@ -16,10 +18,11 @@ function Input({
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
-        style={[styles.input]}
+        style={[styles.input, styleInput]}
         ref={ref}
         {...props}
       />
+      {icon}
     </ElevatedView>
   );
 }
