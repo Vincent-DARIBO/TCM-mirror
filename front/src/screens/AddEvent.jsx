@@ -1,6 +1,7 @@
 import React from 'react';
 import { FAB } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
+import {Ionicons} from '@expo/vector-icons';
 import {
     Keyboard,
     View,
@@ -19,16 +20,21 @@ export default function AddEvent() {
   return (
   //contentContainerStyle={{flex:1}}
   <SafeAreaView style={styles.safeareaview} >
-    <ScrollView >
+    <ScrollView style={{backgroundColor:'white'}}>
       <View style={styles.tittle}>
           <Text style={styles.text}>Lundi 25 novembre</Text>
       </View>
       <View style={styles.search}>
-        <Searchbar style={{borderRadius: 30}}
+        <Searchbar style={{borderRadius: 30, width:270}}
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
         />
+        <View style={{borderRadius:10, borderColor:"whitesmoke", borderWidth:2, alignItems: 'center', justifyContent: 'center'}}>
+          <Ionicons size={30} style={{color:'orange'}} name='options'/>
+        </View>
+      </View>
+      <View >
       </View>
       <View style={styles.container}>
           <Text style={styles.textWhite}>Cours d'espagnol</Text>
@@ -86,13 +92,24 @@ const styles = StyleSheet.create({
     color:'white'
   },
   search: {
-    padding: 20,
+    padding: 10,
     alignItems: 'center',
+    flexDirection:'row',
+    justifyContent: 'space-between',
+  },
+  imageMenu:{
+    width:40,
+    height:40,
+    borderRadius: 10,
+    borderColor: 'black',
+    borderWidth: 1
   },
   image:{
     width:25,
     height:25,
-    borderRadius:100,
+    borderRadius: 10,
+    borderWidth: 1,
+    marginLeft: 5
   },
   sameLigne:{
     flexDirection:'row',
@@ -103,7 +120,11 @@ const styles = StyleSheet.create({
       marginRight: 20,
       marginLeft: 20,
       marginBottom: 10,
-      borderRadius: 30,
+      borderRadius: 10,
+      borderLeftWidth: 10,
+      borderLeftColor: "darkred",
+      borderTopLeftRadius: 10,
+      borderBottomLeftRadius: 10,
     },
   container2: {
     padding: 10,
@@ -111,15 +132,23 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginLeft: 20,
     marginBottom: 10,
-    borderRadius: 30
+    borderRadius: 10,
+    borderLeftWidth: 10,
+    borderLeftColor: "royalblue",
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   container3: {
     padding: 10,
-    backgroundColor: "navajowhite",
+    backgroundColor: "bisque",
     marginRight: 20,
     marginLeft: 20,
     marginBottom: 10,
-    borderRadius: 30
+    borderRadius: 10,
+    borderLeftWidth: 10,
+    borderLeftColor: "navajowhite",
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   container4: {
     padding: 10,
@@ -127,7 +156,11 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginLeft: 20,
     marginBottom: 10,
-    borderRadius: 30
+    borderRadius: 10,
+    borderLeftWidth: 10,
+    borderLeftColor: "green",
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   fab: {
     position: 'absolute',

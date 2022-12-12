@@ -12,6 +12,8 @@ import Code from '../screens/Code';
 import Iam from '../screens/Iam';
 import AddEvent from '../screens/AddEvent';
 import EventList from '../screens/EventList';
+import EventDayDetailsYourActivity from '../screens/EventDayDetailsYourActivity';
+import YouAreSubscribedTo from '../screens/YouAreSubscribedTo';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +29,8 @@ export default function TabNavigator() {
       <Stack.Screen name="Iam" component={Iam} />
       <Stack.Screen name="AddEvent" component={AddEvent} />
       <Stack.Screen name="EventList" component={EventList} />
+      <Stack.Screen name="EventDayDetailsYourActivity" component={EventDayDetailsYourActivity} />
+      <Stack.Screen name="YouAreSubscribedTo" component={YouAreSubscribedTo} />
     </Stack.Navigator>
   );
 }

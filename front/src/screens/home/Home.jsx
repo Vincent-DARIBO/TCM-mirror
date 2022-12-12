@@ -26,6 +26,8 @@ export default function Home({navigation}) {
       <Button title="IAM" onPress={() => navigation.navigate('Iam')} />
       <Button title="EventList" onPress={() => navigation.navigate('EventList')} />
       <Button title="AddEvent" onPress={() => navigation.navigate('AddEvent')} />
+      <Button title="EventDayDetailsYourActivity" onPress={() => navigation.navigate('EventDayDetailsYourActivity')} />
+      <Button title="YouAreSubscribedTo" onPress={() => navigation.navigate('YouAreSubscribedTo')} />
     </View>
   );
 }

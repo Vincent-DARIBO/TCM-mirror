@@ -33,7 +33,9 @@ export default function EventList() {
                     </View>
                 </View>
                 <View style={styles.calendar}>
-                    <Calendar style={{margin: 20, elevation: 4, width: 330, height: 350}}/>
+                    <Calendar theme={theme.theme} 
+                    style={{margin: 20, elevation: 4, width: 330, height: 350}}
+                    />
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -48,6 +50,7 @@ export default function EventList() {
         marginBottom: 20,
         alignItems: 'center',
         padding: 10,
+        fontWeight:'bold'
     },
     calendar: {
         padding: 10,
@@ -61,4 +64,15 @@ export default function EventList() {
     fab: {
         flexDirection:'row',
       },
+  });
+
+  const theme = StyleSheet.create({
+    theme: {
+        arrowColor:'orange',
+        selectedDayBackgroundColor:'orange',
+        selectedDayTextColor:'darkblue',
+        dayTextColor: 'darkblue',
+        todayTextColor:'darkblue',
+        monthTextColor: 'darkblue',
+    },
   });
