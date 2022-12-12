@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import {Pressable, Text, StyleSheet} from 'react-native';
-import {blue, primary, white} from '../constants/colors';
+import { Pressable, Text, StyleSheet } from 'react-native';
+import { blue, primary, white } from '../constants/colors';
 
 export default function Button({
   icon,
@@ -10,19 +10,20 @@ export default function Button({
   style,
   textStyle,
 }) {
+  const _style= useCallback( ({pressed}) => ([styles.text, {marginLeft: icon ? 15 : null, opacity: pressed ? 0.5: 1,  ...styles.center,
+    ...style,
+    justifyContent: icon ? null : 'center',
+  }]), [])
   return (
     <Pressable
       onPress={onPress}
-      style={{
-        ...styles.center,
-        ...style,
-        justifyContent: icon ? null : 'center',
-      }}>
+      style={_style}
+       >
       <>{icon}</>
       <Text style={[styles.text, {marginLeft: icon ? 15 : null}, textStyle]}>
         {title}
       </Text>
-    </Pressable>
+    </Pressable >
   );
 }
 
