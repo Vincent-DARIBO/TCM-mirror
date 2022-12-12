@@ -51,6 +51,10 @@ export default function Home({navigation}) {
         title="AddEvent"
         onPress={() => navigation.navigate('AddEvent')}
       />
+      <Button
+        title="CreateAnEvent"
+        onPress={() => navigation.navigate('CreateAnEventScreen')}
+      />
     </View>
   );
 }
