@@ -14,6 +14,8 @@ import EventList from '../screens/EventList';
 import Gender from '../screens/Gender';
 import Interest from '../screens/Interest';
 import Login from '../screens/Login';
+import EventDayDetailsYourActivity from '../screens/EventDayDetailsYourActivity';
+import YouAreSubscribedTo from '../screens/YouAreSubscribedTo';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +34,8 @@ export default function TabNavigator() {
       <Stack.Screen name="Gender" component={Gender} />
       <Stack.Screen name="Interest" component={Interest} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="EventDayDetailsYourActivity" component={EventDayDetailsYourActivity} />
+      <Stack.Screen name="YouAreSubscribedTo" component={YouAreSubscribedTo} />
     </Stack.Navigator>
   );
 }

@@ -51,6 +51,8 @@ export default function Home({navigation}) {
         title="Login"
         onPress={() => navigation.navigate('Login')}
       />
+      <Button title="EventDayDetailsYourActivity" onPress={() => navigation.navigate('EventDayDetailsYourActivity')} />
+      <Button title="YouAreSubscribedTo" onPress={() => navigation.navigate('YouAreSubscribedTo')} />
     </View>
   );
 }
