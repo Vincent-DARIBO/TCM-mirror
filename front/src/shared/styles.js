@@ -9,5 +9,10 @@ export const layout = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-    }
+    },
+    circle : (size)=> ({
+        width: size,
+        height: size,
+        borderRadius: size,
+    })
 })

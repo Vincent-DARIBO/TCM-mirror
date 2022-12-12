@@ -26,11 +26,11 @@ export default function Home({navigation}) {
         title="Register"
         onPress={() => navigation.navigate('Register')}
       />
+      <Button title="Profile" onPress={() => navigation.navigate('Profile')} />
       <Button
-        title="Profile"
-        onPress={() => navigation.navigate('Profile')}
+        title="pres"
+        onPress={() => navigation.navigate('Edit profile')}
       />
-      <Button title="pres" onPress={() => navigation.navigate('Edit profile')} />
       <Button title="Chat" onPress={() => navigation.navigate('Chat')} />
       <Button
         title="pres"
@@ -44,6 +44,10 @@ export default function Home({navigation}) {
       <Button
         title="AddEvent"
         onPress={() => navigation.navigate('AddEvent')}
+      />
+      <Button
+        title="EventDescription"
+        onPress={() => navigation.navigate('EventDescription')}
       />
     </View>
   );
