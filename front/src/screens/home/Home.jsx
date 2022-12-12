@@ -27,10 +27,11 @@ export default function Home({navigation}) {
         onPress={() => navigation.navigate('Register')}
       />
       <Button
-        title="Details"
-        onPress={() => navigation.navigate('Profile details')}
+        title="Profile"
+        onPress={() => navigation.navigate('Profile')}
       />
       <Button title="pres" onPress={() => navigation.navigate('Edit profile')} />
+      <Button title="Chat" onPress={() => navigation.navigate('Chat')} />
       <Button
         title="pres"
         onPress={() => navigation.navigate('Edit profile')}
