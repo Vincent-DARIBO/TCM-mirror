@@ -49,6 +49,8 @@ export default function Home({navigation}) {
         title="EventDescription"
         onPress={() => navigation.navigate('EventDescription')}
       />
+      <Button title="Friends" onPress={() => navigation.navigate('Friends')} />
+      <Button title="Interest" onPress={() => navigation.navigate('Interest')} />
     </View>
   );
 }

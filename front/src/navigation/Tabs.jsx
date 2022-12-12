@@ -1,18 +1,19 @@
 import React from 'react';
 // import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Chat from '../screens/Chat';
-import Number from '../screens/Number'
+import Number from '../screens/Number';
 import Home from '../screens/home/Home';
 import Register from '../screens/profile/Register';
 import Profile from '../screens/profile/Profile';
 import Code from '../screens/Code';
-import Iam from '../screens/Iam';
 import AddEvent from '../screens/AddEvent';
 import EventList from '../screens/EventList';
 import EventDescription from '../screens/Events/EventDescription';
+import Gender from '../screens/Gender';
+import Interest from '../screens/Interest';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,10 +27,11 @@ export default function TabNavigator() {
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Profile details" component={Profile} />
       <Stack.Screen name="Code" component={Code} />
-      <Stack.Screen name="Iam" component={Iam} />
       <Stack.Screen name="AddEvent" component={AddEvent} />
       <Stack.Screen name="EventDescription" component={EventDescription} />
       <Stack.Screen name="EventList" component={EventList} />
+      <Stack.Screen name="Gender" component={Gender} />
+      <Stack.Screen name="Interest" component={Interest} />
     </Stack.Navigator>
   );
 }
