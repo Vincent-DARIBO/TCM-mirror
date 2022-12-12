@@ -1,7 +1,7 @@
 import React from 'react';
 import { FAB } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
-import {Ionicons} from '@expo/vector-icons';
+import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
 import {
     Keyboard,
     View,
@@ -31,39 +31,87 @@ export default function AddEvent() {
         value={searchQuery}
         />
         <View style={{marginRight:10, borderRadius:10, borderColor:"whitesmoke", borderWidth:2, alignItems: 'center', justifyContent: 'center'}}>
-          <Ionicons size={40} style={{color:'orange'}} name='options'/>
+          <Ionicons size={37} style={{color:'orange'}} name='options'/>
         </View>
       </View>
       <View >
       </View>
       <View style={styles.container}>
           <Text style={styles.textWhite}>Cours d'espagnol</Text>
-          <Text>9:00 AM - 10:00 AM</Text>
-          <Text style={{textAlign:'right'}}>Lyon 1er</Text>
+          <Text style={{color:'white'}}>9:00 AM - 10:00 AM</Text>
+          <Text style={{textAlign:'right', color:'white'}}>Lyon 1er</Text>
           <View style={styles.sameLigne}>
-            <Image style={styles.image} source={require("../assets/Femme1.png")} />
-            <Image style={styles.image} source={require("../assets/marcel.png")} />
+            <View style={styles.sameLigne}>
+              <Image style={styles.image} source={require("../assets/Femme1.png")} />
+              <Image style={styles.image} source={require("../assets/marcel.png")} />
+            </View>
+            <View style={styles.sameLigne}>
+              <Text style={{opacity:0.5}}>Participer</Text>
+              <MaterialCommunityIcons
+                name="calendar-edit"
+                size={30}
+                onPress={() => console.log('Pressed')}
+                style={{opacity:0.5}}
+                />
+            </View>
           </View>
       </View>
       <View style={styles.container2}>
           <Text style={styles.textWhite}>Partie d'échec avec léa</Text>
           <Text>10:00 AM - 11:00 AM</Text>
           <Text style={{textAlign:'right'}}>Lyon 7eme</Text>
-          <Image style={styles.image} source={require("../assets/Femme1.png")} />
+          <View style={styles.sameLigne}>
+            <View style={styles.sameLigne}>
+              <Image style={styles.image} source={require("../assets/Femme1.png")} />
+            </View>
+            <View style={styles.sameLigne}>
+              <Text style={{opacity:0.5}}>Participer</Text>
+              <MaterialCommunityIcons
+                name="calendar-edit"
+                size={30}
+                onPress={() => console.log('Pressed')}
+                style={{opacity:0.5}}
+                />
+            </View>
+          </View>
       </View>
       <View style={styles.container3}>
           <Text style={styles.textWhite}>Yoga avec karine</Text>
           <Text>9:00 AM - 11:00 AM</Text>
           <Text style={{textAlign:'right'}}>Lyon 1er</Text>
-          <Image style={styles.image} source={require("../assets/Femme1.png")} />
+          <View style={styles.sameLigne}>
+            <View style={styles.sameLigne}>
+              <Image style={styles.image} source={require("../assets/marcel.png")} />
+            </View>
+            <View style={styles.sameLigne}>
+              <Text style={{opacity:0.5}}>Participer</Text>
+              <MaterialCommunityIcons
+                name="calendar-edit"
+                size={30}
+                onPress={() => console.log('Pressed')}
+                style={{opacity:0.5}}
+                />
+            </View>
+          </View>
       </View>
       <View style={styles.container4}>
           <Text style={styles.textWhite}>Pique-nique avec marie</Text>
           <Text>10:00 AM - 11:00 AM</Text>
           <Text style={{textAlign:'right'}}>Lyon 8eme</Text>
           <View style={styles.sameLigne}>
-            <Image style={styles.image} source={require("../assets/Femme1.png")} />
-            <Image style={styles.image} source={require("../assets/marcel.png")} />
+            <View style={styles.sameLigne}>
+              <Image style={styles.image} source={require("../assets/Femme1.png")} />
+              <Image style={styles.image} source={require("../assets/marcel.png")} />
+            </View>
+            <View style={styles.sameLigne}>
+              <Text style={{opacity:0.5}}>Participer</Text>
+              <MaterialCommunityIcons
+                name="calendar-edit"
+                size={30}
+                onPress={() => console.log('Pressed')}
+                style={{opacity:0.5}}
+                />
+            </View>
           </View>
       </View>
       {/*<View style={styles.fab}>
@@ -113,6 +161,7 @@ const styles = StyleSheet.create({
   },
   sameLigne:{
     flexDirection:'row',
+    justifyContent:'space-between'
   },
   container: {
       padding: 10,
