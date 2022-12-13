@@ -12,4 +12,11 @@ export class AuthController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
+
+  @Public()
+  @Post('/signUp')
+  async signUp(@Request() req) {
+    const { profile } = req.body;
+    return this.authService.signUp(profile);
+  }
 }
