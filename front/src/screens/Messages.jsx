@@ -187,7 +187,7 @@ const Messages = ({ navigation }) => {
                 elevation={0}
                 style={{ borderRadius: 10, marginLeft: '10%', marginRight: '10%', marginTop: '5%', marginBottom: '5%', height: 40, borderWidth: 1, borderColor: '#ADAFBB' }}
             />
-            <View style={{ paddingTop: 30, paddingHorizontal: 40, width: '100%', height: '80%' }}>
+            <View style={{ paddingTop: 10, paddingHorizontal: 40, width: '100%', height: '82%' }}>
                 <FlatList data={matchesList}
                     renderItem={render}
                     keyExtractor={item => item.id}
