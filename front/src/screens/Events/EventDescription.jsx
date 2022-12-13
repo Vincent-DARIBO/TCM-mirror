@@ -8,7 +8,13 @@ import {
   Text,
 } from 'react-native';
 import Icon from '../../components/Icon';
-import {gray, green, primary, secondary} from '../../constants/colors';
+import {
+  gray,
+  green,
+  primary,
+  secondary,
+  fadedOrange,
+} from '../../constants/colors';
 import {layout} from '../../shared/styles';
 import ElevatedBadge from '../../components/Badge';
 import Title from '../profile/components/Title';
@@ -42,7 +48,7 @@ export default function EventDescription() {
           marginTop: -15,
         }}>
         Pique-nique avec
-        <Text style={{...styles.title, color: secondary}}>Marie</Text>
+        <Text style={{...styles.title, color: secondary}}> Marie</Text>
       </Text>
       <View style={{paddingHorizontal: 20}}>
         <View
@@ -54,7 +60,8 @@ export default function EventDescription() {
           <ElevatedBadge
             icon={<Icon family="Ionicons" name="wine" color={secondary} />}
             title={fakeHobies[0]}
-            style={{backgroundColor: gray, borderRadius: 10}}
+            elevation={2}
+            style={{backgroundColor: gray, borderRadius: 10, }}
             textStyle={{color: null}}
           />
           <ElevatedBadge
@@ -62,21 +69,21 @@ export default function EventDescription() {
             title={fakeHobies[1]}
             style={{backgroundColor: gray, borderRadius: 10}}
             textStyle={{color: null}}
+            elevation={2}
           />
         </View>
         <Schedule
           beginAt="12:00AM"
           endAt="1:00PM"
           date="Mercredi 21 janvier"
-          description="zeqsfjdcqẑejsdf^qzeàehsf^qzàhesdfhzqbs<dfbcmqzesfzeqpsfuhqczesfbqzubesfq\
-        dskfkjspdijfseprjidfŝedrigeihsdfgùijesdùgjes^dgje)sdrjgseç)rdjgầsergjuàeçrgd\
-        dsifijqiejsầfçjer^tàjgeprjdgầqejrdgùijeqrdgùijerp"
+          description="Ceci est un description d'un évènement qui aura lieu à la tête d'or"
         />
       </View>
       <Button
         title="Participer"
         style={styles.button}
-        textStyle={{color: secondary, opacity: 1}}
+        textStyle={{color: secondary}}
+        onPress={() => console.log('pressed')}
       />
     </View>
   );
@@ -106,8 +113,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   button: {
-    backgroundColor: secondary,
-    opacity: 0.5,
+    backgroundColor: '#ffe3ba',
     width: 150,
     height: 35,
     bottom: 20,

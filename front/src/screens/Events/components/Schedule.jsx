@@ -39,8 +39,8 @@ export default function Schedule({
       </View>
       <Location location="Parc de la tete d'Or" style={{marginTop: 10}} />
       <View style={{...layout.row, marginTop: 10}}>
-        <Icon family="EvilIcons" name="clock" color="red" size={30} />
-        <Text style={{paddingLeft: 10, flexShrink: 1, fontSize: 16}}>{description}</Text>
+        <Icon family="Feather" name="align-left" color="lightblue" size={30} />
+        <Text style={{paddingLeft: 10, flexShrink: 1, fontSize: 18, color: primary, letterSpacing: 1, lineHeight: 25}}>{description}</Text>
       </View>
     </View>
   );
