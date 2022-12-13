@@ -1,25 +1,7 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNative } from '@react-navigation/native-stack';
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Chat from '../screens/Chat';
-import Number from '../screens/Number';
-import Home from '../screens/home/Home';
-import Register from '../screens/profile/Register';
-import Profile from '../screens/profile/Profile';
-import Code from '../screens/Code';
-import AddEvent from '../screens/AddEvent';
-import EventList from '../screens/EventList';
-import EventDescription from '../screens/Events/EventDescription';
-import Gender from '../screens/Gender';
-import Interest from '../screens/Interest';
-import Login from '../screens/Login';
-import EventDayDetailsYourActivity from '../screens/EventDayDetailsYourActivity';
-import YouAreSubscribedTo from '../screens/YouAreSubscribedTo';
-
 import MyMessagesStack from './Stacks/MyMessages';
 import MeetStack from './Stacks/Meet';
 import MyFriendsStack from './Stacks/MyFriends';
