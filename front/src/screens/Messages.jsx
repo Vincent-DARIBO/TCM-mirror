@@ -136,7 +136,7 @@ const DATA = [
     }
 ];
 
-const MyMessages = ({ navigation }) => {
+const Messages = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [matchesList, setMatchesList] = useState(DATA);
     const [loading, setLoading] = useState(false);
@@ -148,7 +148,7 @@ const MyMessages = ({ navigation }) => {
 
     const render = ({ item, index }) => {
         return (
-            <View style={{ flexDirection: 'row', flex: 1, paddingBottom: 10 }}>
+            <TouchableOpacity style={{ flexDirection: 'row', flex: 1, paddingBottom: 10 }} onPress={() => navigation.navigate('Chat')} >
                 <Image style={{ height: 60, width: 60, borderRadius: 30 }} source={item.img} />
                 <View style={{ flex: 1, paddingLeft: 10, justifyContent: 'space-around' }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -161,7 +161,7 @@ const MyMessages = ({ navigation }) => {
                     </View>
                     <View style={{ backgroundColor: '#ADAFBB', height: 1 }} />
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 
@@ -201,4 +201,4 @@ const MyMessages = ({ navigation }) => {
     )
 }
 
-export default MyMessages;
+export default Messages;
