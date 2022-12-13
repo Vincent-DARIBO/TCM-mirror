@@ -1,12 +1,28 @@
-import { View, TextInput, Text, StyleSheet } from "react-native"
+import { View, TextInput, Text, StyleSheet, Animated } from "react-native"
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { primary, white, secondary } from '../constants/colors';
 import Input from "../screens/profile/components/Input";
+import { useEffect, useRef } from "react";
 
 export default function SignUpComponent() {
+  
+  const fadeAnim = useRef(new Animated.Value(200)).current
+
+  useEffect( () =>  {
+    Animated.timing(
+      fadeAnim,
+      {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: false,
+      }
+    ).start();
+  }, []);
+
   return(
-    <View style={{ width: 400, height: 400, borderRadius: 200 }}>
+    // <View style={{ width: 400, height: 400, borderRadius: 200 }}>
+    <Animated.View style={{ width: 400, height: 400, borderRadius: 200, left: fadeAnim }}>
       <View style={{ flexDirection: "column", marginLeft: 30, marginRight: 30, marginTop: 20 }}>
         <View>
           <View style={{backgroundColor: secondary, width: 40, height: 40, borderRadius: 20, position:"absolute", marginTop: 10, marginLeft: -10}}></View>
@@ -18,7 +34,8 @@ export default function SignUpComponent() {
             <Input style={{width:240, flexDirection:'row', alignItems: 'center'}} styleInput={{width: 200}} placeholder="Vérifier mot de passe" icon={<EvilIcons name="lock" size={30} style={style.icon} />}></Input>
         </View>
       </View>
-    </View>
+    </Animated.View>
+    // </View>
   )
 }
 
