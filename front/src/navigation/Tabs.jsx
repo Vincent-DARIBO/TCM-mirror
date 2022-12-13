@@ -20,11 +20,11 @@ import Login from '../screens/Login';
 import EventDayDetailsYourActivity from '../screens/EventDayDetailsYourActivity';
 import YouAreSubscribedTo from '../screens/YouAreSubscribedTo';
 
-import MyMessages from '../screens/MyMessages';
+import MyMessagesStack from './Stacks/MyMessages';
 import MeetStack from './Stacks/Meet';
 import MyFriendsStack from './Stacks/MyFriends';
 import EventsStack from './Stacks/Events';
-import MyAccountStack from './Stacks/MyAccountStack';
+import MyAccountStack from './Stacks/MyAccount';
 
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import { secondary } from '../constants/colors';
@@ -49,7 +49,7 @@ export default function TabNavigator() {
           return (<MaterialCommunityIcons name='calendar-month' size={30} style={{ paddingTop: 7 }} color={tabInfo.focused ? secondary : "#ADAFBB"} />)
         }
       }} />
-      <Tab.Screen name="MyMessages" component={MyMessages} options={{
+      <Tab.Screen name="MyMessages" component={MyMessagesStack} options={{
         tabBarIcon: (tabInfo) => {
           return (<Ionicons name='chatbubble-ellipses' size={27} style={{ paddingTop: 7 }} color={tabInfo.focused ? secondary : "#ADAFBB"} />)
         }
