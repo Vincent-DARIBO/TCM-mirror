@@ -11,6 +11,7 @@ import Profile from '../screens/profile/Profile';
 import Code from '../screens/Code';
 import AddEvent from '../screens/AddEvent';
 import EventList from '../screens/EventList';
+import EventDescription from '../screens/Events/EventDescription';
 import Gender from '../screens/Gender';
 import Interest from '../screens/Interest';
 import Login from '../screens/Login';
@@ -30,6 +31,7 @@ export default function TabNavigator() {
       <Stack.Screen name="Profile details" component={Profile} />
       <Stack.Screen name="Code" component={Code} />
       <Stack.Screen name="AddEvent" component={AddEvent} />
+      <Stack.Screen name="EventDescription" component={EventDescription} />
       <Stack.Screen name="EventList" component={EventList} />
       <Stack.Screen name="Gender" component={Gender} />
       <Stack.Screen name="Interest" component={Interest} />
