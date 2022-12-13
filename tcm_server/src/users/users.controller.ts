@@ -61,8 +61,6 @@ export class UsersController {
   async getEvents(@Param('uuid') uuid: string) {
     return await this.usersService.getEvents(uuid);
   }
-
-  @Post()
   @UsePipes(ValidationPipe)
   async createUser(@Body() createUserInput: CreateUserInput) {
     return await this.usersService.create(createUserInput);

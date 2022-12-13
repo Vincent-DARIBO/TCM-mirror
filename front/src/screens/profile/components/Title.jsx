@@ -4,7 +4,7 @@ import {Text, StyleSheet} from 'react-native';
 import { primary } from '../../../constants/colors';
 
 export default function Title({text, style = {}}) {
-  return <Text style={{...styles.title, style}}>{text}</Text>;
+  return <Text style={{...styles.title, ...style}}>{text}</Text>;
 }
 
 const styles = StyleSheet.create({
