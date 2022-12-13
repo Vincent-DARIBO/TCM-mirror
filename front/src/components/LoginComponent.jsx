@@ -1,13 +1,29 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { primary, secondary, white } from '../constants/colors';
 import Button from "./Button";
 import Input from "../screens/profile/components/Input";
+import { useEffect, useRef } from "react";
 
 export default function LoginComponent() {
+
+  const fadeAnim = useRef(new Animated.Value(-200)).current
+
+  useEffect( () =>  {
+    Animated.timing(
+      fadeAnim,
+      {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: false,
+      }
+    ).start();
+  }, []);
+
   return (
-    <View style={{ width: 400, height: 400, borderRadius: 200 }}>
+    // <View style={{ width: 400, height: 400, borderRadius: 200 }}>
+    <Animated.View style={{ width: 400, height: 400, borderRadius: 200, left: fadeAnim }}>
       <View style={{ flexDirection: "column", marginLeft: 30, marginRight: 30, marginTop: 40 }}>
         <View>
           <View style={{backgroundColor: secondary, width: 40, height: 40, borderRadius: 20, position:"absolute", marginTop: 10, marginLeft: -10}}></View>
@@ -22,7 +38,8 @@ export default function LoginComponent() {
         </TouchableOpacity>
         <Button title="Login Now" style={{width: 120, borderRadius: 30, backgroundColor: secondary}}></Button>
       </View>
-    </View>
+    </Animated.View>
+    // </View>
   )
 }
 
