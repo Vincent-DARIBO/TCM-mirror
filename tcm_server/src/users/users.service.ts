@@ -21,6 +21,7 @@ export class UsersService {
       firstName: profile.profile.firstName,
       lastName: profile.profile.lastName,
       email: profile.profile.email,
+      gender: profile.profile.gender,
       phone: profile.profile.phone,
       password: await hashPassword(profile.profile.password),
       birthDate: new Date(profile.profile.birthDate),
@@ -118,6 +119,7 @@ export class UsersService {
       firstName: user.profile.firstName,
       lastName: user.profile.lastName,
       email: user.profile.email,
+      gender: user.profile.gender,
       phone: user.profile.phone,
       birthDate: user.profile.birthDate,
       location: user.profile.location,
@@ -141,6 +143,7 @@ export class UsersService {
           uuid: friend.uuid,
           firstName: friend.profile.firstName,
           lastName: friend.profile.lastName,
+          gender: friend.profile.gender,
           hobbies: friend.hobbies,
           avatar: !friend.profile.picture
             ? null
@@ -156,6 +159,7 @@ export class UsersService {
           uuid: friend.uuid,
           firstName: friend.profile.firstName,
           lastName: friend.profile.lastName,
+          gender: friend.profile.gender,
           hobbies: friend.hobbies,
           avatar: !friend.profile.picture
             ? null
@@ -171,6 +175,7 @@ export class UsersService {
           uuid: met.uuid,
           firstName: met.profile.firstName,
           lastName: met.profile.lastName,
+          gender: met.profile.gender,
           hobbies: met.hobbies,
           avatar: !met.profile.picture
             ? null
@@ -192,6 +197,7 @@ export class UsersService {
         uuid: blocked.uuid,
         firstName: blocked.profile.firstName,
         lastName: blocked.profile.lastName,
+        gender: blocked.profile.gender,
         avatar: !blocked.profile.picture
           ? null
           : {
@@ -221,6 +227,7 @@ export class UsersService {
             uuid: event.creator.uuid,
             firstName: event.creator.profile.firstName,
             lastName: event.creator.profile.lastName,
+            gender: event.creator.profile.gender,
             hobbies: event.creator.hobbies,
             avatar: !event.creator.profile.picture
               ? null
@@ -251,6 +258,7 @@ export class UsersService {
               uuid: user.uuid,
               firstName: user.profile.firstName,
               lastName: user.profile.lastName,
+              gender: user.profile.gender,
               hobbies: user.hobbies,
               avatar: !user.profile.picture
                 ? null

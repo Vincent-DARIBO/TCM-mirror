@@ -1,5 +1,6 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
-import { IsEmail, IsPhoneNumber } from 'class-validator';
+import { IsEmail, IsEnum, IsPhoneNumber } from 'class-validator';
+import { Gender } from 'src/types';
 
 @InputType()
 export class CreateProfileInput {
@@ -12,6 +13,9 @@ export class CreateProfileInput {
   @IsEmail()
   @Field(() => String, { description: 'user email' })
   email: string;
+
+  @Field(() => Gender)
+  gender: Gender;
 
   @IsPhoneNumber('FR')
   @Field(() => String, { description: 'user phone number' })
