@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  client_mobile:
+    image: front
+    build: ./front
+    ports:
+      - "19000:19000"
+      - "5037:5037"
+    command: npm start
+    networks:
+      - client_mobile-tier
+      - server-tier
+    depends_on:
+      - server
+
+  server:
+    image: server
+    build: ./tcm_server
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: SuperSecret!23
+      DB_DATABASE: postgres
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: SuperSecret!23
+    volumes:
+      - db-data:/app/postgres:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+
+
+secrets:
+  server-certificate:
+    external: true
+
+networks:
+  server-tier: {}
+  client_web-tier: {}
+  client_mobile-tier: {}
+  db-tier: {}
