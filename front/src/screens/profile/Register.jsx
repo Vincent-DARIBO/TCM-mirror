@@ -32,7 +32,7 @@ export default function Register({navigation}) {
   const [lastName, setLastname] = React.useState('');
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
-  const {user} = useUserInfo();
+  const {user, setUser} = useUserInfo();
 
   // console.log({user});
   const pickImage = async () => {
@@ -51,26 +51,28 @@ export default function Register({navigation}) {
     }
   };
 
-  const {data, mutate, isSuccess, status, error} = useMutation(() =>
-    createUser({
-     profile: { firstName,
-      lastName,
-      email: user.email,
-      phone: user.phone,
-      password: user.password,
-      birthDate: '12/12/2002',
-      location: '2 Rue du professeur Charles Appleton',
-     },
-     hobbies: user.hobbies
-    }),
-  );
+  const {data, mutate, isSuccess, status, error, isError, isLoading} =
+    useMutation(() =>
+      createUser({
+        firstName,
+        lastName,
+        email: user.email,
+        phone: user.phone,
+        password: user.password,
+        birthDate: '12/12/2002',
+        location: '2 Rue du professeur Charles Appleton',
+      }),
+    );
   function onConfirmPress() {
+    console.log({user});
     mutate();
   }
-  if (isSuccess && !error && data) {
-    console.log({user})
-    console.log({token: data.data, status, error});
-  }
+  if (isError) console.log({error});
+  isLoading && console.log('loading...');
+  !isLoading &&
+    isSuccess &&
+    console.log({user, token: data.data.access_token}) &&
+    setUser({...user, token: data.data.access_token, isLogged: true});
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

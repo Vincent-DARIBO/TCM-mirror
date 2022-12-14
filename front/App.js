@@ -10,16 +10,24 @@ const queryClient = new QueryClient();
 
 import TabNavigator from './src/navigation/Tabs';
 import AuthStackNavigator from './src/navigation/Stacks/Auth';
+import UserInfoProvider from './src/providers/UserInfoProvider';
 export default function App() {
-  console.log('app');
+  const [user, setUser] = React.useState({isLogged: false});
+
+  React.useEffect(() => {
+    console.log({user});
+  }, [user]);
+  
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider>
-        <StatusBar backgroundColor={'#eaeaea'} barStyle={'dark-content'} />
-        <NavigationContainer>
-          <AuthStackNavigator />
-        </NavigationContainer>
-      </Provider>
-    </QueryClientProvider>
+    <UserInfoProvider setUser={setUser} user={user}>
+      <QueryClientProvider client={queryClient}>
+        <Provider>
+          <StatusBar backgroundColor={'#eaeaea'} barStyle={'dark-content'} />
+          <NavigationContainer>
+            <AuthStackNavigator />
+          </NavigationContainer>
+        </Provider>
+      </QueryClientProvider>
+    </UserInfoProvider>
   );
 }
