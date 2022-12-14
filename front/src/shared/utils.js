@@ -10,19 +10,21 @@ export const emailValidator = email => {
   if (!email || email.length <= 0) return 'Email cannot be empty.';
   if (!re.test(email)) return 'Ooops! We need a valid email address.';
 
-  return true;
+  console.log('email valid');
+  return false;
 };
 
 export const passwordValidator = password => {
   if (!password || password.length <= 0) return 'Password cannot be empty.';
-
-  return true;
+  
+  console.log('password valid');
+  return false;
 };
 
 export const nameValidator = name => {
   if (!name || name.length <= 0) return 'Name cannot be empty.';
 
-  return true;
+  return false;
 };
 
 export async function getDataFromRoute(routeName) {

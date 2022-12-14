@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Keyboard} from 'react-native';
 import {Entypo, Ionicons} from '@expo/vector-icons';
 
 import {primary, secondary, white} from '../constants/colors';
@@ -70,6 +70,7 @@ export default function LoginComponent({
             onChangeText={setPassword}
             ref={ref}
             secureTextEntry={isSecure}
+            onSubmitEditing={() => Keyboard.dismiss()}
           />
         </View>
         <TouchableOpacity style={{marginBottom: 10}}>

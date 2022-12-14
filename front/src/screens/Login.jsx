@@ -7,36 +7,52 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
-import {useMutation, useQuery} from 'react-query';
 
 import {primary, fadedOrange, secondary, white} from '../constants/colors';
 import SignUpComponent from '../components/SignUpComponent';
 import LoginComponent from '../components/LoginComponent';
-import {createUser, emailValidator, passwordValidator} from '../shared/utils';
+import {emailValidator, loginUser, passwordValidator} from '../shared/utils';
 import useUserInfo from '../providers/hooks/useUserInfo';
-export default function Login({navigation}) {
+import {useMutation} from 'react-query';
+
+export default function Login({navigation, route}) {
   const [page, setPage] = useState('Login');
   const [password, setPassword] = React.useState('');
   const [verify, setVerify] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [error, setError] = React.useState(false);
-  const {setUser , user} = useUserInfo();
+  const [email, setEmail] = React.useState('maria@gmail.com');
+  const {setUser, user} = useUserInfo();
+  const {data, isSuccess, isLoading, status, isError, error, mutate} =
+    useMutation(() => loginUser(email, password));
 
   function onSignUpPress() {
+    const emailError = emailValidator(email);
+    const passwordError = passwordValidator(password);
     if (
-      emailValidator(email) &&
-      passwordValidator(password) &&
+      !emailError &&
+      !passwordError &&
       password === verify
     ) {
-      setUser({...user,email, password })
+      setUser({...user, email, password});
       navigation.navigate('Number');
     } else
       Alert.alert('Erreur', 'email ou mot de passe invalid', [
         {text: 'OK', style: 'cancel'},
       ]);
   }
+  navigation.navigate('Number', {details : {}});
+ const { details} = route.params
 
- 
+  function onLoginPress() {
+    const emailError = emailValidator(email);
+    const passwordError = passwordValidator(password);
+    !emailError && !passwordError && mutate();
+  }
+  if (isError) {
+    console.log(JSON.stringify({error: error.status}, null, 2));
+  }
+  if (isSuccess && !isLoading) {
+    console.log(JSON.stringify({data, isSuccess, isLoading, status}, null, 2));
+  }
   return (
     <View
       style={{backgroundColor: primary, width: 100 + '%', height: 100 + '%'}}>
