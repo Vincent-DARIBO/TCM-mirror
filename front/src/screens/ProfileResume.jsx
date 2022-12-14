@@ -59,7 +59,7 @@ const ProfileResume = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <ElevatedView style={{ marginTop: "5%", width: "32%", height: 40, marginRight: "2%", borderRadius: 20, backgroundColor: "#FF9900", flexDirection: "row", alignItems: "center" }} elevation={5}>
+      <ElevatedView style={{ marginTop: "2%", marginBottom: "2%", width: "32%", height: 40, marginRight: "2%", borderRadius: 20, backgroundColor: "#FF9900", flexDirection: "row", alignItems: "center" }} elevation={5}>
         <Icon
           family={item.family}
           name={item.name}
