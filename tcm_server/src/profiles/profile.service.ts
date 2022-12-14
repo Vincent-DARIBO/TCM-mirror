@@ -82,6 +82,7 @@ export class ProfilesService {
       firstName: null,
       lastName: null,
       email: null,
+      gender: null,
       phone: null,
       password: null,
       birthDate: null,

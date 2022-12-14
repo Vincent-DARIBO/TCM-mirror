@@ -23,13 +23,18 @@ import {
 } from '../../constants/colors';
 import {layout} from '../../shared/styles';
 import Input from './components/Input';
+import useUserInfo from '../../providers/hooks/useUserInfo';
+import {useMutation} from 'react-query';
+import {createUser} from '../../shared/utils';
 
 export default function Register({navigation}) {
-  const [firstname, setFirstname] = React.useState('');
-  const [lastname, setLastname] = React.useState('');
+  const [firstName, setFirstname] = React.useState('');
+  const [lastName, setLastname] = React.useState('');
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
+  const {user} = useUserInfo();
 
+  // console.log({user});
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -45,6 +50,25 @@ export default function Register({navigation}) {
       setImage(result.assets[0].uri);
     }
   };
+
+  const {data, mutate, isSuccess, status, error} = useMutation(() =>
+    createUser({
+      firstName,
+      lastName,
+      email: user.email,
+      phone: user.phone,
+      password: user.password,
+      birthDate: '12/12/2002',
+      location: '2 Rue du professeur Charles Appleton',
+    }),
+  );
+  function onConfirmPress() {
+    mutate();
+  }
+  if (isSuccess && !error && data) {
+    console.log({token: data.data, status, error});
+  }
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <ScrollView
@@ -88,7 +112,7 @@ export default function Register({navigation}) {
         </View>
         <Input
           placeholder="Prénom"
-          value={firstname}
+          value={firstName}
           onChangeText={setFirstname}
           returnKeyType="next"
           onSubmitEditing={() => {
@@ -97,7 +121,7 @@ export default function Register({navigation}) {
         />
         <Input
           placeholder="Nom"
-          value={lastname}
+          value={lastName}
           onChangeText={setLastname}
           style={{marginTop: 10}}
           ref={surnameRef}
@@ -111,7 +135,7 @@ export default function Register({navigation}) {
         />
         <Button
           title="Confirmer"
-          onPress={() => navigation.navigate('Profile Details')}
+          onPress={() => onConfirmPress()}
           style={{marginTop: 25}}
         />
       </ScrollView>

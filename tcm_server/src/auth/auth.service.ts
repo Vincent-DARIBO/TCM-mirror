@@ -39,10 +39,9 @@ export class AuthService {
   async signUp(profile: Profile) {
     const user = await this.usersService.findByMail(profile.email);
     if (user) {
-      console.log(user);
       throw new UnauthorizedException({
-        statusCode: 1,
-        message: `User ${profile}already exists`,
+        statusCode: 401,
+        message: `User ${profile.email} already exists`,
       });
     }
     const createdUser = await this.usersService.create({

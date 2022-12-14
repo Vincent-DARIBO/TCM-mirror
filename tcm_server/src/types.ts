@@ -6,7 +6,18 @@ export enum EventType {
   EVENT = 'EVENT',
 }
 
+export enum Gender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+  OTHER = 'OTHER',
+}
+
 registerEnumType(EventType, {
   name: 'EventType',
   description: 'event types',
 });
+
+registerEnumType(Gender, {
+  name: 'Gender',
+  description: 'genders',
+})

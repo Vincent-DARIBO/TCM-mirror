@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { File } from 'src/files/entities/file.entity';
+import { Gender } from 'src/types';
 import {
   Column,
   Entity,
@@ -30,6 +31,14 @@ export class Profile {
   @Column()
   @Field(() => String, { description: 'user last name' })
   lastName: string;
+
+  @Column({
+    type: 'enum',
+    enum: Gender,
+    default: Gender.MALE,
+  })
+  @Field(() => Gender)
+  gender: Gender;
 
   @Column({ unique: true })
   @Field(() => String, { description: 'user email' })

@@ -3,7 +3,7 @@ import AddEvent from '../../screens/AddEvent';
 import EventDayDetailsYourActivity from '../../screens/EventDayDetailsYourActivity';
 import YouAreSubscribedTo from '../../screens/YouAreSubscribedTo';
 import EventList from '../../screens/EventList';
-import EventDescription from '../../screens/Events/EventDescription';
+// import EventDescription from '../../screens/Events/EventDescription';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +14,7 @@ const EventsStack = () => {
       <Stack.Screen name='EventDayDetailsYourActivity' component={EventDayDetailsYourActivity} />
       <Stack.Screen name='YouAreSubscribedTo' component={YouAreSubscribedTo} />
       <Stack.Screen name='EventList' component={EventList} />
-      <Stack.Screen name='EventDescription' component={EventDescription} />
+      {/* <Stack.Screen name='EventDescription' component={EventDescription} /> */}
     </Stack.Navigator>
   )
 }
