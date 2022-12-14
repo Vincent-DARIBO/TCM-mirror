@@ -47,6 +47,7 @@ export class AuthService {
     const createdUser = await this.usersService.create({
       profile,
     });
+    console.log({ createdUser });
     return this.login(createdUser);
   }
 }

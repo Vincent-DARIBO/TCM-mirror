@@ -47,6 +47,8 @@ export default function Login({navigation, route}) {
       ]);
     }
   }
+  isSuccess &&
+    setUser({...user, isLogged: true, token: data.data.access_token});
   React.useEffect(() => {
     if (isError) {
       const {message} = error;
