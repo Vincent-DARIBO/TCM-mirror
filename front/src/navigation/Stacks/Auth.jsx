@@ -7,6 +7,7 @@ import Register from '../../screens/profile/Register';
 import Code from '../../screens/Code';
 import Gender from '../../screens/Gender';
 import UserInfoProvider from '../../providers/UserInfoProvider';
+import Interest from '../../screens/Interest';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +21,7 @@ export default function AuthStackNavigator() {
         <Stack.Screen name="Number" component={Number} />
         <Stack.Screen name="Code" component={Code} />
         <Stack.Screen name="Gender" component={Gender} />
-        {/* <Stack.Screen name="Interest" component={Interest} /> */}
+        <Stack.Screen name="Interests" component={Interest} />
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     </UserInfoProvider>
