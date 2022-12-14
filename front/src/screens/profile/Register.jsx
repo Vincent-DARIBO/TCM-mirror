@@ -51,7 +51,7 @@ export default function Register({navigation}) {
     }
   };
 
-  const {data, mutate, isSuccess, status, error, } = useMutation(() =>
+  const {data, mutate, isSuccess, status, error} = useMutation(() =>
     createUser({
       firstName,
       lastName,
@@ -65,7 +65,7 @@ export default function Register({navigation}) {
   function onConfirmPress() {
     mutate();
   }
-  if (isSuccess && !error) {
+  if (isSuccess && !error && data) {
     console.log({token: data.data, status, error});
   }
 
