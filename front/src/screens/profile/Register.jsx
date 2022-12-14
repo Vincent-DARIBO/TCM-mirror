@@ -53,19 +53,22 @@ export default function Register({navigation}) {
 
   const {data, mutate, isSuccess, status, error} = useMutation(() =>
     createUser({
-      firstName,
+     profile: { firstName,
       lastName,
       email: user.email,
       phone: user.phone,
       password: user.password,
       birthDate: '12/12/2002',
       location: '2 Rue du professeur Charles Appleton',
+     },
+     hobbies: user.hobbies
     }),
   );
   function onConfirmPress() {
     mutate();
   }
   if (isSuccess && !error && data) {
+    console.log({user})
     console.log({token: data.data, status, error});
   }
 
