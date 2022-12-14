@@ -5768,6 +5768,11 @@
   "resolved" "https://registry.npmjs.org/react-native-elevated-view/-/react-native-elevated-view-0.0.6.tgz"
   "version" "0.0.6"
 
+"react-native-geocoder@^0.5.0":
+  "integrity" "sha512-bFCvFvlRvIw66krT6RIanZFZj1/B7Oq1cyr5L0DHpc12iCNneOenNVAxA1gDULqKIphkB1D67Ybm7NpJVakHnw=="
+  "resolved" "https://registry.npmjs.org/react-native-geocoder/-/react-native-geocoder-0.5.0.tgz"
+  "version" "0.5.0"
+
 "react-native-gesture-handler@>= 1.0.0", "react-native-gesture-handler@>=1.10.1", "react-native-gesture-handler@~2.8.0":
   "integrity" "sha512-poOSfz/w0IyD6Qwq7aaIRRfEaVTl1ecQFoyiIbpOpfNTjm2B1niY2FLrdVQIOtIOe+K9nH55Qal04nr4jGkHdQ=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.8.0.tgz"

@@ -1,17 +1,50 @@
-import {StyleSheet, View, Pressable, Text, TextInput, Icon} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Pressable,
+  Text,
+  TextInput,
+  Button,
+} from 'react-native';
 import {Calendar} from 'react-native-calendars';
-import React from 'react';
+import Geocoder from 'react-native-geocoder';
+import React, {useState} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import ElevatedView from 'react-native-elevated-view';
 import {Ionicons} from '@expo/vector-icons';
 
 export default function CreateAnEventScreen({navigation}) {
+  const [address, setAddress] = useState('');
+  const [results, setResults] = useState([]);
   const [titleEvent, setTitleEvent] = React.useState('');
   const [description, setDescription] = React.useState('');
+
   console.log(titleEvent);
   console.log(description);
   return (
     <ScrollView>
+      {/* <View style={{marginTop: 100}}>
+        <TextInput
+          style={{
+            width: 350,
+            height: 50,
+            marginTop: 30,
+            marginLeft: 40,
+            paddingLeft: 20,
+            borderColor: 'orange',
+            borderWidth: 0.5,
+            borderRadius: 10,
+          }}
+          value={address}
+          onChangeText={setAddress}
+        />
+        <Button onPress={handleSearch} title="Search" />
+        {results.map(result => (
+          <View key={result.position}>
+            <Text>{result.formattedAddress}</Text>
+          </View>
+        ))}
+      </View> */}
       <View style={{marginTop: 75, marginLeft: 40, position: 'absolute'}}>
         <Ionicons
           onPress={() => navigation.navigate('Home')}
