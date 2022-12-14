@@ -20,9 +20,10 @@ export default function AuthStackNavigator() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Number" component={Number} />
         <Stack.Screen name="Code" component={Code} />
+        <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Gender" component={Gender} />
         <Stack.Screen name="Interests" component={Interest} />
-        <Stack.Screen name="Register" component={Register} />
+        {/* mettre le screen profileResume */}
       </Stack.Navigator>
     </UserInfoProvider>
   );
