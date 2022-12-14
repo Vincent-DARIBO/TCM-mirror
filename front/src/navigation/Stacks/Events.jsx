@@ -10,10 +10,10 @@ const Stack = createNativeStackNavigator();
 const EventsStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='EventList' component={EventList} />
       <Stack.Screen name='AddEvent' component={AddEvent} />
       <Stack.Screen name='EventDayDetailsYourActivity' component={EventDayDetailsYourActivity} />
       <Stack.Screen name='YouAreSubscribedTo' component={YouAreSubscribedTo} />
-      <Stack.Screen name='EventList' component={EventList} />
       {/* <Stack.Screen name='EventDescription' component={EventDescription} /> */}
     </Stack.Navigator>
   )

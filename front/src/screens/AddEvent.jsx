@@ -13,7 +13,7 @@ import {
     SafeAreaView,
 } from 'react-native';
 
-export default function AddEvent() {
+export default function AddEvent({ navigation }) {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   const onChangeSearch = query => setSearchQuery(query);
@@ -50,7 +50,7 @@ export default function AddEvent() {
               <MaterialCommunityIcons
                 name="calendar-edit"
                 size={30}
-                onPress={() => console.log('Pressed')}
+                onPress={() => navigation.navigate('YouAreSubscribedTo')}
                 style={{opacity:0.5}}
                 />
             </View>
@@ -69,7 +69,7 @@ export default function AddEvent() {
               <MaterialCommunityIcons
                 name="calendar-edit"
                 size={30}
-                onPress={() => console.log('Pressed')}
+                onPress={() => navigation.navigate('YouAreSubscribedTo')}
                 style={{opacity:0.5}}
                 />
             </View>
@@ -88,7 +88,7 @@ export default function AddEvent() {
               <MaterialCommunityIcons
                 name="calendar-edit"
                 size={30}
-                onPress={() => console.log('Pressed')}
+                onPress={() => navigation.navigate('YouAreSubscribedTo')}
                 style={{opacity:0.5}}
                 />
             </View>
@@ -108,7 +108,7 @@ export default function AddEvent() {
               <MaterialCommunityIcons
                 name="calendar-edit"
                 size={30}
-                onPress={() => console.log('Pressed')}
+                onPress={() => navigation.navigate('YouAreSubscribedTo')}
                 style={{opacity:0.5}}
                 />
             </View>
