@@ -18,7 +18,7 @@ export default function Gender({route, navigation}) {
   const checkValid = () => {
     if (gender !== undefined) {
       setUser({...user, gender});
-      navigation.navigate('Register');
+      navigation.navigate('Interests');
     }
     return;
   };

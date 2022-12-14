@@ -8,7 +8,8 @@ export const baseUrl = process.env.API_URL;
 export const emailValidator = email => {
   const re = /\S+@\S+\.\S+/;
 
-  if (!email || email.length <= 0) return 'Vous devez remplir le champs mot de passe';
+  if (!email || email.length <= 0)
+    return 'Vous devez remplir le champs mot de passe';
   if (!re.test(email)) return "Ooops! Votre addresse mail n'est pas valid";
 
   console.log('email valid');
@@ -17,7 +18,7 @@ export const emailValidator = email => {
 
 export const passwordValidator = password => {
   if (!password || password.length <= 0) return 'Password cannot be empty.';
-  
+
   console.log('password valid');
   return '';
 };
@@ -39,14 +40,9 @@ export async function getDataFromRoute(routeName) {
 }
 
 export async function createUser(userInfo) {
-  try {
-    const response = await axios.post(baseUrl + '/auth/signUp', {
-      profile: userInfo,
-    });
-    return response;
-  } catch (e) {
-    console.log(e);
-  }
+  return axios.post(baseUrl + '/auth/signUp', {
+    profile: userInfo,
+  });
 }
 
 export async function loginUser(email, password) {
