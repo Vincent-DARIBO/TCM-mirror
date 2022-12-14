@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateFileInput } from 'src/files/dto/create-file.input';
 import { FilesService } from 'src/files/files.service';
+import { Hobby } from 'src/hobbies/entities/hobby.entity';
 import { Repository } from 'typeorm';
 import { CreateProfileInput } from './dto/create-profile.input';
 import { UpdateProfileInput } from './dto/update-profile.input';

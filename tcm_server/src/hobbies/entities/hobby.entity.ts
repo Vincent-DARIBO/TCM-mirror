@@ -8,7 +8,7 @@ export class Hobby {
   @Field(() => Int, { description: 'hobby id' })
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   @Field(() => String, { description: 'hobby name' })
   name: string;
 }
