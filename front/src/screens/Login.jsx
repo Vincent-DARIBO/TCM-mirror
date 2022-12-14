@@ -27,11 +27,7 @@ export default function Login({navigation, route}) {
   function onSignUpPress() {
     const emailError = emailValidator(email);
     const passwordError = passwordValidator(password);
-    if (
-      !emailError &&
-      !passwordError &&
-      password === verify
-    ) {
+    if (!emailError && !passwordError && password === verify) {
       setUser({...user, email, password});
       navigation.navigate('Number');
     } else
@@ -39,20 +35,38 @@ export default function Login({navigation, route}) {
         {text: 'OK', style: 'cancel'},
       ]);
   }
-//   navigation.navigate('Number', {details : {}});
-//  const { details} = route.params
 
   function onLoginPress() {
     const emailError = emailValidator(email);
     const passwordError = passwordValidator(password);
-    !emailError && !passwordError && mutate();
+
+    if (!emailError && !passwordError) mutate();
+    else {
+      Alert.alert('Erreur', emailError + '\n' + passwordError, [
+        {text: 'OK', style: 'cancel'},
+      ]);
+    }
   }
-  if (isError) {
-    console.log(JSON.stringify({error: error.status}, null, 2));
-  }
-  if (isSuccess && !isLoading) {
-    console.log(JSON.stringify({data, isSuccess, isLoading, status}, null, 2));
-  }
+  React.useEffect(() => {
+    if (isError) {
+      const {message} = error;
+      console.log(message);
+      message.includes('401') &&
+        Alert.alert('Erreur', 'Mot de passe invalid', [
+          {text: 'OK', style: 'cancel'},
+        ]);
+      message.includes('404') &&
+        Alert.alert(
+          'Oups',
+          "Il semble que vous n'ayez pas de compte chez nous",
+          [
+            {text: 'OK', style: 'cancel'},
+            {text: 'Créer un compte', onPress: () => setPage('signUp')},
+          ],
+        );
+    }
+  }, [error]);
+  !isLoading && isSuccess && console.log(data.data.access_token);
   return (
     <View
       style={{backgroundColor: primary, width: 100 + '%', height: 100 + '%'}}>

@@ -2,29 +2,30 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 
 // export const baseUrl = 'http://localhost:3000/';
+
 export const baseUrl = process.env.API_URL;
 
 export const emailValidator = email => {
   const re = /\S+@\S+\.\S+/;
 
-  if (!email || email.length <= 0) return 'Email cannot be empty.';
-  if (!re.test(email)) return 'Ooops! We need a valid email address.';
+  if (!email || email.length <= 0) return 'Vous devez remplir le champs mot de passe';
+  if (!re.test(email)) return "Ooops! Votre addresse mail n'est pas valid";
 
   console.log('email valid');
-  return false;
+  return '';
 };
 
 export const passwordValidator = password => {
   if (!password || password.length <= 0) return 'Password cannot be empty.';
   
   console.log('password valid');
-  return false;
+  return '';
 };
 
 export const nameValidator = name => {
   if (!name || name.length <= 0) return 'Name cannot be empty.';
 
-  return false;
+  return '';
 };
 
 export async function getDataFromRoute(routeName) {
