@@ -69,10 +69,12 @@ export default function Register({navigation}) {
   }
   if (isError) console.log({error});
   isLoading && console.log('loading...');
-  !isLoading &&
-    isSuccess &&
-    console.log({user, token: data.data.access_token}) &&
-    setUser({...user, token: data.data.access_token, isLogged: true});
+  isSuccess &&
+  setUser({...user, isLogged: true, token: data.data.access_token});
+  // !isLoading &&
+  //   isSuccess &&
+  //   console.log({user, token: data.data.access_token}) &&
+  //   setUser({...user, token: data.data.access_token, isLogged: true});
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
