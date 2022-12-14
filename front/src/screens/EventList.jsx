@@ -15,7 +15,7 @@ import { FAB } from 'react-native-paper';
 import {AntDesign} from '@expo/vector-icons';
 import ElevatedView from 'react-native-elevated-view'
 
-export default function EventList() {
+export default function EventList({navigation}) {
     return (
         <SafeAreaView style={styles.safeareaview}>
             <ScrollView style={{backgroundColor:'white'}}>
@@ -27,7 +27,7 @@ export default function EventList() {
                             <AntDesign 
                             name="pluscircleo"
                             size={25}
-                            onPress={() => console.log('Pressed')}
+                            onPress={() => navigation.navigate('EventDayDetailsYourActivity')}
                             color="orange"
                             />
                         </View>
@@ -36,6 +36,7 @@ export default function EventList() {
                 <View style={styles.calendar}>
                     <ElevatedView elevation={4}  style={{margin: 20, width: 330, height: 350}}>
                         <Calendar theme={theme.theme} 
+                        onDayPress= {() => navigation.navigate('AddEvent')}
                         />
                     </ElevatedView>
                 </View>
