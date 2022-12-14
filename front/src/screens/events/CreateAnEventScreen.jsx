@@ -4,9 +4,12 @@ import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import ElevatedView from 'react-native-elevated-view';
 import {Ionicons} from '@expo/vector-icons';
-import AnEventHasBeenScreen from './AnEventHasBeenScreen';
 
 export default function CreateAnEventScreen({navigation}) {
+  const [titleEvent, setTitleEvent] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  console.log(titleEvent);
+  console.log(description);
   return (
     <ScrollView>
       <View style={{marginTop: 75, marginLeft: 40, position: 'absolute'}}>
@@ -62,10 +65,14 @@ export default function CreateAnEventScreen({navigation}) {
         <TextInput placeholder="Adresse" style={[styles.inputAdresse]} />
         <TextInput
           placeholder="Titre de l'évènement"
+          value={titleEvent}
+          onChangeText={setTitleEvent}
           style={[styles.inputTitre]}
         />
         <TextInput
           placeholder="Description"
+          value={description}
+          onChangeText={setDescription}
           style={[styles.inputDescription]}
         />
       </ElevatedView>

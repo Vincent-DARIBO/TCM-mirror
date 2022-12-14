@@ -26,7 +26,7 @@ export default function AnEventHasBeenScreen() {
             <View>
               <Text style={styles.text}>Génial Liza ! L'évènement:</Text>
             </View>
-            <Text style={styles.subtext}>Pique nique avec Marie</Text>
+            <Text style={styles.subtext}>Pique-nique avec Marie</Text>
           </View>
           <View>
             <Text style={styles.text}>à été créer.</Text>
