@@ -4,6 +4,7 @@ import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import ElevatedView from 'react-native-elevated-view';
 import {Ionicons} from '@expo/vector-icons';
+import AnEventHasBeenScreen from './AnEventHasBeenScreen';
 
 export default function CreateAnEventScreen({navigation}) {
   return (
@@ -68,7 +69,9 @@ export default function CreateAnEventScreen({navigation}) {
           style={[styles.inputDescription]}
         />
       </ElevatedView>
-      <Pressable style={styles.button}>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate('AnEventHasBeenScreen')}>
         <Text style={styles.text}>Valider</Text>
       </Pressable>
     </ScrollView>
