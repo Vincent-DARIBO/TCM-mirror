@@ -28,12 +28,13 @@ import { useMutation, useQuery } from 'react-query';
 import { baseUrl, createUser } from '../../shared/utils';
 import axios from 'axios';
 
-export default function Register({ navigation }) {
+export default function Register({ navigation, route }) {
   const [firstName, setFirstname] = React.useState('');
   const [lastName, setLastname] = React.useState('');
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
   const { user, setUser } = useUserInfo();
+  const { hobbies } = route.params;
 
   // console.log({user});
   const pickImage = async () => {
@@ -67,13 +68,15 @@ export default function Register({ navigation }) {
 
 
   function onConfirmPress() {
-    console.log({ user });
+    //console.log({ user });
     mutate();
     setUser({
       ...user, token: data ? data.data.access_token : '', firstName,
       lastName,
     });
-    navigation.navigate("Interests")
+    console.log("Register : ")
+    console.log(hobbies)
+    navigation.navigate("ProfileResume", { hobbies: hobbies })
 
   }
   if (isError) console.log({ error });
