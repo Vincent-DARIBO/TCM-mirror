@@ -1,11 +1,11 @@
 import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from '../../screens/Login';
-import Number from '../../screens/Number';
+import Login from '../../screens/Auth/Login';
+import Number from '../../screens/Auth/Number';
 import Register from '../../screens/profile/Register';
-import Code from '../../screens/Code';
-import Gender from '../../screens/Gender';
+import Code from '../../screens/Auth/Code';
+import Gender from '../../screens/Auth/Gender';
 import Interest from '../../screens/Interest';
 import useUserInfo from '../../providers/hooks/useUserInfo';
 import TabNavigator from '../Tabs';

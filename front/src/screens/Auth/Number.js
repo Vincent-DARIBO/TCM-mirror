@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Text, TouchableOpacity, View} from 'react-native';
 import PhoneInput, {isValidNumber} from 'react-native-phone-number-input';
 import {useState, useRef} from 'react';
-import useUserInfo from '../providers/hooks/useUserInfo';
+import useUserInfo from '../../providers/hooks/useUserInfo';
 
 export default function Number({navigation, route}) {
   const {user, setUser} = useUserInfo();

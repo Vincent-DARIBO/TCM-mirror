@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-native-paper';
 import {StatusBar} from 'react-native';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
+import Clipboard from '@react-native-community/clipboard'; 
 
 const queryClient = new QueryClient();
 

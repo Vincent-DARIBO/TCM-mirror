@@ -4,14 +4,18 @@ import {
   StyleSheet,
   Button,
   Text,
-  Clipboard,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
-import useUserInfo from '../providers/hooks/useUserInfo';
+import useUserInfo from '../../providers/hooks/useUserInfo';
+import Clipboard from '@react-native-community/clipboard';
+import Input from '../profile/components/Input';
+
+const isIOS = Platform.OS === 'ios';
 
 const Code = ({route, navigation}) => {
-  const {user} = useUserInfo()
+  const {user} = useUserInfo();
   const checkVerification = code => {
     console.log('code ' + code);
     if (code === '0000') navigation.navigate('Gender');
@@ -39,17 +43,31 @@ const Code = ({route, navigation}) => {
           Modifier le numéro de téléphone
         </Text>
       </TouchableOpacity>
-      <OTPInputView
-        style={{width: '80%', height: 200}}
-        pinCount={4}
-        editable={true}
-        autoFocusOnLoad
-        codeInputFieldStyle={styles.underlineStyleBase}
-        codeInputHighlightStyle={styles.underlineStyleHighLighted}
-        onCodeFilled={code => {
-          checkVerification(code);
-        }}
-      />
+      {isIOS ? (
+        <OTPInputView
+          style={{width: '80%', height: 200}}
+          pinCount={4}
+          editable={true}
+          autoFocusOnLoad
+          codeInputFieldStyle={styles.underlineStyleBase}
+          codeInputHighlightStyle={styles.underlineStyleHighLighted}
+          onCodeFilled={code => {
+            checkVerification(code);
+          }}
+        />
+      ) : (
+        <Input
+          maxLength={4}
+          placeholder="Enter yout code"
+          value={myCode}
+          onChangeText={setCode}
+          style={{marginTop: 10}}
+          onSubmitEditing={() => {
+            checkVerification(myCode);
+          }}
+        />
+      )}
+
       {invalidCode && <Text style={styles.error}>Incorrect code.</Text>}
       <Text
         style={{

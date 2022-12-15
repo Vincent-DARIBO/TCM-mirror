@@ -1,7 +1,7 @@
 import {View, Text, Button, TouchableOpacity, StyleSheet} from 'react-native';
 import {useState} from 'react';
 import React from 'react';
-import useUserInfo from '../providers/hooks/useUserInfo';
+import useUserInfo from '../../providers/hooks/useUserInfo';
 
 const styles = StyleSheet.create({
   linearGradient: {

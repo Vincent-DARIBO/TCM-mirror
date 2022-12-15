@@ -8,12 +8,16 @@ import {
   Alert,
 } from 'react-native';
 
-import {primary, fadedOrange, secondary, white} from '../constants/colors';
-import SignUpComponent from '../components/SignUpComponent';
-import LoginComponent from '../components/LoginComponent';
-import {emailValidator, loginUser, passwordValidator} from '../shared/utils';
-import useUserInfo from '../providers/hooks/useUserInfo';
+import {primary, fadedOrange, secondary, white} from '../../constants/colors';
+import SignUpComponent from '../../components/SignUpComponent';
+import LoginComponent from '../../components/LoginComponent';
+import {emailValidator, loginUser, passwordValidator} from '../../shared/utils';
+import useUserInfo from '../../providers/hooks/useUserInfo';
 import {useMutation} from 'react-query';
+import {LogBox} from 'react-native';
+
+// Ignore log notification by message
+LogBox.ignoreLogs(['AxiosError: Request failed with status code 404']);
 
 export default function Login({navigation, route}) {
   const [page, setPage] = useState('Login');
@@ -199,10 +203,10 @@ export default function Login({navigation, route}) {
           }}>
           <Text style={style.bold}>Also login with</Text>
           <Image
-            source={require('../assets/logoFacebook.png')}
+            source={require('../../assets/logoFacebook.png')}
             style={style.image}></Image>
           <Image
-            source={require('../assets/logoGoogle.png')}
+            source={require('../../assets/logoGoogle.png')}
             style={style.image}></Image>
         </View>
       </View>
