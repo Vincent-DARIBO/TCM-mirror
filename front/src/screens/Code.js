@@ -4,14 +4,13 @@ import {
   StyleSheet,
   Button,
   Text,
-  Clipboard,
   TouchableOpacity,
 } from 'react-native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import useUserInfo from '../providers/hooks/useUserInfo';
 
 const Code = ({route, navigation}) => {
-  const {user} = useUserInfo()
+  const {user} = useUserInfo();
   const checkVerification = code => {
     console.log('code ' + code);
     if (code === '0000') navigation.navigate('Gender');
