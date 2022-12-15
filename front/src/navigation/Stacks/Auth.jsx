@@ -8,13 +8,13 @@ import Code from '../../screens/Code';
 import Gender from '../../screens/Gender';
 import Interest from '../../screens/Interest';
 import useUserInfo from '../../providers/hooks/useUserInfo';
-import TabNavigator from '../Tabs'
+import TabNavigator from '../Tabs';
 const Stack = createNativeStackNavigator();
 
 export default function AuthStackNavigator() {
-  const {user} = useUserInfo()
+  const {user} = useUserInfo();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       {user.isLogged || user.token ? (
         <Stack.Screen name="Tabs" component={TabNavigator} />
       ) : (

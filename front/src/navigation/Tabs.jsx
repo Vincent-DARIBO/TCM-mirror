@@ -6,7 +6,7 @@ import MyMessagesStack from './Stacks/MyMessages';
 import MeetStack from './Stacks/Meet';
 import MyFriendsStack from './Stacks/MyFriends';
 import EventsStack from './Stacks/Events';
-import MyAccountStack from './Stacks/MyAccount';
+import MyAccountStack from './Stacks/MyAccountStack';
 
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import { secondary } from '../constants/colors';
