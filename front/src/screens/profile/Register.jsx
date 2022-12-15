@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Keyboard,
   View,
@@ -34,6 +34,11 @@ export default function Register({ navigation, route }) {
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
   const { user, setUser } = useUserInfo();
+  const refMonth = React.useRef(null);
+  const refYear = React.useRef(null);
+  const [day, setDay] = React.useState(null);
+  const [month, setMonth] = React.useState(null);
+  const [year, setYear] = React.useState(null);
   const { hobbies } = route.params;
 
   // console.log({user});
@@ -145,13 +150,18 @@ export default function Register({ navigation, route }) {
           style={{ marginTop: 10 }}
           ref={surnameRef}
         />
-        <Button
-          style={{ ...styles.dateButton }}
+        {/* <Button
+          style={{...styles.dateButton}}
           onPress={() => console.log('pressed calendar')}
           icon={<EvilIcons name="calendar" size={35} color={secondary} />}
           title="Choisir une date"
-          textStyle={{ color: secondary }}
-        />
+          textStyle={{color: secondary}}
+        /> */}
+        <View style={{ flexDirection: 'row', width: 295 }}>
+          <Input style={{ flex: 3, marginTop: 10, backgroundColor: white, width: 75, borderRadius: 15, ...layout.center }} styleInput={{ width: 75, paddingLeft: 0 }} maxLength={2} textAlign={"center"} placeholder="JJ" onChangeText={(day) => { setDay(day); if (day.length === 2) refMonth.current.focus() }}></Input>
+          <Input style={{ flex: 3, marginTop: 10, backgroundColor: white, width: 75, borderRadius: 15, ...layout.center }} styleInput={{ width: 75, paddingLeft: 0 }} maxLength={2} textAlign={"center"} placeholder="MM" ref={refMonth} onChangeText={(month) => { setDay(month); if (month.length === 2) refYear.current.focus() }}></Input>
+          <Input style={{ flex: 3, marginTop: 10, backgroundColor: white, width: 100, borderRadius: 15, ...layout.center }} styleInput={{ width: 100, paddingLeft: 0 }} maxLength={4} textAlign={"center"} placeholder="YYYY" ref={refYear} ></Input>
+        </View>
         <Button
           title="Confirmer"
           onPress={() => onConfirmPress()}
