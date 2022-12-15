@@ -39,9 +39,13 @@ const Code = ({route, navigation}) => {
       <TouchableOpacity
         onPress={() => navigation.replace('Number')}
         style={{marginTop: '5%'}}>
-        <Text style={{fontStyle: 'italic', color: '#084887'}}>
-          Modifier le numéro de téléphone
-        </Text>
+        {invalidCode ? (
+          <Text style={styles.error}>Incorrect code.</Text>
+        ) : (
+          <Text style={{fontStyle: 'italic', color: '#084887'}}>
+            Modifier le numéro de téléphone
+          </Text>
+        )}
       </TouchableOpacity>
       {isIOS ? (
         <OTPInputView
@@ -65,10 +69,10 @@ const Code = ({route, navigation}) => {
           onSubmitEditing={() => {
             checkVerification(myCode);
           }}
+          keyboardType="number-pad"
         />
       )}
 
-      {invalidCode && <Text style={styles.error}>Incorrect code.</Text>}
       <Text
         style={{
           color: '#FF9900',
@@ -131,7 +135,7 @@ const styles = StyleSheet.create({
 
   error: {
     color: 'red',
-    marginTop: '-10%',
+    // marginTop: '-10%',
   },
 });
 

@@ -17,8 +17,8 @@ export default function Home({navigation}) {
   return (
     <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
       <Button
-        title="HomeScreen"
-        onPress={() => navigation.navigate('HomeScreen')}
+        title="Code"
+        onPress={() => navigation.navigate('Code')}
       />
       {
         <Button
