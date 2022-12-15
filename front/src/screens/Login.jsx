@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,33 +6,35 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Platform,
 } from 'react-native';
 
-import {primary, fadedOrange, secondary, white} from '../constants/colors';
+import { primary, fadedOrange, secondary, white } from '../constants/colors';
 import SignUpComponent from '../components/SignUpComponent';
 import LoginComponent from '../components/LoginComponent';
-import {emailValidator, loginUser, passwordValidator} from '../shared/utils';
+import { emailValidator, loginUser, passwordValidator } from '../shared/utils';
 import useUserInfo from '../providers/hooks/useUserInfo';
-import {useMutation} from 'react-query';
+import { useMutation } from 'react-query';
+import AppleAuth from './appleAuth';
 
-export default function Login({navigation, route}) {
+export default function Login({ navigation, route }) {
   const [page, setPage] = useState('Login');
   const [password, setPassword] = React.useState('');
   const [verify, setVerify] = React.useState('');
   const [email, setEmail] = React.useState('maria@gmail.com');
-  const {setUser, user} = useUserInfo();
-  const {data, isSuccess, isLoading, status, isError, error, mutate} =
+  const { setUser, user } = useUserInfo();
+  const { data, isSuccess, isLoading, status, isError, error, mutate } =
     useMutation(() => loginUser(email, password));
 
   function onSignUpPress() {
     const emailError = emailValidator(email);
     const passwordError = passwordValidator(password);
     if (!emailError && !passwordError && password === verify) {
-      setUser({...user, email, password});
+      setUser({ ...user, email, password });
       navigation.navigate('Number');
     } else
       Alert.alert('Erreur', 'email ou mot de passe invalid', [
-        {text: 'OK', style: 'cancel'},
+        { text: 'OK', style: 'cancel' },
       ]);
   }
 
@@ -43,27 +45,27 @@ export default function Login({navigation, route}) {
     if (!emailError && !passwordError) mutate();
     else {
       Alert.alert('Erreur', emailError + '\n' + passwordError, [
-        {text: 'OK', style: 'cancel'},
+        { text: 'OK', style: 'cancel' },
       ]);
     }
   }
   isSuccess &&
-    setUser({...user, isLogged: true, token: data.data.access_token});
+    setUser({ ...user, isLogged: true, token: data.data.access_token });
   React.useEffect(() => {
     if (isError) {
-      const {message} = error;
+      const { message } = error;
       console.log(message);
       message.includes('401') &&
         Alert.alert('Erreur', 'Mot de passe invalid', [
-          {text: 'OK', style: 'cancel'},
+          { text: 'OK', style: 'cancel' },
         ]);
       message.includes('404') &&
         Alert.alert(
           'Oups',
           "Il semble que vous n'ayez pas de compte chez nous",
           [
-            {text: 'OK', style: 'cancel'},
-            {text: 'Créer un compte', onPress: () => setPage('signUp')},
+            { text: 'OK', style: 'cancel' },
+            { text: 'Créer un compte', onPress: () => setPage('signUp') },
           ],
         );
     }
@@ -71,8 +73,8 @@ export default function Login({navigation, route}) {
   !isLoading && isSuccess && console.log(data.data.access_token);
   return (
     <View
-      style={{backgroundColor: primary, width: 100 + '%', height: 100 + '%'}}>
-      <View style={{marginLeft: 30, marginRight: 30, marginTop: 20}}>
+      style={{ backgroundColor: primary, width: 100 + '%', height: 100 + '%' }}>
+      <View style={{ marginLeft: 30, marginRight: 30, marginTop: 20 }}>
         <Text
           style={{
             color: fadedOrange,
@@ -81,10 +83,10 @@ export default function Login({navigation, route}) {
             fontWeight: '600',
           }}>
           Bienvenue sur,
-          <Text style={{color: secondary}}> Tous Chez Marcel</Text>
+          <Text style={{ color: secondary }}> Tous Chez Marcel</Text>
         </Text>
 
-        <View style={{justifyContent: 'center'}}>
+        <View style={{ justifyContent: 'center' }}>
           <View
             style={{
               flexDirection: 'row',
@@ -92,11 +94,11 @@ export default function Login({navigation, route}) {
               marginTop: 20,
             }}>
             <TouchableOpacity
-              style={{color: white, marginRight: 30}}
+              style={{ color: white, marginRight: 30 }}
               onPress={() => {
                 setPage('Login');
               }}>
-              <View style={{flexDirection: 'column', alignItems: 'center'}}>
+              <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <Text
                   style={{
                     color: white,
@@ -118,11 +120,11 @@ export default function Login({navigation, route}) {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              style={{color: white}}
+              style={{ color: white }}
               onPress={() => {
                 setPage('SignUp');
               }}>
-              <View style={{flexDirection: 'column', alignItems: 'center'}}>
+              <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <Text
                   style={{
                     color: white,
@@ -148,7 +150,7 @@ export default function Login({navigation, route}) {
         </View>
       </View>
 
-      <View style={{marginTop: 30}}>
+      <View style={{ marginTop: 30 }}>
         <View
           style={{
             backgroundColor: white,
@@ -204,6 +206,7 @@ export default function Login({navigation, route}) {
           <Image
             source={require('../assets/logoGoogle.png')}
             style={style.image}></Image>
+          {Platform.OS === "ios" ? <AppleAuth /> : null}
         </View>
       </View>
     </View>

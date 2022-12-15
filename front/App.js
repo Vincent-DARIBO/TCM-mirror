@@ -17,16 +17,13 @@ export default function App() {
   React.useEffect(() => {
     console.log({user});
   }, [user]);
-  
+
   return (
     <UserInfoProvider setUser={setUser} user={user}>
       <QueryClientProvider client={queryClient}>
         <Provider>
           <StatusBar backgroundColor={'#eaeaea'} barStyle={'dark-content'} />
-          <NavigationContainer>
-            {/* <AuthStackNavigator /> */}
-            <TabNavigator/>
-          </NavigationContainer>
+          <NavigationContainer>{<AuthStackNavigator />}</NavigationContainer>
         </Provider>
       </QueryClientProvider>
     </UserInfoProvider>
