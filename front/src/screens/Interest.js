@@ -1,12 +1,10 @@
 import {
   View,
   Text,
-  Button,
   TouchableOpacity,
-  StyleSheet,
   FlatList,
 } from 'react-native';
-import {useState} from 'react';
+import { useState } from 'react';
 import Icon from '../components/Icon';
 import useUserInfo from '../providers/hooks/useUserInfo';
 
@@ -61,9 +59,9 @@ const DATA = [
   },
 ];
 
-export default function Interest({navigation}) {
+export default function Interest({ navigation }) {
   const [interests, setInterests] = useState([]);
-  const {user, setUser} = useUserInfo();
+  const { user, setUser } = useUserInfo();
   const checkIsSelected = name => {
     const found = interests.find(element => element === name);
 
@@ -74,10 +72,10 @@ export default function Interest({navigation}) {
   };
 
   function onConfirmPress() {
-    setUser({...user, hobbies: interests});
+    setUser({ ...user, hobbies: interests });
     navigation.navigate('Register');
   }
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <View
         style={{
@@ -125,8 +123,8 @@ export default function Interest({navigation}) {
     );
   };
   return (
-    <View style={{backgroundColor: 'white'}}>
-      <View style={{marginLeft: '10%', marginRight: '10%'}}>
+    <View style={{ backgroundColor: 'white', width: 100 + '%', height: 100 + '%' }}>
+      <View style={{ marginLeft: '10%', marginRight: '10%' }}>
         <Text
           style={{
             fontSize: 35,
@@ -137,7 +135,7 @@ export default function Interest({navigation}) {
           }}>
           Centre d'intérêts
         </Text>
-        <Text style={{marginTop: '3%', color: '#0754A0', fontWeight: '800'}}>
+        <Text style={{ marginTop: '3%', color: '#0754A0', fontWeight: '800' }}>
           Sélectionne plusieurs centre d'intérêts
         </Text>
 
@@ -149,21 +147,20 @@ export default function Interest({navigation}) {
             keyExtractor={item => item.id}
           />
         </View>
-        <TouchableOpacity onPress={() => onConfirmPress()}>
-          <View
-            style={{
-              borderWidth: 1,
-              backgroundColor: '#084887',
-              borderRadius: 20,
-              height: '25%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: '40%',
-            }}>
-            <Text style={{fontSize: 18, color: 'white', fontWeight: 'bold'}}>
-              CONTINUER
-            </Text>
-          </View>
+
+        <TouchableOpacity onPress={() => onConfirmPress()}
+          style={{
+            borderWidth: 1,
+            backgroundColor: '#084887',
+            borderRadius: 20,
+            height: '15%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '40%',
+          }}>
+          <Text style={{ fontSize: 18, color: 'white', fontWeight: 'bold' }}>
+            CONTINUER
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

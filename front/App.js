@@ -26,6 +26,7 @@ export default function App() {
           <StatusBar backgroundColor={'#eaeaea'} barStyle={'dark-content'} />
           <NavigationContainer>
             <AuthStackNavigator />
+            {/* <TabNavigator/> */}
           </NavigationContainer>
         </Provider>
       </QueryClientProvider>
