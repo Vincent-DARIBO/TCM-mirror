@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 export default function AuthStackNavigator() {
   const {user} = useUserInfo()
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       {user.isLogged ? (
         <Stack.Screen name="Tabs" component={TabNavigator} />
       ) : (
