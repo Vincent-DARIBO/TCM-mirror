@@ -13,7 +13,7 @@ export default function Button({
   const _style= useCallback( ({pressed}) => ([styles.text, {marginLeft: icon ? 15 : null, opacity: pressed ? 0.5: 1,  ...styles.center,
     ...style,
     justifyContent: icon ? null : 'center',
-  }]), [])
+  }]), [style])
   return (
     <Pressable
       onPress={onPress}

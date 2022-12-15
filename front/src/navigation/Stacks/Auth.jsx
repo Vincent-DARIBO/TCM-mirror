@@ -15,7 +15,7 @@ export default function AuthStackNavigator() {
   const {user} = useUserInfo()
   return (
     <Stack.Navigator>
-      {user.isLogged ? (
+      {user.isLogged || user.token ? (
         <Stack.Screen name="Tabs" component={TabNavigator} />
       ) : (
         <>

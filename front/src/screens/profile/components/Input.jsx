@@ -2,18 +2,12 @@ import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import ElevatedView from 'react-native-elevated-view';
 
-function Input({
-  placeholder,
-  label,
-  value,
-  onChangeText,
-  style,
-  icon,
-  styleInput,
-  ...props
-}, ref) {
+function Input(
+  {placeholder, label, value, onChangeText, style, icon, styleInput, ...props},
+  ref,
+) {
   return (
-    <ElevatedView elevation={2} style={[styles.radius, style]}>
+    <ElevatedView elevation={2} style={{...styles.radius, ...style}}>
       <TextInput
         placeholder={placeholder}
         value={value}
@@ -26,7 +20,8 @@ function Input({
     </ElevatedView>
   );
 }
-export default React.forwardRef(Input)
+export default React.forwardRef(Input);
+
 const styles = StyleSheet.create({
   input: {
     width: 295,
