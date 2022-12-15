@@ -10,8 +10,6 @@ import MyAccountStack from './Stacks/MyAccountStack';
 
 import {MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
 import {secondary} from '../constants/colors';
-import CreateEvent from '../screens/Events/CreateEvent';
-import Code from '../screens/Auth/Code';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +22,7 @@ export default function TabNavigator() {
         tabBarLabel: '',
         tabBarHideOnKeyboard: true,
       }}>
-      {/* <Tab.Screen
+      <Tab.Screen
         name="MeetStack"
         component={MeetStack}
         options={{
@@ -39,23 +37,8 @@ export default function TabNavigator() {
             );
           },
         }}
-      /> */}
-      <Tab.Screen
-        name="MeetStack"
-        component={Code}
-        options={{
-          tabBarIcon: tabInfo => {
-            return (
-              <MaterialCommunityIcons
-                name="cards"
-                size={30}
-                style={{paddingTop: 7}}
-                color={tabInfo.focused ? secondary : '#ADAFBB'}
-              />
-            );
-          },
-        }}
       />
+   
       <Tab.Screen
         name="MyFriendsStack"
         component={MyFriendsStack}
