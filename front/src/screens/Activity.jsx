@@ -1,4 +1,5 @@
 import { View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
+import { useState, useEffect } from 'react';
 import { Searchbar } from 'react-native-paper';
 import ScreenHeader from '../shared/components/ScreenHeader';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
@@ -97,15 +98,15 @@ const Activity = ({ navigation }) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setFriendsList(DATAF.filter(item => item.name.includes(searchQuery)))
-        setForYouList(DATAR.filter(item => item.name.includes(searchQuery)))
-        setRecently(DATAR.filter(item => item.name.includes(searchQuery)))
+        setFriendsList(DATAF.filter(item => item.title.includes(searchQuery)))
+        setForYouList(DATAR.filter(item => item.title.includes(searchQuery)))
+        setRecently(DATAR.filter(item => item.title.includes(searchQuery)))
         setLoading(false)
     }, [searchQuery])
 
     const render = ({ item, index }) => {
         return (
-            <TouchableOpacity style={{ flexDirection: 'row', flex: 1 / 2, paddingBottom: 5, backgroundColor: '#ADAFBB', borderRadius: 5 }} onPress={() => { }} >
+            <TouchableOpacity style={{ flexDirection: 'row', flex: 1 / 2, padding: 5, backgroundColor: '#ADAFBB', borderRadius: 5 }} onPress={() => { }} >
                 <Icon family={item.iconFamily} name={item.icon} style={{ color: secondary }} />
                 <Text>{item.activity}</Text>
             </TouchableOpacity>
@@ -114,8 +115,8 @@ const Activity = ({ navigation }) => {
 
     const renderActivities = ({ item, index }) => {
         return (
-            <TouchableOpacity style={{ flexDirection: 'column', flex: 1, paddingBottom: 10 }} onPress={() => navigation.navigate('Chat')} >
-                <Image style={{ height: 60, width: 60, borderRadius: 30 }} source={item.img} />
+            <TouchableOpacity style={{ flexDirection: 'column', flex: 1, paddingVertical: 10 }} onPress={() => navigation.navigate('Chat')} >
+                <Image style={{ height: 60, width: 60 }} source={item.img} />
                 <Text>Text</Text>
             </TouchableOpacity>
         )
@@ -147,17 +148,16 @@ const Activity = ({ navigation }) => {
                     renderItem={render}
                     keyExtractor={item => item.id}
                     ListEmptyComponent={emptyList}
-                    numColumns={2}
-                    horizontal={true}
+                    numColumns={DATAA.length / 2}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    ItemSeparatorComponent={<View style={{ height: 10 }} />}
+                    ItemSeparatorComponent={<View style={{ width: 10, height: 10 }} />}
                 />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
-                    <Text style={{ color: secondary }} >Créer une activité</Text>
+                    <Text style={{ color: secondary, fontWeight: 'bold', fontSize: 17  }} >Créer une activité</Text>
                     <Icon family={'AntDesign'} name={'pluscircleo'} style={{ color: secondary }} onPress={() => { }} />
                 </View>
-                <Text style={{ paddingBottom: 5, color: primary }}>Vos amis ({ })</Text>
+                <Text style={{ paddingBottom: 5, color: primary, fontWeight: 'bold', fontSize: 17 }}>Vos amis ({ })</Text>
                 <FlatList data={friendsList}
                     renderItem={renderActivities}
                     keyExtractor={item => item.id}
@@ -165,9 +165,9 @@ const Activity = ({ navigation }) => {
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
-                    ItemSeparatorComponent={<View style={{ height: 10 }} />}
+                    ItemSeparatorComponent={<View style={{ width: 10 }} />}
                 />
-                <Text style={{ paddingBottom: 5, color: primary }} >Pour vous ({ })</Text>
+                <Text style={{ paddingBottom: 5, color: primary, fontWeight: 'bold', fontSize: 17 }} >Pour vous ({ })</Text>
                 <FlatList data={forYouList}
                     renderItem={renderActivities}
                     keyExtractor={item => item.id}
@@ -177,7 +177,7 @@ const Activity = ({ navigation }) => {
                     showsVerticalScrollIndicator={false}
                     ItemSeparatorComponent={<View style={{ height: 10 }} />}
                 />
-                <Text style={{ paddingBottom: 5, color: primary }}>Récents ({ })</Text>
+                <Text style={{ paddingBottom: 5, color: primary, fontWeight: 'bold', fontSize: 17 }}>Récents ({ })</Text>
                 <FlatList data={recently}
                     renderItem={renderActivities}
                     keyExtractor={item => item.id}
