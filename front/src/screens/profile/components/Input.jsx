@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import ElevatedView from 'react-native-elevated-view';
 
 function Input({
@@ -36,5 +36,6 @@ const styles = StyleSheet.create({
   radius: {
     borderRadius: 50,
     borderWith: 1,
+    backgroundColor: "white"
   },
 });

@@ -17,6 +17,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { Public } from 'src/auth/auth.utils';
+import { Hobby } from 'src/hobbies/entities/hobby.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UsersService } from './users.service';
@@ -88,6 +89,14 @@ export class UsersController {
     );
   }
 
+  @Post(':uuid/hobbies')
+  async addHobbies(
+    @Param('uuid') uuid: string,
+    @Body() hobbies: Array<Hobby>,
+  ) {
+    return await this.usersService.addHobbies(uuid, hobbies);
+  }
+
   // only accessible to the user whom id is the same as the route and admin user
   @Put(':uuid')
   @UsePipes(ValidationPipe)
@@ -96,6 +105,14 @@ export class UsersController {
     @Body() updateUserInput: UpdateUserInput,
   ) {
     return await this.usersService.update(uuid, updateUserInput);
+  }
+
+  @Delete(':uuid/hobbies/:id')
+  async removeHobby(
+    @Param('uuid') uuid: string,
+    @Param('id') id: number,
+  ) {
+    return await this.usersService.removeHobby(uuid, id);
   }
 
   // only accessible to the user whom id is the same as the route and admin user
