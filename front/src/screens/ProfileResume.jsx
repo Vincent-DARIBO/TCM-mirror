@@ -58,7 +58,6 @@ const DATA = [
 const ProfileResume = ({ navigation, route }) => {
 
   const { hobbies } = route.params
-  console.log(hobbies)
 
   const renderItem = ({ item }) => {
     return (
@@ -97,7 +96,8 @@ const ProfileResume = ({ navigation, route }) => {
           />
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          {/* REMPLACER HOME PAR ACTIVITIES SCREEN */}
           <View
             style={{
               borderWidth: 1,
