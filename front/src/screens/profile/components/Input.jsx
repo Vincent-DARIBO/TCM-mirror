@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import ElevatedView from 'react-native-elevated-view';
 
 function Input(
-  {placeholder, label, value, onChangeText, style, icon, styleInput, ...props},
+  {placeholder, label, value, onChangeText, style, icon, styleInput, textAlign, ...props},
   ref,
 ) {
   return (
@@ -14,6 +14,7 @@ function Input(
         onChangeText={onChangeText}
         style={[styles.input, styleInput]}
         ref={ref}
+        textAlign={textAlign}
         {...props}
       />
       {icon}
