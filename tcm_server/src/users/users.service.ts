@@ -7,6 +7,7 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 import { Profile } from 'src/profiles/entities/profile.entity';
+import { Hobby } from 'src/hobbies/entities/hobby.entity';
 
 @Injectable()
 export class UsersService {
@@ -283,6 +284,16 @@ export class UsersService {
     });
   }
 
+  async addHobbies(uuid: string, hobbies: Array<Hobby>) {
+    const user = await this.findOne(uuid);
+
+    hobbies.map((hobby) => {
+      if (user.hobbies.filter((item) => hobby === item).length === 0)
+        user.hobbies.push(hobby);
+    });
+    return await this.userRepository.save(user);
+  }
+
   async update(
     uuid: string,
     updateUserInput: UpdateUserInput,
@@ -307,6 +318,18 @@ export class UsersService {
       if (!user) throw new NotFoundException(`User #${uuid} not found`);
       return await this.userRepository.save(await user);
     }
+  }
+
+  async removeHobby(uuid: string, id: number) {
+    const user = await this.findOne(uuid);
+    if (user.hobbies.find((hobby) => hobby.id === id))
+      throw new NotFoundException(
+        `Hobby ${id} not registered for user ${uuid}.`,
+      );
+    user.hobbies = user.hobbies.filter(
+      (hobby) => hobby.id !== id,
+    );
+    return await this.userRepository.save(user);
   }
 
   async remove(uuid: string): Promise<User> {
