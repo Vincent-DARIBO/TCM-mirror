@@ -8,23 +8,38 @@ import {
     white,
 } from '../../constants/colors';
 
-const ScreenHeader = ({ title = 'title', isStack = false, navBack = () => {}, optionPress = () => {} }) => {
+const ScreenHeader = ({ title = 'title', isStack = false, navBack = () => { }, optionPress = () => { } }) => {
     return (
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-end', width: '100%' }} >
+        <View style={styles.container} >
             {isStack ? <Ionicons name='chevron-back' size={30} color={'black'} onPress={navBack} /> : null}
             <Text style={styles.name}>{title}</Text>
-            <Ionicons name='options' size={30} color={secondary} onPress={optionPress} />
+            <Ionicons name='options' size={25} color={secondary} onPress={optionPress} style={styles.icon} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    name: {
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        paddingHorizontal: 50,
         paddingTop: 10,
+    },
+    name: {
         fontWeight: 'bold',
         fontSize: 30,
         color: primary,
     },
+    icon: {
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#BFC0C0',
+        padding: 10,
+        textAlign: 'center',
+    },
 })
+
 
 export default ScreenHeader;
