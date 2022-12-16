@@ -58,22 +58,22 @@ const DATAF = {
     data: [
         {
             id: '1',
-            img: require('../assets/Femme1.png'),
+            img: require('../assets/pick_nique.png'),
             name: 'text',
         },
         {
             id: '2',
-            img: require('../assets/Femme1.png'),
+            img: require('../assets/Randonnée.png'),
             name: 'text',
         },
         {
             id: '3',
-            img: require('../assets/Femme1.png'),
+            img: require('../assets/pick_nique.png'),
             name: 'text',
         },
         {
             id: '4',
-            img: require('../assets/Femme1.png'),
+            img: require('../assets/Randonnée.png'),
             name: 'text',
         }
     ]
@@ -85,22 +85,22 @@ const DATAY = {
         [
             {
                 id: '1',
-                img: require('../assets/Femme1.png'),
+                img: require('../assets/pick_nique.png'),
                 name: 'sed',
             },
             {
                 id: '2',
-                img: require('../assets/Femme1.png'),
+                img: require('../assets/Randonnée.png'),
                 name: 'sed',
             },
             {
                 id: '3',
-                img: require('../assets/Femme1.png'),
+                img: require('../assets/pick_nique.png'),
                 name: 'sed',
             },
             {
                 id: '4',
-                img: require('../assets/Femme1.png'),
+                img: require('../assets/Randonnée.png'),
                 name: 'sed',
             }
         ]
@@ -152,7 +152,7 @@ const Activity = ({ navigation }) => {
 
     const renderActivities = ({ item }) => {
         return (
-            <TouchableOpacity style={{ flexDirection: 'column', flex: 1, paddingVertical: 10, justifyContent: 'space-between', height: 135 }} onPress={() => {}} >
+            <TouchableOpacity style={{ flexDirection: 'column', flex: 1, paddingVertical: 10, justifyContent: 'space-between', height: 135 }} onPress={() => { }} >
                 <Image style={{ height: 90, width: 90 }} source={item.img} />
                 <Text style={{ width: '100%', textAlign: 'center', backgroundColor: '#BFC0C0', borderRadius: 10, elevation: 3 }}>{item.name}</Text>
             </TouchableOpacity>
@@ -244,8 +244,8 @@ const Activity = ({ navigation }) => {
                         ListEmptyComponent={<Text>Section vide</Text>}
                         renderSectionHeader={({ section }) => (
                             <View>
-                                <Text style={{ color: primary, fontWeight: 'bold', fontSize: 17 }}>{section.title} ({section.data.length})</Text>
-                                <FlatList
+                                {section.data.length != 0 ? <Text style={{ color: primary, fontWeight: 'bold', fontSize: 17 }}>{section.title} ({section.data.length})</Text> : null}
+                                {section.data.length != 0 ?  <FlatList
                                     data={section.data}
                                     horizontal
                                     renderItem={renderActivities}
@@ -253,7 +253,7 @@ const Activity = ({ navigation }) => {
                                     showsVerticalScrollIndicator={false}
                                     ListEmptyComponent={emptyList}
                                     ItemSeparatorComponent={<View style={{ width: 10 }} />}
-                                />
+                                /> : null}
                             </View>
                         )}
                     />
