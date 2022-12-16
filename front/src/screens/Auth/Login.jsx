@@ -108,7 +108,7 @@ export default function Login({navigation, route}) {
                     marginBottom: 5,
                     fontSize: 18,
                   }}>
-                  Login
+                  Se connecter
                 </Text>
                 {page === 'Login' ? (
                   <View
@@ -134,7 +134,7 @@ export default function Login({navigation, route}) {
                     marginBottom: 5,
                     fontSize: 18,
                   }}>
-                  Signup
+                  Créer un compte
                 </Text>
 
                 {page === 'Login' ? null : (
@@ -192,16 +192,17 @@ export default function Login({navigation, route}) {
           flexDirection: 'column',
           justifyContent: 'center',
         }}>
-        <Text style={style.text}>
-          Already have an account <Text style={style.bold}>Signup ?</Text>
-        </Text>
+        {/* <Text style={style.text}>
+          Avez vous déja un compte <Text style={style.bold}>Se connecter ?</Text>
+        </Text> */}
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             width: 170,
+            alignItems:'center'
           }}>
-          <Text style={style.bold}>Also login with</Text>
+          <Text style={style.bold}>Se connecter avec </Text>
           <Image
             source={require('../../assets/logoFacebook.png')}
             style={style.image}></Image>
@@ -229,6 +230,7 @@ const style = StyleSheet.create({
   bold: {
     color: white,
     fontWeight: '700',
+    alignItems:'center'
   },
   image: {
     width: 30,

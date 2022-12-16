@@ -11,7 +11,7 @@ export default function Settings({ navigation }) {
       <View style={styles.header}>
         <View style={styles.title}>
           <Icon family="Ionicons" name="settings" color={white} size={32}></Icon>
-          <Text style={styles.text}>Settings</Text>
+          <Text style={styles.text}>Paramètre</Text>
         </View>
       </View>
       <View style={styles.card}>
@@ -24,9 +24,9 @@ export default function Settings({ navigation }) {
         </View>
         <View style={styles.secondContainer}>
           <View style={styles.second}>
-            <Text style={{ color: drakGray, fontWeight: '400', fontSize: 20 }}>Account Settings</Text>
-            <Text style={{ color: 'black', fontWeight: '700', fontSize: 15, textAlignVertical: 'center', height: 40 }} onPress={() => { navigation.navigate('Edit Profile') }}>Edit profile</Text>
-            <Text style={{ color: 'black', fontWeight: '700', fontSize: 15, textAlignVertical: 'center', height: 40 }}>Change password</Text>
+            <Text style={{ color: drakGray, fontWeight: '400', fontSize: 20 }}>Paramètre du compte</Text>
+            <Text style={{ color: 'black', fontWeight: '700', fontSize: 15, textAlignVertical: 'center', height: 40 }} onPress={() => { navigation.navigate('Edit Profile') }}>Editer le profile</Text>
+            <Text style={{ color: 'black', fontWeight: '700', fontSize: 15, textAlignVertical: 'center', height: 40 }}>Changer le mot de passe</Text>
             <Text style={{ color: 'black', fontWeight: '700', fontSize: 15, textAlignVertical: 'center', height: 40 }}>Ajouter un mode de paiement</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 40 }}>
               <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>notifications push</Text>
@@ -49,11 +49,11 @@ export default function Settings({ navigation }) {
               <Icon family="AntDesign" name="right" size={20} ></Icon>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>Privacy policy</Text>
+              <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>politique de confidentialité</Text>
               <Icon family="AntDesign" name="right" size={20} ></Icon>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>Terms and conditions</Text>
+              <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>Termes et conditions</Text>
               <Icon family="AntDesign" name="right" size={20} ></Icon>
             </View>
           </View>

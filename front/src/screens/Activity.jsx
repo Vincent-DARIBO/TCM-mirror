@@ -58,23 +58,23 @@ const DATAF = {
     data: [
         {
             id: '1',
-            img: require('../assets/Femme1.png'),
-            name: 'text',
+            img: require('../assets/pick_nique.png'),
+            name: 'Pique-nique',
         },
         {
             id: '2',
-            img: require('../assets/Femme1.png'),
-            name: 'text',
+            img: require('../assets/Randonnée.png'),
+            name: 'Randonnée',
         },
         {
             id: '3',
-            img: require('../assets/Femme1.png'),
-            name: 'text',
+            img: require('../assets/petanque.jpg'),
+            name: 'Pétanque',
         },
         {
             id: '4',
-            img: require('../assets/Femme1.png'),
-            name: 'text',
+            img: require('../assets/Randonnée.png'),
+            name: 'Marche',
         }
     ]
 }
@@ -85,23 +85,23 @@ const DATAY = {
         [
             {
                 id: '1',
-                img: require('../assets/Femme1.png'),
-                name: 'sed',
+                img: require('../assets/pick_nique.png'),
+                name: 'Pique-nique',
             },
             {
                 id: '2',
-                img: require('../assets/Femme1.png'),
-                name: 'sed',
+                img: require('../assets/Randonnée.png'),
+                name: 'Marche',
             },
             {
                 id: '3',
-                img: require('../assets/Femme1.png'),
-                name: 'sed',
+                img: require('../assets/pick_nique.png'),
+                name: 'Repas',
             },
             {
                 id: '4',
-                img: require('../assets/Femme1.png'),
-                name: 'sed',
+                img: require('../assets/Randonnée.png'),
+                name: 'Randonnée',
             }
         ]
 }
@@ -112,8 +112,8 @@ const DATAR = {
         [
             {
                 id: '1',
-                img: require('../assets/Femme1.png'),
-                name: 'lol',
+                img: require('../assets/petanque.jpg'),
+                name: 'Pétanque',
             },
         ]
 }
@@ -152,7 +152,7 @@ const Activity = ({ navigation }) => {
 
     const renderActivities = ({ item }) => {
         return (
-            <TouchableOpacity style={{ flexDirection: 'column', flex: 1, paddingVertical: 10, justifyContent: 'space-between', height: 135 }} onPress={() => {}} >
+            <TouchableOpacity style={{ flexDirection: 'column', flex: 1, paddingVertical: 10, justifyContent: 'space-between', height: 135 }} onPress={() => {navigation.navigate("Description")}} >
                 <Image style={{ height: 90, width: 90 }} source={item.img} />
                 <Text style={{ width: '100%', textAlign: 'center', backgroundColor: '#BFC0C0', borderRadius: 10, elevation: 3 }}>{item.name}</Text>
             </TouchableOpacity>
@@ -244,8 +244,8 @@ const Activity = ({ navigation }) => {
                         ListEmptyComponent={<Text>Section vide</Text>}
                         renderSectionHeader={({ section }) => (
                             <View>
-                                <Text style={{ color: primary, fontWeight: 'bold', fontSize: 17 }}>{section.title} ({section.data.length})</Text>
-                                <FlatList
+                                {section.data.length != 0 ? <Text style={{ color: primary, fontWeight: 'bold', fontSize: 17 }}>{section.title} ({section.data.length})</Text> : null}
+                                {section.data.length != 0 ?  <FlatList
                                     data={section.data}
                                     horizontal
                                     renderItem={renderActivities}
@@ -253,7 +253,7 @@ const Activity = ({ navigation }) => {
                                     showsVerticalScrollIndicator={false}
                                     ListEmptyComponent={emptyList}
                                     ItemSeparatorComponent={<View style={{ width: 10 }} />}
-                                />
+                                /> : null}
                             </View>
                         )}
                     />

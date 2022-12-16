@@ -70,7 +70,7 @@ export default function Chat({navigation}) {
           <Text style={styles.text}>Juliette Dubois</Text>
           <View style={{ width: 40 + '%', flexDirection: "row", alignItems: 'center', flex: 1, justifyContent: "space-around" }}>
             <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: "green" }}></View>
-            <Text style={{}}>Online</Text>
+            <Text style={{}}> En ligne</Text>
           </View>
         </View>
         <View style={{ width: 50, height: 50, borderColor: 'black', borderWidth: 1, borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
