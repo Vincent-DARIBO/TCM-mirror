@@ -18,6 +18,7 @@ import {
   white,
 } from '../constants/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import ElevatedView from 'react-native-elevated-view';
 
 FontAwesome.loadFont();
 
@@ -101,25 +102,26 @@ const Friends = ({navigation}) => {
 
   const render = ({item, index}) => {
     return (
-      <TouchableOpacity
-        style={styles.itemCard}
-        onPress={() =>
-          navigation.navigate('ProfileDetails', {name: item.title})
-        }>
-        <Image
-          style={{width: 120, height: 110, marginTop: '2%'}}
-          source={item.img}
-        />
-        <Text
-          style={{
-            fontSize: 15,
-            color: primary,
-            textAlign: 'center',
-          }}>
-          {item.title}
-        </Text>
-        <View style={styles.bottomCardBar} />
-      </TouchableOpacity>
+      <ElevatedView>
+        <TouchableOpacity
+          style={styles.itemCard}
+          onPress={navigation.navigate('ProfileDetails', {name: item.title})}  
+          >
+          <Image
+            style={{width: 120, height: 110, marginTop: '10%'}}
+            source={item.img}
+          />
+          <Text
+            style={{
+              fontSize: 15,
+              color: primary,
+              textAlign: 'center',
+            }}>
+            {item.title}
+          </Text>
+          <View style={styles.bottomCardBar} />
+        </TouchableOpacity>
+      </ElevatedView>
     );
   };
 
@@ -179,17 +181,17 @@ const Friends = ({navigation}) => {
               style={{
                 fontWeight: 'bold',
                 fontSize: 18,
-                color: secondary,
+                color: 'red',
                 textAlign: 'right',
-                paddingRight: 20,
-                paddingBottom: 10,
+                paddingRight: 40,
+                paddingBottom: 25,
               }}>
               Demandes (2)
             </Text>
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{height: '73%', width: '80%', alignItems: 'center'}}>
+      <View style={{height: '87%', width: '80%', alignItems: 'center'}}>
         <FlatList
           data={matchesList}
           renderItem={render}
@@ -217,13 +219,13 @@ const styles = StyleSheet.create({
     flex: 0.5,
     aspectRatio: 1,
     marginHorizontal: '2%',
-    backgroundColor: '#ddd',
-    borderRadius: 5,
+    backgroundColor: 'rgba(234, 231, 233, 0.8)',
+    borderRadius: 10,
   },
   bottomCardBar: {
     width: '100%',
     backgroundColor: secondary,
-    height: '3%',
+    height: '1%',
     borderRadius: 5,
   },
 });

@@ -157,10 +157,10 @@ export default function Register({ navigation, route }) {
           title="Choisir une date"
           textStyle={{color: secondary}}
         /> */}
-        <View style={{ flexDirection: 'row', width: 295 }}>
-          <Input style={{ flex: 3, marginTop: 10, backgroundColor: white, width: 75, borderRadius: 15, ...layout.center }} styleInput={{ width: 75, paddingLeft: 0 }} maxLength={2} textAlign={"center"} placeholder="JJ" onChangeText={(day) => { setDay(day); if (day.length === 2) refMonth.current.focus() }}></Input>
-          <Input style={{ flex: 3, marginTop: 10, backgroundColor: white, width: 75, borderRadius: 15, ...layout.center }} styleInput={{ width: 75, paddingLeft: 0 }} maxLength={2} textAlign={"center"} placeholder="MM" ref={refMonth} onChangeText={(month) => { setDay(month); if (month.length === 2) refYear.current.focus() }}></Input>
-          <Input style={{ flex: 3, marginTop: 10, backgroundColor: white, width: 100, borderRadius: 15, ...layout.center }} styleInput={{ width: 100, paddingLeft: 0 }} maxLength={4} textAlign={"center"} placeholder="YYYY" ref={refYear} ></Input>
+        <View style={{flexDirection:'row', width:295}}>
+          <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width: 75, borderRadius: 15, ...layout.center}} styleInput={{width: 75, paddingLeft: 0}} maxLength={2} textAlign={"center"} placeholder="JJ" ref={refDay} onChangeText={(day) => {setDay(day); if (day.length === 2) refMonth.current.focus()}}></Input>
+          <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width: 75, borderRadius: 15, ...layout.center}} styleInput={{width: 75, paddingLeft: 0}} maxLength={2} textAlign={"center"} placeholder="MM" ref={refMonth} onChangeText={(month) => {setMonth(month); if (month.length === 2) {refYear.current.focus()} }}></Input>
+          <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width:100, borderRadius: 15, ...layout.center}} styleInput={{width:100, paddingLeft: 0}} maxLength={4} textAlign={"center"} placeholder="YYYY" ref={refYear} ></Input>
         </View>
         <Button
           title="Confirmer"
