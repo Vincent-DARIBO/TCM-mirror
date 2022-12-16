@@ -1,5 +1,5 @@
 import { React, useState, useEffect, useCallback } from 'react';
-import { View, Image, StyleSheet, Text, Touchable, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, Text, Touchable, TouchableOpacity, SafeAreaView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GiftedChat } from 'react-native-gifted-chat';
 import constant, { primary } from '../constants/colors';
@@ -60,7 +60,7 @@ export default function Chat({navigation}) {
   }, [])
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
 
       <View style={{ flexDirection: "row", justifyContent: 'space-around', marginLeft: 10 + '%', marginRight: 10 + '%', marginTop: 5 + '%' }}>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
@@ -89,7 +89,7 @@ export default function Chat({navigation}) {
           _id: 1,
         }}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 
