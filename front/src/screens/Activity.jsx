@@ -59,22 +59,22 @@ const DATAF = {
         {
             id: '1',
             img: require('../assets/pick_nique.png'),
-            name: 'text',
+            name: 'Pique-nique',
         },
         {
             id: '2',
             img: require('../assets/Randonnée.png'),
-            name: 'text',
+            name: 'Randonnée',
         },
         {
             id: '3',
-            img: require('../assets/pick_nique.png'),
-            name: 'text',
+            img: require('../assets/petanque.jpg'),
+            name: 'Pétanque',
         },
         {
             id: '4',
             img: require('../assets/Randonnée.png'),
-            name: 'text',
+            name: 'Marche',
         }
     ]
 }
@@ -86,22 +86,22 @@ const DATAY = {
             {
                 id: '1',
                 img: require('../assets/pick_nique.png'),
-                name: 'sed',
+                name: 'Pique-nique',
             },
             {
                 id: '2',
                 img: require('../assets/Randonnée.png'),
-                name: 'sed',
+                name: 'Marche',
             },
             {
                 id: '3',
                 img: require('../assets/pick_nique.png'),
-                name: 'sed',
+                name: 'Repas',
             },
             {
                 id: '4',
                 img: require('../assets/Randonnée.png'),
-                name: 'sed',
+                name: 'Randonnée',
             }
         ]
 }
@@ -112,8 +112,8 @@ const DATAR = {
         [
             {
                 id: '1',
-                img: require('../assets/Femme1.png'),
-                name: 'lol',
+                img: require('../assets/petanque.jpg'),
+                name: 'Pétanque',
             },
         ]
 }
