@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import {
     fadedOrange,
@@ -150,14 +150,14 @@ const Messages = ({ navigation }) => {
         return (
             <TouchableOpacity style={{ flexDirection: 'row', flex: 1, paddingBottom: 10 }} onPress={() => navigation.navigate('Chat')} >
                 <Image style={{ height: 60, width: 60, borderRadius: 30 }} source={item.img} />
-                <View style={{ flex: 1, paddingLeft: 10, justifyContent: 'space-around' }}>
+                <View style={{ flex: 1, paddingLeft: 20, justifyContent: 'space-around' }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={{ fontWeight: '500' }}>{item.name}</Text>
                         <Text style={{ color: '#ADAFBB', fontWeight: '500' }}>20 min</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={{ color: '#ADAFBB' }}>{item.lastMessageAuthor && !item.isWritting ? 'Vous: ' : ''}</Text>
-                        <Text style={{ fontWeight: !item.isWritting && item.read ? '400' : 'bold' }}>{!item.isWritting ? item.lastMessageContent : 'Est en train d\'écrire...'}</Text>
+                        <Text numberOfLines={1} style={{ fontWeight: !item.isWritting && item.read ? '400' : 'bold' }}>{!item.isWritting ? item.lastMessageContent : 'Est en train d\'écrire...'}</Text>
                     </View>
                     <View style={{ backgroundColor: '#ADAFBB', height: 1 }} />
                 </View>
@@ -178,7 +178,7 @@ const Messages = ({ navigation }) => {
     }
 
     return (
-        <View style={{ alignItems: 'center' }}>
+        <SafeAreaView style={{ alignItems: 'center', flex: 1 }}>
             <ScreenHeader title='Messages' />
             <Searchbar
                 placeholder='Rechercher'
@@ -197,7 +197,7 @@ const Messages = ({ navigation }) => {
                     ItemSeparatorComponent={<View style={{ height: 10 }} />}
                 />
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 

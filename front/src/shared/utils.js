@@ -40,6 +40,7 @@ export async function getDataFromRoute(routeName) {
 }
 
 export async function createUser(userInfo) {
+  console.log({baseUrl});
   return axios.post(baseUrl + '/auth/signUp', {
     profile: userInfo,
   });
