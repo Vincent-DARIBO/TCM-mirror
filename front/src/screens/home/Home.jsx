@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import { Button, Text, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   // ref
   const bottomSheetRef = React.useRef(null);
 
@@ -15,7 +15,7 @@ export default function Home({navigation}) {
   }, []);
 
   return (
-    <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
       <Button
         title="Code"
         onPress={() => navigation.navigate('Code')}
