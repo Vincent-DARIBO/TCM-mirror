@@ -44,7 +44,7 @@ export default function LoginComponent({
               marginTop: 10,
               marginLeft: -10,
             }}></View>
-          <Text style={style.title}>Login</Text>
+          <Text style={style.title}>Se connecter</Text>
         </View>
         <View
           style={{
@@ -83,10 +83,10 @@ export default function LoginComponent({
           />
         </View>
         <TouchableOpacity style={{marginBottom: 10}}>
-          <Text>Forgot password ?</Text>
+          <Text>Mot de passe oublié ?</Text>
         </TouchableOpacity>
         <Button
-          title="Login Now"
+          title="Suivant"
           style={{width: 120, borderRadius: 30, backgroundColor: secondary}}
           onPress={onLoginPress}
         />

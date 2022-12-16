@@ -3,7 +3,7 @@ import Constants from 'expo-constants';
 
 // export const baseUrl = 'http://localhost:3000/';
 
-export const baseUrl = process.env.API_URL;
+export const baseUrl = process.env.API_URL.includes("http") ? process.env.API_URL : "http://" + process.env.API_URL;
 
 export const emailValidator = email => {
   const re = /\S+@\S+\.\S+/;
@@ -40,17 +40,21 @@ export async function getDataFromRoute(routeName) {
 }
 
 export async function createUser(userInfo) {
-  console.log({baseUrl});
   return axios.post(baseUrl + '/auth/signUp', {
     profile: userInfo,
   });
 }
 
 export async function loginUser(email, password) {
-  return axios.post(baseUrl + '/auth/login', {
-    email,
-    password,
-  });
+  try {
+    console.log(baseUrl + '/auth/login');
+    return axios.post(baseUrl + '/auth/login', {
+      email,
+      password,
+    });
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function editUser(userId, newUserInfo) {

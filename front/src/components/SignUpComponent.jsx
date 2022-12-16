@@ -45,7 +45,7 @@ export default function SignUpComponent({
               marginLeft: -10,
             }}></View>
         </View>
-        <Text style={style.title}>Sign Up</Text>
+        <Text style={style.title}>S'inscrire</Text>
         <View
           style={{
             width: 300,
