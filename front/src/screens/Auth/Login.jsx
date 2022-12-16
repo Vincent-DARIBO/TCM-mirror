@@ -230,6 +230,7 @@ const style = StyleSheet.create({
   bold: {
     color: white,
     fontWeight: '700',
+    alignItems:'center'
   },
   image: {
     width: 30,
