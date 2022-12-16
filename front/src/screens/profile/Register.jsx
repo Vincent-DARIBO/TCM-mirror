@@ -7,12 +7,12 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ScrollView,
+  Alert,
 } from 'react-native';
 import ElevatedView from 'react-native-elevated-view';
 import {ActivityIndicator, TouchableRipple} from 'react-native-paper';
 import {Ionicons, EvilIcons} from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-
 import Button from '../../components/Button';
 import {
   fadedOrange,
@@ -27,6 +27,7 @@ import useUserInfo from '../../providers/hooks/useUserInfo';
 import {useMutation, useQuery} from 'react-query';
 import {baseUrl, createUser} from '../../shared/utils';
 import axios from 'axios';
+import {nameValidator} from '../../shared/utils';
 
 export default function Register({navigation, route}) {
   const [firstName, setFirstname] = React.useState('');
@@ -73,6 +74,18 @@ export default function Register({navigation, route}) {
 
   function onConfirmPress() {
     //console.log({ user });
+    const lastNameError = nameValidator(firstName);
+    const firstNameError = nameValidator(lastName);
+
+    if (lastNameError || firstNameError) {
+      Alert.alert(
+        'Erreur',
+        'Le nom et le nom de famille doivent être remplis',
+        [{text: 'OK', style: 'cancel'}],
+      );
+      return;
+    }
+
     mutate();
     setUser({
       ...user,
@@ -173,7 +186,7 @@ export default function Register({navigation, route}) {
             maxLength={2}
             textAlign={'center'}
             placeholder="JJ"
-            ref={refDay}
+            keyboardType="number-pad"
             onChangeText={day => {
               setDay(day);
               if (day.length === 2) refMonth.current.focus();
@@ -192,6 +205,7 @@ export default function Register({navigation, route}) {
             textAlign={'center'}
             placeholder="MM"
             ref={refMonth}
+            keyboardType="number-pad"
             onChangeText={month => {
               setMonth(month);
               if (month.length === 2) {
@@ -211,6 +225,7 @@ export default function Register({navigation, route}) {
             maxLength={4}
             textAlign={'center'}
             placeholder="YYYY"
+            keyboardType="number-pad"
             ref={refYear}></Input>
         </View>
         <Button
