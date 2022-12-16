@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Keyboard,
   View,
@@ -9,8 +9,8 @@ import {
   ScrollView,
 } from 'react-native';
 import ElevatedView from 'react-native-elevated-view';
-import { ActivityIndicator, TouchableRipple } from 'react-native-paper';
-import { Ionicons, EvilIcons } from '@expo/vector-icons';
+import {ActivityIndicator, TouchableRipple} from 'react-native-paper';
+import {Ionicons, EvilIcons} from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
 import Button from '../../components/Button';
@@ -21,25 +21,25 @@ import {
   secondary,
   white,
 } from '../../constants/colors';
-import { layout } from '../../shared/styles';
+import {layout} from '../../shared/styles';
 import Input from './components/Input';
 import useUserInfo from '../../providers/hooks/useUserInfo';
-import { useMutation, useQuery } from 'react-query';
-import { baseUrl, createUser } from '../../shared/utils';
+import {useMutation, useQuery} from 'react-query';
+import {baseUrl, createUser} from '../../shared/utils';
 import axios from 'axios';
 
-export default function Register({ navigation, route }) {
+export default function Register({navigation, route}) {
   const [firstName, setFirstname] = React.useState('');
   const [lastName, setLastname] = React.useState('');
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
-  const { user, setUser } = useUserInfo();
+  const {user, setUser} = useUserInfo();
   const refMonth = React.useRef(null);
   const refYear = React.useRef(null);
   const [day, setDay] = React.useState(null);
   const [month, setMonth] = React.useState(null);
   const [year, setYear] = React.useState(null);
-  const { hobbies } = route.params;
+  const {hobbies} = route.params;
 
   // console.log({user});
   const pickImage = async () => {
@@ -58,7 +58,7 @@ export default function Register({ navigation, route }) {
     }
   };
 
-  const { data, mutate, isSuccess, status, error, isError, isLoading } =
+  const {data, mutate, isSuccess, status, error, isError, isLoading} =
     useMutation(() =>
       createUser({
         firstName,
@@ -71,27 +71,29 @@ export default function Register({ navigation, route }) {
       }),
     );
 
-
   function onConfirmPress() {
     //console.log({ user });
     mutate();
     setUser({
-      ...user, token: data ? data.data.access_token : '', firstName,
+      ...user,
+      token: data ? data.data.access_token : '',
+      firstName,
       lastName,
     });
-    console.log("Register : ")
-    console.log(hobbies)
-    navigation.navigate("ProfileResume", { hobbies: hobbies })
-
+    console.log('Register : ');
+    console.log(hobbies);
+    navigation.navigate('ProfileResume', {hobbies: hobbies});
   }
-  if (isError) console.log({ error });
+  if (isError) console.log({error});
   isLoading && console.log('loading...');
   isSuccess &&
-    setUser({ ...user, isLogged: true, token: data.data.access_token });
-  // !isLoading &&
-  //   isSuccess &&
-  //   console.log({user, token: data.data.access_token}) &&
-  //   setUser({...user, token: data.data.access_token, isLogged: true});
+    setUser({
+      ...user,
+      isLogged: true,
+      token: data.data.access_token,
+      firstName,
+      lastName,
+    });
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -104,27 +106,27 @@ export default function Register({ navigation, route }) {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        <View style={{ ...styles.photo, ...layout.center }}>
+        <View style={{...styles.photo, ...layout.center}}>
           <Text style={styles.title}>Votre profil</Text>
           {image.length ? (
             <ElevatedView
               elevation={5}
-              style={{ ...layout.center, ...styles.elevated }}>
-              <Image source={{ uri: image }} style={styles.image} />
+              style={{...layout.center, ...styles.elevated}}>
+              <Image source={{uri: image}} style={styles.image} />
             </ElevatedView>
           ) : (
             <TouchableRipple
-              style={{ ...layout.center, ...styles.elevated }}
+              style={{...layout.center, ...styles.elevated}}
               onPress={() => pickImage()}
               borderles>
               <>
                 <Ionicons name="person-outline" size={50} color={secondary} />
-                <Text style={{ color: secondary }}>Ajouter un photo</Text>
+                <Text style={{color: secondary}}>Ajouter un photo</Text>
               </>
             </TouchableRipple>
           )}
           {image.length ? (
-            <View style={{ ...layout.center, ...styles.circle, marginTop: 10 }}>
+            <View style={{...layout.center, ...styles.circle, marginTop: 10}}>
               <Ionicons
                 onPress={() => pickImage()}
                 name="camera"
@@ -147,7 +149,7 @@ export default function Register({ navigation, route }) {
           placeholder="Nom"
           value={lastName}
           onChangeText={setLastname}
-          style={{ marginTop: 10 }}
+          style={{marginTop: 10}}
           ref={surnameRef}
         />
         {/* <Button
@@ -157,21 +159,67 @@ export default function Register({ navigation, route }) {
           title="Choisir une date"
           textStyle={{color: secondary}}
         /> */}
-        <View style={{flexDirection:'row', width:295}}>
-          <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width: 75, borderRadius: 15, ...layout.center}} styleInput={{width: 75, paddingLeft: 0}} maxLength={2} textAlign={"center"} placeholder="JJ" ref={refDay} onChangeText={(day) => {setDay(day); if (day.length === 2) refMonth.current.focus()}}></Input>
-          <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width: 75, borderRadius: 15, ...layout.center}} styleInput={{width: 75, paddingLeft: 0}} maxLength={2} textAlign={"center"} placeholder="MM" ref={refMonth} onChangeText={(month) => {setMonth(month); if (month.length === 2) {refYear.current.focus()} }}></Input>
-          <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width:100, borderRadius: 15, ...layout.center}} styleInput={{width:100, paddingLeft: 0}} maxLength={4} textAlign={"center"} placeholder="YYYY" ref={refYear} ></Input>
+        <View style={{flexDirection: 'row', width: 295}}>
+          <Input
+            style={{
+              flex: 3,
+              marginTop: 10,
+              backgroundColor: white,
+              width: 75,
+              borderRadius: 15,
+              ...layout.center,
+            }}
+            styleInput={{width: 75, paddingLeft: 0}}
+            maxLength={2}
+            textAlign={'center'}
+            placeholder="JJ"
+            ref={refDay}
+            onChangeText={day => {
+              setDay(day);
+              if (day.length === 2) refMonth.current.focus();
+            }}></Input>
+          <Input
+            style={{
+              flex: 3,
+              marginTop: 10,
+              backgroundColor: white,
+              width: 75,
+              borderRadius: 15,
+              ...layout.center,
+            }}
+            styleInput={{width: 75, paddingLeft: 0}}
+            maxLength={2}
+            textAlign={'center'}
+            placeholder="MM"
+            ref={refMonth}
+            onChangeText={month => {
+              setMonth(month);
+              if (month.length === 2) {
+                refYear.current.focus();
+              }
+            }}></Input>
+          <Input
+            style={{
+              flex: 3,
+              marginTop: 10,
+              backgroundColor: white,
+              width: 100,
+              borderRadius: 15,
+              ...layout.center,
+            }}
+            styleInput={{width: 100, paddingLeft: 0}}
+            maxLength={4}
+            textAlign={'center'}
+            placeholder="YYYY"
+            ref={refYear}></Input>
         </View>
         <Button
           title="Confirmer"
           onPress={() => onConfirmPress()}
-          style={{ marginTop: 25 }}
+          style={{marginTop: 25}}
           icon={
             isLoading ? (
-              <ActivityIndicator
-                animating={true}
-                color={white}
-              />
+              <ActivityIndicator animating={true} color={white} />
             ) : null
           }
         />
