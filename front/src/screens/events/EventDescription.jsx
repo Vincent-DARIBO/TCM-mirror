@@ -15,14 +15,14 @@ import {
   secondary,
   fadedOrange,
 } from '../../constants/colors';
-import {layout} from '../../shared/styles';
+import { layout } from '../../shared/styles';
 import ElevatedBadge from '../../components/Badge';
 import Title from '../profile/components/Title';
 import Schedule from './components/Schedule';
 import Button from '../../components/Button';
 
 export default function EventDescription() {
-  const fakeHobies = ['Jardiange', 'Voyage'];
+  const fakeHobies = ['Jardinage', 'Voyage'];
 
   return (
     <View style={layout.container}>
@@ -31,12 +31,12 @@ export default function EventDescription() {
           source={require('../../assets/pick_nique.png')}
           style={styles.banner}
         />
-        <View style={{...layout.circle(60), ...layout.center, ...styles.badge}}>
+        <View style={{ ...layout.circle(60), ...layout.center, ...styles.badge }}>
           <Image
             source={require('../../assets/Femme1.png')}
-            style={{...layout.circle(55), resizeMode: 'contain'}}
+            style={{ ...layout.circle(55), resizeMode: 'contain' }}
           />
-          <View style={{...layout.circle(10), ...styles.indicator}} />
+          <View style={{ ...layout.circle(10), ...styles.indicator }} />
         </View>
       </View>
 
@@ -48,9 +48,9 @@ export default function EventDescription() {
           marginTop: -15,
         }}>
         Pique-nique avec
-        <Text style={{...styles.title, color: secondary}}> Marie</Text>
+        <Text style={{ ...styles.title, color: secondary }}> Marie</Text>
       </Text>
-      <View style={{paddingHorizontal: 20}}>
+      <View style={{ paddingHorizontal: 20 }}>
         <View
           style={{
             ...layout.row,
@@ -61,14 +61,14 @@ export default function EventDescription() {
             icon={<Icon family="Ionicons" name="wine" color={secondary} />}
             title={fakeHobies[0]}
             elevation={2}
-            style={{backgroundColor: gray, borderRadius: 10, }}
-            textStyle={{color: null}}
+            style={{ backgroundColor: gray, borderRadius: 10, }}
+            textStyle={{ color: null }}
           />
           <ElevatedBadge
             icon={<Icon family="Ionicons" name="wine" color={secondary} />}
             title={fakeHobies[1]}
-            style={{backgroundColor: gray, borderRadius: 10}}
-            textStyle={{color: null}}
+            style={{ backgroundColor: gray, borderRadius: 10 }}
+            textStyle={{ color: null }}
             elevation={2}
           />
         </View>
@@ -76,13 +76,13 @@ export default function EventDescription() {
           beginAt="12:00AM"
           endAt="1:00PM"
           date="Mercredi 21 janvier"
-          description="Ceci est un description d'un évènement qui aura lieu à la tête d'or"
+          description="Ceci est une description d'un évènement qui aura lieu à la tête d'or"
         />
       </View>
       <Button
         title="Participer"
         style={styles.button}
-        textStyle={{color: secondary}}
+        textStyle={{ color: secondary }}
         onPress={() => console.log('pressed')}
       />
     </View>
