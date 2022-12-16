@@ -27,7 +27,9 @@ export default function EventList({navigation}) {
               <AntDesign
                 name="pluscircleo"
                 size={25}
-                onPress={() => navigation.navigate('CreateEvent')}
+                onPress={() =>
+                  navigation.navigate('CreateEvent')
+                }
                 color="orange"
               />
             </View>
@@ -38,10 +40,8 @@ export default function EventList({navigation}) {
             elevation={4}
             style={{margin: 20, width: 330, height: 350}}>
             <Calendar
+              onDayPress={() => navigation.navigate('AddEvent')}
               theme={theme.theme}
-              onDayPress={() =>
-                navigation.navigate('AddEvent')
-              }
             />
           </ElevatedView>
         </View>
