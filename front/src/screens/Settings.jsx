@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Touchable, TouchableOpacity } from "react-native";
 import { drakGray, gray, primary, white } from "../constants/colors";
 import Icon from "../components/Icon";
 import femme from "../assets/Femme1.png"
+import useUserInfo from "../providers/hooks/useUserInfo";
 
 export default function Settings({ navigation }) {
+  const {user, setUser} = useUserInfo() ;
   return (
     <View style={styles.page}>
       <View style={styles.header}>
@@ -32,22 +34,25 @@ export default function Settings({ navigation }) {
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 40 }}>
               <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>mode nuit</Text>
-              <Icon family="MaterialCommunityIcons" name="toggle-switch" size={50} color={drakGray} style={{transform: [{rotateY: '180deg'}]}}></Icon>
+              <Icon family="MaterialCommunityIcons" name="toggle-switch" size={50} color={drakGray} style={{ transform: [{ rotateY: '180deg' }] }}></Icon>
             </View>
+            <TouchableOpacity onPress={() => (setUser({isLogged: false}))}>
+              <Text style={{ color: 'black', fontWeight: '700', fontSize: 15, textAlignVertical: 'center', height: 40 }}>Se déconnecter</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.thirdContainer}>
           <View style={styles.third}>
             <Text style={{ color: drakGray, fontWeight: '400', fontSize: 15 }}>More</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>À propos</Text>
               <Icon family="AntDesign" name="right" size={20} ></Icon>
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent:'space-between'  }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>Privacy policy</Text>
               <Icon family="AntDesign" name="right" size={20} ></Icon>
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent:'space-between'  }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <Text style={{ color: 'black', fontWeight: '700', fontSize: 15 }}>Terms and conditions</Text>
               <Icon family="AntDesign" name="right" size={20} ></Icon>
             </View>
@@ -125,7 +130,7 @@ const styles = StyleSheet.create({
   secondContainer: {
     borderBottomColor: gray,
     borderBottomWidth: 1,
-    height: 40 + '%',
+    height: 50 + '%',
     paddingBottom: 20,
     paddingTop: 20,
   },
