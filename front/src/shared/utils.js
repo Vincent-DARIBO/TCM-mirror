@@ -3,7 +3,7 @@ import Constants from 'expo-constants';
 
 // export const baseUrl = 'http://localhost:3000/';
 
-export const baseUrl = process.env.API_URL.includes("http") ? process.env.API_URL : "http://" + process.env.API_URL;
+export const baseUrl = process.env.API_URL;
 
 export const emailValidator = email => {
   const re = /\S+@\S+\.\S+/;
@@ -53,7 +53,7 @@ export async function loginUser(email, password) {
       password,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
