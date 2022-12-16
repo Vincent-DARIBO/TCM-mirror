@@ -141,7 +141,7 @@ const Activity = ({ navigation }) => {
 
     const render = ({ item, index }) => {
         return (
-            <ElevatedView style={{ backgroundColor: '#BFC0C0', borderRadius: 10, padding: 5, margin: 2, width: 150 }}>
+            <ElevatedView style={{ backgroundColor: '#BFC0C0', borderRadius: 10, padding: 5, margin: 2, width: 152 }}>
                 <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => { }} >
                     <Icon family={item.iconFamily} name={item.icon} style={{ color: secondary, paddingRight: 2 }} />
                     <Text numberOfLines={1} >{item.activity}</Text>
@@ -190,15 +190,15 @@ const Activity = ({ navigation }) => {
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20 }}>
                             <Text>Activités</Text>
-                            <Switch trackColor={{ false: "#767577", true: "#81b0ff" }} thumbColor={screenTitle === 'Activités' ? secondary : "#f4f3f4"} onValueChange={() => setScreenTitle('Activités')} value={screenTitle === 'Activités' ? true : false} />
+                            <Switch trackColor={{ false: "#767577", true: primary }} thumbColor={screenTitle === 'Activités' ? secondary : "#f4f3f4"} onValueChange={() => setScreenTitle('Activités')} value={screenTitle === 'Activités' ? true : false} />
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20 }}>
                             <Text>Hébergements</Text>
-                            <Switch trackColor={{ false: "#767577", true: "#81b0ff" }} thumbColor={screenTitle === 'Hébergements' ? secondary : "#f4f3f4"} onValueChange={() => setScreenTitle('Hébergements')} value={screenTitle === 'Hébergements' ? true : false} />
+                            <Switch trackColor={{ false: "#767577", true: primary }} thumbColor={screenTitle === 'Hébergements' ? secondary : "#f4f3f4"} onValueChange={() => setScreenTitle('Hébergements')} value={screenTitle === 'Hébergements' ? true : false} />
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20 }}>
                             <Text>Cours</Text>
-                            <Switch trackColor={{ false: "#767577", true: "#81b0ff" }} thumbColor={screenTitle === 'Cours' ? secondary : "#f4f3f4"} onValueChange={() => setScreenTitle('Cours')} value={screenTitle === 'Cours' ? true : false} />
+                            <Switch trackColor={{ false: "#767577", true: primary }} thumbColor={screenTitle === 'Cours' ? secondary : "#f4f3f4"} onValueChange={() => setScreenTitle('Cours')} value={screenTitle === 'Cours' ? true : false} />
                         </View>
                     </View>
                 </View>
@@ -217,7 +217,7 @@ const Activity = ({ navigation }) => {
                 elevation={0}
                 style={{ borderRadius: 10, marginHorizontal: '10%', marginVertical: '5%', height: 40, borderWidth: 1, borderColor: '#ADAFBB' }} />
             <View>
-                <ScrollView horizontal showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ paddingHorizontal: 40 }} >
+                <ScrollView horizontal showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ marginHorizontal: 40 }} >
                     <FlatList data={DATAA}
                         renderItem={render}
                         keyExtractor={item => item.id}
