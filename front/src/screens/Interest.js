@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import {useState} from 'react';
 import Icon from '../components/Icon';
 import useUserInfo from '../providers/hooks/useUserInfo';
@@ -64,18 +57,26 @@ const DATA = [
 export default function Interest({navigation}) {
   const [interests, setInterests] = useState([]);
   const {user, setUser} = useUserInfo();
-  const checkIsSelected = name => {
-    const found = interests.find(element => element === name);
 
-    if (found === undefined) setInterests(interests => [...interests, name]);
-    else {
-      setInterests(interests.filter(item => item !== name));
+  const [data, setData] = useState([]);
+
+  const checkIsSelected = data => {
+    const found = interests.find(element => element === data.text);
+
+    if (found === undefined) {
+      setInterests(interests => [...interests, data.text]);
+      setData(myData => [...myData, data]);
+    } else {
+      setInterests(interests.filter(item => item !== data.text));
+      setData(data.filter(item => item.name !== item.name));
     }
   };
 
   function onConfirmPress() {
     setUser({...user, hobbies: interests});
-    navigation.navigate('Register');
+    console.log('interests ');
+    console.log(data);
+    navigation.navigate('Register', {hobbies: data});
   }
   const renderItem = ({item}) => {
     return (
@@ -87,7 +88,7 @@ export default function Interest({navigation}) {
           marginRight: '5%',
         }}>
         <TouchableOpacity
-          onPress={() => checkIsSelected(item.text)}
+          onPress={() => checkIsSelected(item)}
           style={{
             flexDirection: 'row',
             flex: 1,
@@ -125,7 +126,8 @@ export default function Interest({navigation}) {
     );
   };
   return (
-    <View style={{backgroundColor: 'white'}}>
+    <View
+      style={{backgroundColor: 'white', width: 100 + '%', height: 100 + '%'}}>
       <View style={{marginLeft: '10%', marginRight: '10%'}}>
         <Text
           style={{
@@ -149,21 +151,21 @@ export default function Interest({navigation}) {
             keyExtractor={item => item.id}
           />
         </View>
-        <TouchableOpacity onPress={() => onConfirmPress()}>
-          <View
-            style={{
-              borderWidth: 1,
-              backgroundColor: '#084887',
-              borderRadius: 20,
-              height: '25%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: '40%',
-            }}>
-            <Text style={{fontSize: 18, color: 'white', fontWeight: 'bold'}}>
-              CONTINUER
-            </Text>
-          </View>
+
+        <TouchableOpacity
+          onPress={() => onConfirmPress()}
+          style={{
+            borderWidth: 1,
+            backgroundColor: '#084887',
+            borderRadius: 20,
+            height: '15%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '40%',
+          }}>
+          <Text style={{fontSize: 18, color: 'white', fontWeight: 'bold'}}>
+            CONTINUER
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

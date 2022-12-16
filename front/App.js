@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-native-paper';
 import {StatusBar} from 'react-native';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
-import Clipboard from '@react-native-community/clipboard'; 
+import Clipboard from '@react-native-community/clipboard';
 
 const queryClient = new QueryClient();
 
@@ -18,7 +18,7 @@ export default function App() {
   React.useEffect(() => {
     console.log({user});
   }, [user]);
-  
+
   return (
     <UserInfoProvider setUser={setUser} user={user}>
       <QueryClientProvider client={queryClient}>
@@ -26,6 +26,7 @@ export default function App() {
           <StatusBar backgroundColor={'#eaeaea'} barStyle={'dark-content'} />
           <NavigationContainer>
             <AuthStackNavigator />
+            {/* <TabNavigator/> */}
           </NavigationContainer>
         </Provider>
       </QueryClientProvider>
