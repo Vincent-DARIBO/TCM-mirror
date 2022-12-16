@@ -27,10 +27,7 @@ import useUserInfo from '../../providers/hooks/useUserInfo';
 import {useMutation, useQuery} from 'react-query';
 import {baseUrl, createUser} from '../../shared/utils';
 import axios from 'axios';
-<<<<<<< HEAD
 import { TextInput } from 'react-native-gesture-handler';
-=======
->>>>>>> e8d251b2483ab3ed65a179c3ffeb21609e19506f
 
 export default function Register({navigation, route}) {
   const [firstName, setFirstname] = React.useState('');
@@ -38,20 +35,13 @@ export default function Register({navigation, route}) {
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
   const {user, setUser} = useUserInfo();
-<<<<<<< HEAD
   const refDay = React.useRef(null);
-=======
->>>>>>> e8d251b2483ab3ed65a179c3ffeb21609e19506f
   const refMonth = React.useRef(null);
   const refYear = React.useRef(null);
   const [day, setDay] = React.useState(null);
   const [month, setMonth] = React.useState(null);
   const [year, setYear] = React.useState(null);
-<<<<<<< HEAD
   const { hobbies } = route.params;
-=======
-  const {hobbies} = route.params;
->>>>>>> e8d251b2483ab3ed65a179c3ffeb21609e19506f
 
   // console.log({user});
   const pickImage = async () => {
