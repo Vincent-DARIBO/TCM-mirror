@@ -13,7 +13,8 @@ import TabNavigator from './src/navigation/Tabs';
 import AuthStackNavigator from './src/navigation/Stacks/Auth';
 import UserInfoProvider from './src/providers/UserInfoProvider';
 export default function App() {
-  const [user, setUser] = React.useState({isLogged: false});
+  // const [user, setUser] = React.useState({isLogged: false});
+  const [user, setUser] = React.useState({isLogged: true});
 
   React.useEffect(() => {
     console.log({user});

@@ -28,7 +28,7 @@ export default function EventList({navigation}) {
                 name="pluscircleo"
                 size={25}
                 onPress={() =>
-                  navigation.navigate('EventDayDetailsYourActivity')
+                  navigation.navigate('CreateEvent')
                 }
                 color="orange"
               />
@@ -40,8 +40,8 @@ export default function EventList({navigation}) {
             elevation={4}
             style={{margin: 20, width: 330, height: 350}}>
             <Calendar
+              onDayPress={() => navigation.navigate('AddEvent')}
               theme={theme.theme}
-              onDayPress={() => navigation.navigate('CreateEvent')}
             />
           </ElevatedView>
         </View>
