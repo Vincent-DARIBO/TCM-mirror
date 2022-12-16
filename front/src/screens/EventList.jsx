@@ -41,7 +41,7 @@ export default function EventList({navigation}) {
             style={{margin: 20, width: 330, height: 350}}>
             <Calendar
               theme={theme.theme}
-              onDayPress={() => navigation.navigate('AddEvent')}
+              onDayPress={() => navigation.navigate('CreateEvent')}
             />
           </ElevatedView>
         </View>

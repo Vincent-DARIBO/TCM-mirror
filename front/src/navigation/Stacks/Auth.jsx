@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../../screens/Auth/Login';
 import Number from '../../screens/Auth/Number';
 import Register from '../../screens/profile/Register';
@@ -10,14 +10,18 @@ import Interest from '../../screens/Interest';
 import useUserInfo from '../../providers/hooks/useUserInfo';
 import TabNavigator from '../Tabs';
 import ProfileResume from '../../screens/ProfileResume';
+import ProfileDetails from '../../screens/profile/Profile';
 const Stack = createNativeStackNavigator();
 
 export default function AuthStackNavigator() {
-  const { user } = useUserInfo();
+  const {user} = useUserInfo();
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {user.isLogged || user.token ? (
-        <Stack.Screen name="Tabs" component={TabNavigator} />
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      {user.isLogged ? (
+        <>
+          <Stack.Screen name="Tabs" component={TabNavigator} />
+          <Stack.Screen name="ProfileDetails" component={ProfileDetails} />
+        </>
       ) : (
         <>
           <Stack.Screen name="Login" component={Login} />

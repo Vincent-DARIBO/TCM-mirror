@@ -20,7 +20,7 @@ import Title from './components/Title';
 import Description from './components/Description';
 import IconBar from './components/IconBar';
 
-export default function ProfileDetails() {
+export default function ProfileDetails({navigation, route}) {
   const data = [
     {text: 'Jardiange', isShared: true},
     {text: 'Voyage', isShared: true},
@@ -47,7 +47,7 @@ export default function ProfileDetails() {
           elevation={5}
           style={[layout.center, styles.imageContainer]}>
           <Image
-            source={require('../../assets/marcel.png')}
+            source={require('../../assets/Femme1.png')}
             style={styles.image}
           />
         </ElevatedView>
@@ -60,7 +60,7 @@ export default function ProfileDetails() {
             marginTop: 20,
           }}>
           <View style={{...styles.paragraph, width: 250}}>
-            <Title text="Gilbert, 75" />
+            <Title text={route.params.name + ', 75'} />
             <Description text="Ceci est une description" />
           </View>
           <TouchableOpacity style={styles.sendIcon}>
@@ -83,7 +83,9 @@ export default function ProfileDetails() {
 
         <View style={[styles.paragraph]}>
           <Title text="À propos" />
-          <Description text="Je suis Marcel, le fondateur de cette appli je vais écrire ce long text pour faire des test su tous chez marcel" />
+          <Description
+            text={`Je suis ${route.params.name} , j'aime le jardinage et le voyage, partageons ensemble un moment autour d'un repas`}
+          />
         </View>
         <View style={[styles.paragraph]}>
           <Title text="Intérêts" />
