@@ -27,31 +27,21 @@ import useUserInfo from '../../providers/hooks/useUserInfo';
 import { useMutation, useQuery } from 'react-query';
 import { baseUrl, createUser } from '../../shared/utils';
 import axios from 'axios';
-<<<<<<< HEAD
 import { TextInput } from 'react-native-gesture-handler';
-=======
->>>>>>> 745ea5e66d926a52bb4c18f33f7547c28b3f46a1
 
 export default function Register({ navigation, route }) {
   const [firstName, setFirstname] = React.useState('');
   const [lastName, setLastname] = React.useState('');
   const [image, setImage] = React.useState('');
   const surnameRef = React.createRef(null);
-<<<<<<< HEAD
   const {user, setUser} = useUserInfo();
   const refDay = React.useRef(null);
-=======
-  const { user, setUser } = useUserInfo();
->>>>>>> 745ea5e66d926a52bb4c18f33f7547c28b3f46a1
   const refMonth = React.useRef(null);
   const refYear = React.useRef(null);
   const [day, setDay] = React.useState(null);
   const [month, setMonth] = React.useState(null);
   const [year, setYear] = React.useState(null);
-<<<<<<< HEAD
-=======
   const { hobbies } = route.params;
->>>>>>> 745ea5e66d926a52bb4c18f33f7547c28b3f46a1
 
   // console.log({user});
   const pickImage = async () => {
@@ -170,7 +160,7 @@ export default function Register({ navigation, route }) {
           textStyle={{color: secondary}}
         /> */}
         <View style={{flexDirection:'row', width:295}}>
-          <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width: 75, borderRadius: 15, ...layout.center}} styleInput={{width: 75, paddingLeft: 0}} maxLength={2} textAlign={"center"} placeholder="JJ" ref={refDay} onChangeText={(day) => {setDay(day); if (day.length === 2) refMonth.current.focus()}}></Input>
+          <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width: 75, borderRadius: 15, ...layout.center}} styleInput={{width: 75, paddingLeft: 0}} maxLength={2} textAlign={"center"} placeholder="JJ" autoComplete="birthdate-day" ref={refDay} onChangeText={(day) => {setDay(day); if (day.length === 2) refMonth.current.focus()}}></Input>
           <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width: 75, borderRadius: 15, ...layout.center}} styleInput={{width: 75, paddingLeft: 0}} maxLength={2} textAlign={"center"} placeholder="MM" ref={refMonth} onChangeText={(month) => {setMonth(month); if (month.length === 2) {refYear.current.focus()} }}></Input>
           <Input style={{ flex:3, marginTop: 10, backgroundColor:white, width:100, borderRadius: 15, ...layout.center}} styleInput={{width:100, paddingLeft: 0}} maxLength={4} textAlign={"center"} placeholder="YYYY" ref={refYear} ></Input>
         </View>
