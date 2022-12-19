@@ -21,16 +21,13 @@ import Title from '../profile/components/Title';
 import Schedule from './components/Schedule';
 import Button from '../../components/Button';
 
-export default function EventDescription() {
-  const fakeHobies = ['Jardiange', 'Voyage'];
-
+export default function EventDescription({route}) {
+  const fakeHobies = ['Jardinage', 'Voyage'];
+  const {item} = route.params;
   return (
     <View style={layout.container}>
       <View>
-        <Image
-          source={require('../../assets/pick_nique.png')}
-          style={styles.banner}
-        />
+        <Image source={item.img} style={styles.banner} />
         <View style={{...layout.circle(60), ...layout.center, ...styles.badge}}>
           <Image
             source={require('../../assets/Femme1.png')}
@@ -47,8 +44,8 @@ export default function EventDescription() {
           textAlign: 'center',
           marginTop: -15,
         }}>
-        Pique-nique avec
-        <Text style={{...styles.title, color: secondary}}> Marie</Text>
+        {item.name} avec
+        <Text style={{...styles.title, color: secondary}}> {item.creator}</Text>
       </Text>
       <View style={{paddingHorizontal: 20}}>
         <View
@@ -61,7 +58,7 @@ export default function EventDescription() {
             icon={<Icon family="Ionicons" name="wine" color={secondary} />}
             title={fakeHobies[0]}
             elevation={2}
-            style={{backgroundColor: gray, borderRadius: 10, }}
+            style={{backgroundColor: gray, borderRadius: 10}}
             textStyle={{color: null}}
           />
           <ElevatedBadge

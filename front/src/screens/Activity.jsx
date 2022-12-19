@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList, Image, SafeAreaView, ScrollView, SectionList, Modal, Switch } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, Image, SafeAreaView, ScrollView, SectionList, Modal, Switch, TouchableWithoutFeedback } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Searchbar } from 'react-native-paper';
 import ScreenHeader from '../shared/components/ScreenHeader';
@@ -60,21 +60,25 @@ const DATAF = {
             id: '1',
             img: require('../assets/pick_nique.png'),
             name: 'Pique-nique',
+            creator: 'Marie',
         },
         {
             id: '2',
             img: require('../assets/Randonnée.png'),
             name: 'Randonnée',
+            creator: 'Françoise',
         },
         {
             id: '3',
             img: require('../assets/petanque.jpg'),
             name: 'Pétanque',
+            creator: 'Gisèle',
         },
         {
             id: '4',
             img: require('../assets/Randonnée.png'),
             name: 'Marche',
+            creator: 'Lyse',
         }
     ]
 }
@@ -87,21 +91,25 @@ const DATAY = {
                 id: '1',
                 img: require('../assets/pick_nique.png'),
                 name: 'Pique-nique',
+                creator: 'Tania',
             },
             {
                 id: '2',
                 img: require('../assets/Randonnée.png'),
                 name: 'Marche',
+                creator: 'Léa',
             },
             {
                 id: '3',
                 img: require('../assets/pick_nique.png'),
                 name: 'Repas',
+                creator: 'Juliette',
             },
             {
                 id: '4',
                 img: require('../assets/Randonnée.png'),
                 name: 'Randonnée',
+                creator: 'Lucie',
             }
         ]
 }
@@ -114,6 +122,7 @@ const DATAR = {
                 id: '1',
                 img: require('../assets/petanque.jpg'),
                 name: 'Pétanque',
+                creator: 'Marie',
             },
         ]
 }
@@ -152,7 +161,7 @@ const Activity = ({ navigation }) => {
 
     const renderActivities = ({ item }) => {
         return (
-            <TouchableOpacity style={{ flexDirection: 'column', flex: 1, paddingVertical: 10, justifyContent: 'space-between', height: 135 }} onPress={() => {navigation.navigate("Description")}} >
+            <TouchableOpacity style={{ flexDirection: 'column', flex: 1, paddingVertical: 10, justifyContent: 'space-between', height: 135 }} onPress={() => {navigation.navigate("Description", {item})}} >
                 <Image style={{ height: 90, width: 90 }} source={item.img} />
                 <Text style={{ width: '100%', textAlign: 'center', backgroundColor: '#BFC0C0', borderRadius: 10, elevation: 3 }}>{item.name}</Text>
             </TouchableOpacity>
