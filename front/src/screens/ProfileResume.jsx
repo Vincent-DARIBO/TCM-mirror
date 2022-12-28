@@ -107,8 +107,7 @@ const ProfileResume = ({navigation, route}) => {
             Bonjour
           </Text>
           <Text style={{color: '#FF9900', fontSize: 40, fontWeight: 'bold'}}>
-            {' '}
-            Lisa,
+           {user.firstName}
           </Text>
         </View>
         <Text style={{fontSize: 30, color: '#084887'}}>

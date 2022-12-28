@@ -62,6 +62,7 @@ export default function SignUpComponent({
             icon={<Ionicons name="person" size={30} style={style.icon} />}
             value={email}
             onChangeText={setEmail}
+            autoCapitalize="none"
             onSubmitEditing={() => passwordRef.current.focus()}
           />
           <Input
@@ -71,6 +72,7 @@ export default function SignUpComponent({
             icon={<EvilIcons name="lock" size={30} style={style.icon} />}
             value={password}
             onChangeText={setPassword}
+            autoCapitalize="none"
             onSubmitEditing={() => verifyRef.current.focus()}
             ref={passwordRef}
           />
@@ -80,6 +82,7 @@ export default function SignUpComponent({
             placeholder="Vérifier mot de passe"
             icon={<EvilIcons name="lock" size={30} style={style.icon} />}
             value={verify}
+            autoCapitalize="none"
             onChangeText={setVerify}
             ref={verifyRef}
             onSubmitEditing={onSignUpPress}

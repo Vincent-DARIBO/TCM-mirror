@@ -1,11 +1,18 @@
-import { View, Text, StyleSheet, TouchableOpacity, Animated, Keyboard } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Animated,
+  Keyboard,
+} from 'react-native';
 // import EvilIcons from 'react-native-vector-icons/EvilIcons';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Entypo, Ionicons} from '@expo/vector-icons';
-import { primary, secondary, white } from '../constants/colors';
-import Button from "./Button";
-import Input from "../screens/profile/components/Input";
-import { useEffect, useRef, useState } from "react";
+import {primary, secondary, white} from '../constants/colors';
+import Button from './Button';
+import Input from '../screens/profile/components/Input';
+import {useEffect, useRef, useState} from 'react';
 
 export default function LoginComponent({
   password,
@@ -17,22 +24,26 @@ export default function LoginComponent({
   const ref = useRef(null);
   const [isSecure, setIsSecure] = useState(false);
 
-  const fadeAnim = useRef(new Animated.Value(-200)).current
+  const fadeAnim = useRef(new Animated.Value(-200)).current;
 
-  useEffect( () =>  {
-    Animated.timing(
-      fadeAnim,
-      {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: false,
-      }
-    ).start();
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: false,
+    }).start();
   }, []);
 
   return (
-    <Animated.View style={{ width: 400, height: 400, borderRadius: 200, left: fadeAnim }}>
-      <View style={{ flexDirection: "column", marginLeft: 30, marginRight: 30, marginTop: 40 }}>
+    <Animated.View
+      style={{width: 400, height: 400, borderRadius: 200, left: fadeAnim}}>
+      <View
+        style={{
+          flexDirection: 'column',
+          marginLeft: 30,
+          marginRight: 30,
+          marginTop: 40,
+        }}>
         <View>
           <View
             style={{
@@ -79,7 +90,10 @@ export default function LoginComponent({
             onChangeText={setPassword}
             ref={ref}
             secureTextEntry={isSecure}
-            onSubmitEditing={() => Keyboard.dismiss()}
+            onSubmitEditing={() => {
+              Keyboard.dismiss();
+              onLoginPress();
+            }}
           />
         </View>
         <TouchableOpacity style={{marginBottom: 10}}>
@@ -92,7 +106,7 @@ export default function LoginComponent({
         />
       </View>
     </Animated.View>
-  )
+  );
 }
 
 const style = StyleSheet.create({

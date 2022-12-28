@@ -28,7 +28,7 @@ import {useMutation, useQuery} from 'react-query';
 import {baseUrl, createUser} from '../../shared/utils';
 import axios from 'axios';
 import {nameValidator} from '../../shared/utils';
-import { TextInput } from 'react-native-gesture-handler';
+import {TextInput} from 'react-native-gesture-handler';
 
 export default function Register({navigation, route}) {
   const [firstName, setFirstname] = React.useState('');
@@ -42,7 +42,7 @@ export default function Register({navigation, route}) {
   const [day, setDay] = React.useState(null);
   const [month, setMonth] = React.useState(null);
   const [year, setYear] = React.useState(null);
-  const { hobbies } = route.params;
+  const {hobbies} = route.params;
 
   // console.log({user});
   const pickImage = async () => {
@@ -64,13 +64,16 @@ export default function Register({navigation, route}) {
   const {data, mutate, isSuccess, status, error, isError, isLoading} =
     useMutation(() =>
       createUser({
-        firstName,
-        lastName,
-        email: user.email,
-        phone: user.phone,
-        password: user.password,
-        birthDate: '12/12/2002',
-        location: '2 Rue du professeur Charles Appleton',
+        profile: {
+          firstName,
+          lastName,
+          email: user.email,
+          phone: user.phone,
+          password: user.password,
+          birthDate: '12/12/2002',
+          location: '2 Rue du professeur Charles Appleton',
+        },
+        hobbies,
       }),
     );
 

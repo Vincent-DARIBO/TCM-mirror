@@ -18,7 +18,7 @@ export default function Settings({ navigation }) {
         <View style={styles.person}>
           <View style={styles.user}>
             <Image source={femme} style={styles.image}></Image>
-            <Text style={styles.name}>Juliette Dubois</Text>
+            <Text style={styles.name}>{user.firstName} {user.lastName}</Text>
           </View>
           <Icon family="FontAwesome5" name="pen" color={primary} size={15} style={styles.pen}></Icon>
         </View>

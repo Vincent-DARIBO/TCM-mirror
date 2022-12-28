@@ -41,7 +41,7 @@ export async function getDataFromRoute(routeName) {
 
 export async function createUser(userInfo) {
   return axios.post(baseUrl + '/auth/signUp', {
-    profile: userInfo,
+    ...userInfo,
   });
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MyMessagesStack from './Stacks/MyMessages';
 import MeetStack from './Stacks/Meet';
@@ -8,12 +8,15 @@ import MyFriendsStack from './Stacks/MyFriends';
 import EventsStack from './Stacks/Events';
 import MyAccountStack from './Stacks/MyAccountStack';
 
-import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { secondary } from '../constants/colors';
+import {MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
+import {secondary} from '../constants/colors';
+import useUserInfo from '../providers/hooks/useUserInfo';
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
+  const {user} = useUserInfo();
+  console.log(JSON.stringify({user}, null, 2));
   return (
     <Tab.Navigator
       screenOptions={{
@@ -31,7 +34,7 @@ export default function TabNavigator() {
               <MaterialCommunityIcons
                 name="cards"
                 size={30}
-                style={{ paddingTop: 7 }}
+                style={{paddingTop: 7}}
                 color={tabInfo.focused ? secondary : '#ADAFBB'}
               />
             );
@@ -48,7 +51,7 @@ export default function TabNavigator() {
               <MaterialCommunityIcons
                 name="heart-plus"
                 size={30}
-                style={{ paddingTop: 7 }}
+                style={{paddingTop: 7}}
                 color={tabInfo.focused ? secondary : '#ADAFBB'}
               />
             );
@@ -64,7 +67,7 @@ export default function TabNavigator() {
               <MaterialCommunityIcons
                 name="calendar-month"
                 size={30}
-                style={{ paddingTop: 7 }}
+                style={{paddingTop: 7}}
                 color={tabInfo.focused ? secondary : '#ADAFBB'}
               />
             );
@@ -80,7 +83,7 @@ export default function TabNavigator() {
               <Ionicons
                 name="chatbubble-ellipses"
                 size={27}
-                style={{ paddingTop: 7 }}
+                style={{paddingTop: 7}}
                 color={tabInfo.focused ? secondary : '#ADAFBB'}
               />
             );
@@ -96,7 +99,7 @@ export default function TabNavigator() {
               <MaterialCommunityIcons
                 name="account"
                 size={30}
-                style={{ paddingTop: 7 }}
+                style={{paddingTop: 7}}
                 color={tabInfo.focused ? secondary : '#ADAFBB'}
               />
             );
