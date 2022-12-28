@@ -16,7 +16,7 @@ export class AuthController {
   @Public()
   @Post('/signUp')
   async signUp(@Request() req) {
-    const { profile } = req.body;
-    return this.authService.signUp(profile);
+    const { profile, hobbies } = req.body;
+    return this.authService.signUp({ profile, hobbies });
   }
 }

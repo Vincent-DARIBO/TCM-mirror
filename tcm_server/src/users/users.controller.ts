@@ -92,9 +92,9 @@ export class UsersController {
   @Post(':uuid/hobbies')
   async addHobbies(
     @Param('uuid') uuid: string,
-    @Body() hobbies: Array<Hobby>,
+    @Body() body: { hobbies: Array<Hobby> },
   ) {
-    return await this.usersService.addHobbies(uuid, hobbies);
+    return await this.usersService.addHobbies(uuid, body.hobbies);
   }
 
   // only accessible to the user whom id is the same as the route and admin user
@@ -108,10 +108,7 @@ export class UsersController {
   }
 
   @Delete(':uuid/hobbies/:id')
-  async removeHobby(
-    @Param('uuid') uuid: string,
-    @Param('id') id: number,
-  ) {
+  async removeHobby(@Param('uuid') uuid: string, @Param('id') id: number) {
     return await this.usersService.removeHobby(uuid, id);
   }
 

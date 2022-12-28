@@ -286,7 +286,7 @@ export class UsersService {
 
   async addHobbies(uuid: string, hobbies: Array<Hobby>) {
     const user = await this.findOne(uuid);
-
+    console.log(hobbies);
     hobbies.map((hobby) => {
       if (user.hobbies.filter((item) => hobby === item).length === 0)
         user.hobbies.push(hobby);
@@ -326,9 +326,7 @@ export class UsersService {
       throw new NotFoundException(
         `Hobby ${id} not registered for user ${uuid}.`,
       );
-    user.hobbies = user.hobbies.filter(
-      (hobby) => hobby.id !== id,
-    );
+    user.hobbies = user.hobbies.filter((hobby) => hobby.id !== id);
     return await this.userRepository.save(user);
   }
 

@@ -8,6 +8,7 @@ import { compare } from 'bcrypt';
 import { User } from 'src/users/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { Profile } from 'src/profiles/entities/profile.entity';
+import { Hobby } from 'src/hobbies/entities/hobby.entity';
 
 @Injectable()
 export class AuthService {
@@ -36,7 +37,9 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
     };
   }
-  async signUp(profile: Profile) {
+  async signUp(data: { profile: Profile; hobbies: Hobby[] }) {
+    const { profile, hobbies } = data;
+    console.log(JSON.stringify(data, null, 2));
     const user = await this.usersService.findByMail(profile.email);
     if (user) {
       throw new UnauthorizedException({
@@ -44,9 +47,13 @@ export class AuthService {
         message: `User ${profile.email} already exists`,
       });
     }
-    const createdUser = await this.usersService.create({
+    const newProfile = await this.usersService.create({
       profile,
     });
+    const createdUser = await this.usersService.addHobbies(
+      newProfile.uuid,
+      hobbies,
+    );
     console.log({ createdUser });
     return this.login(createdUser);
   }
